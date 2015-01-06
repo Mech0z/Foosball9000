@@ -201,6 +201,9 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <None Include="AppSettingsSecrets.config.ignore" />
+    <Content Include="ConnectionString.ignore" />
+    <None Include="Properties\PublishProfiles\madsskipper.dk - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\madsskipper.dk - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\MvcP.pubxml" />
     <None Include="Properties\PublishProfiles\MvcPWy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
