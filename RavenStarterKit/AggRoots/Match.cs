@@ -6,7 +6,7 @@ using MvcPWy.Models;
 
 namespace MvcPWy.AggRoots
 {
-    public class DuelMatch : AggregateRoot, IEmit<MatchPlayed>
+    public class Match : AggregateRoot, IEmit<MatchPlayed>
     {
         public List<ApplicationUser> Team1 { get; set; }
         public List<ApplicationUser> Team2 { get; set; }
@@ -20,17 +20,12 @@ namespace MvcPWy.AggRoots
 
         public void Apply(MatchPlayed e)
         {
-            //Get current ratings
-            var eloP1 = 1500;
-            var eloP2 = 1500;
-
-            var elo = new EloRating();
-            var result = elo.CalculateRating(eloP1, eloP2, MatchResults.Team1Won());
+            
         }
 
-        public void AddMatch(DuelMatch duelMatch)
+        public void AddMatch(Match match)
         {
-            Emit(new MatchPlayed(duelMatch));
+            Emit(new MatchPlayed(match));
         }
     }
 }

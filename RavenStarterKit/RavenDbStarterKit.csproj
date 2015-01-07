@@ -42,8 +42,12 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="d60.Cirqus">
-      <HintPath>..\packages\d60.Cirqus.0.49.0\lib\NET45\d60.Cirqus.dll</HintPath>
+    <Reference Include="d60.Cirqus, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\d60.Cirqus.0.50.0\lib\NET45\d60.Cirqus.dll</HintPath>
+    </Reference>
+    <Reference Include="d60.Cirqus.MongoDb">
+      <HintPath>..\packages\d60.Cirqus.MongoDb.0.50.0\lib\NET45\d60.Cirqus.MongoDb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin">
@@ -72,6 +76,12 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Security.Twitter">
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\mongocsharpdriver.1.9.2\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\mongocsharpdriver.1.9.2\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -173,16 +183,23 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Commands\AddMatch.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Events\MatchPlayed.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EloRating.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IRating.cs" />
+    <Compile Include="Models\LeaderboardEntry.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MatchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PViews\LeaderboardView.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

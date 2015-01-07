@@ -3,13 +3,13 @@ using MvcPWy.AggRoots;
 
 namespace MvcPWy.Events
 {
-    public class MatchPlayed : DomainEvent<DuelMatch>
+    public class MatchPlayed : DomainEvent<Match>
     {
-        public MatchPlayed(DuelMatch match)
+        public MatchPlayed(Match match)
         {
             Match = match;
         }
 
-        public DuelMatch Match { get; set; }
+        public Match Match { get; set; }
     }
 }

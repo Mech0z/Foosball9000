@@ -4,13 +4,16 @@ using MvcPWy.Models;
 
 namespace MvcPWy.Commands
 {
-    public class AddMatch : Command<DuelMatch>
+    public class AddMatch : Command<Match>
     {
-        public AddMatch(string aggregateRootId) : base(aggregateRootId)
+        private Match _match;
+
+        public AddMatch(string aggregateRootId, Match match) : base(aggregateRootId)
         {
+            _match = match;
         }
 
-        public override void Execute(DuelMatch aggregateRoot)
+        public override void Execute(Match aggregateRoot)
         {
             aggregateRoot.AddMatch(aggregateRoot);
         }
