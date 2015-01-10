@@ -1,0 +1,40 @@
+﻿@using MvcPWy.Models
+@model MvcPWy.PViews.LeaderboardView
+
+@{
+    ViewBag.Title = "Leaderboard";
+    int i = 1;
+}
+
+<h2>Leaderboard</h2>
+
+@Model.Id
+
+<table>
+    <tr>
+        <td>
+            Rank
+        </td>
+        <td>
+            Username
+        </td>
+        <td>
+            Rating
+        </td>
+    </tr>
+    @foreach (LeaderboardEntry e in Model.LeaderboardEntries.OrderByDescending(x => x.EloRating))
+    {
+        <tr>
+            <td>
+                #@i
+            </td>
+            <td>
+                @e.UserName
+            </td>
+            <td>
+                @e.EloRating
+            </td>
+        </tr>
+        i++;
+    }
+</table>

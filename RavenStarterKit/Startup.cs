@@ -38,37 +38,41 @@ namespace MvcPWy
             var MongoDatabase = mongoServer.GetDatabase("foosball9000");
 
 
-            var session = RavenContext.CreateSession();
-            var player1 = session.Load<ApplicationUser>("ApplicationUsers/1");
-            var player2 = session.Load<ApplicationUser>("ApplicationUsers/33");
-            var player3 = session.Load<ApplicationUser>("ApplicationUsers/65");
-            var player4 = session.Load<ApplicationUser>("ApplicationUsers/66");
+
 
             var eventStore = new MongoDbEventStore(MongoDatabase, "Events");
             var repository = new DefaultAggregateRootRepository(eventStore, new JsonDomainEventSerializer(),
                 new DefaultDomainTypeNameMapper());
 
             var viewManager = new MongoDbViewManager<LeaderboardView>(MongoDatabase, "LeaderboardView");
-            var eventDispatcher = new ViewManagerEventDispatcher(repository, eventStore, new JsonDomainEventSerializer(),
-                new DefaultDomainTypeNameMapper(), viewManager);
+            //var eventDispatcher = new ViewManagerEventDispatcher(repository, eventStore, new JsonDomainEventSerializer(),
+            //    new DefaultDomainTypeNameMapper(), viewManager);
 
-            var processor = CommandProcessor.With()
-                .EventStore(e => e.UseMongoDb(connStr, "Events"))
-                .EventDispatcher(e => e.UseViewManagerEventDispatcher(viewManager))
-                .Create();
+            //var processor = CommandProcessor.With()
+            //    .EventStore(e => e.UseMongoDb(connStr, "Events"))
+            //    .EventDispatcher(e => e.UseViewManagerEventDispatcher(viewManager))
+            //    .Create();
 
-            var guid = Guid.NewGuid();
-            var match = new Match
-            {
-                MatchResults = new MatchResult() {Team1Score = 3, Team2Score = 10},
-                StaticFormation = false,
-                Team1 = new List<ApplicationUser>() {player1, player2},
-                Team2 = new List<ApplicationUser>() {player3, player4}
-            };
+            
 
-            processor.ProcessCommand(new AddMatch(guid.ToString(), match));
+            //var session = RavenContext.CreateSession();
+            //var player1 = session.Load<ApplicationUser>("ApplicationUsers/1");
+            //var player2 = session.Load<ApplicationUser>("ApplicationUsers/33");
+            //var player3 = session.Load<ApplicationUser>("ApplicationUsers/65");
+            //var player4 = session.Load<ApplicationUser>("ApplicationUsers/66");
 
-            processor.Dispose();
+            //var guid = Guid.NewGuid();
+            //var match = new Match
+            //{
+            //    MatchResults = new MatchResult() {Team1Score = 3, Team2Score = 10},
+            //    StaticFormation = false,
+            //    Team1 = new List<ApplicationUser>() {player1, player2},
+            //    Team2 = new List<ApplicationUser>() {player3, player4}
+            //};
+
+            //processor.ProcessCommand(new AddMatch(guid.ToString(), match));
+
+            //processor.Dispose();
         }
     }
 }
