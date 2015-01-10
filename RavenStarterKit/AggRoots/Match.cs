@@ -23,9 +23,9 @@ namespace MvcPWy.AggRoots
             
         }
 
-        public void AddMatch(Match match)
+        protected override void Created()
         {
-            Emit(new MatchPlayed(match));
+            Emit(new MatchPlayed());
         }
     }
 }
