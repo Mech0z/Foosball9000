@@ -15,7 +15,7 @@ namespace MvcPWy.Commands
 
         public override void Execute(Match aggregateRoot)
         {
-            aggregateRoot.AddMatch(aggregateRoot);
+            aggregateRoot.AddMatch(_match);
         }
     }
 }

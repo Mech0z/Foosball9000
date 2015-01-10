@@ -28,7 +28,7 @@
                 diff = player2 - player1;
             }
 
-            var result = (medium * diversification - diff) / medium + minRating;
+            var result = (medium*diversification - diff)/medium + minRating;
 
             if (result > maxRating)
                 result = maxRating;
@@ -39,3 +39,4 @@
             return result;
         }
     }
+}

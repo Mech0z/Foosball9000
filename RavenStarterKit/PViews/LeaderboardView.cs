@@ -20,18 +20,18 @@ namespace MvcPWy.PViews
         {
             //Team1
             var player1 = domainEvent.Match.Team1[0];
-            var existingPlayer1 = LeaderboardEntries.Single(x => x.UserName == player1.UserName);
+            var existingPlayer1 = LeaderboardEntries.SingleOrDefault(x => x.UserName == player1.UserName);
             var player2 = domainEvent.Match.Team1[1];
-            var existingPlayer2 = LeaderboardEntries.Single(x => x.UserName == player2.UserName);
+            var existingPlayer2 = LeaderboardEntries.SingleOrDefault(x => x.UserName == player2.UserName);
 
             var team1AvgElo = existingPlayer1?.EloRating ?? 1500;
             team1AvgElo += existingPlayer2?.EloRating ?? 1500;
 
             //Team2
             var player3 = domainEvent.Match.Team1[1];
-            var existingPlayer3 = LeaderboardEntries.Single(x => x.UserName == player3.UserName);
+            var existingPlayer3 = LeaderboardEntries.SingleOrDefault(x => x.UserName == player3.UserName);
             var player4 = domainEvent.Match.Team1[1];
-            var existingPlayer4 = LeaderboardEntries.Single(x => x.UserName == player4.UserName);
+            var existingPlayer4 = LeaderboardEntries.SingleOrDefault(x => x.UserName == player4.UserName);
 
             var team2AvgElo = existingPlayer3?.EloRating ?? 1500;
             team2AvgElo += existingPlayer4?.EloRating ?? 1500;
