@@ -34,9 +34,9 @@ namespace MvcPWy.PViews
             team1AvgElo += existingPlayer2?.EloRating ?? 1500;
 
             //Team2
-            var player3 = match.Team1[1];
+            var player3 = match.Team2[0];
             var existingPlayer3 = LeaderboardEntries.SingleOrDefault(x => x.UserName == player3.UserName);
-            var player4 = match.Team1[1];
+            var player4 = match.Team2[1];
             var existingPlayer4 = LeaderboardEntries.SingleOrDefault(x => x.UserName == player4.UserName);
 
             var team2AvgElo = existingPlayer3?.EloRating ?? 1500;

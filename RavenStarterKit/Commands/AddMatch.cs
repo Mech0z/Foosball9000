@@ -1,12 +1,11 @@
 ﻿using d60.Cirqus.Commands;
 using MvcPWy.AggRoots;
-using MvcPWy.Models;
 
 namespace MvcPWy.Commands
 {
     public class AddMatch : Command<Match>
     {
-        private Match _match;
+        private readonly Match _match;
 
         public AddMatch(string aggregateRootId, Match match) : base(aggregateRootId)
         {
@@ -15,6 +14,7 @@ namespace MvcPWy.Commands
 
         public override void Execute(Match aggregateRoot)
         {
+            aggregateRoot.SetMatch(_match);
         }
     }
 }

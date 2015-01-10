@@ -11,6 +11,10 @@ namespace MvcPWy.AggRoots
         public List<ApplicationUser> Team1 { get; set; }
         public List<ApplicationUser> Team2 { get; set; }
 
+        public void SetMatch(Match match)
+        {
+            Emit(new MatchPlayed { Match = match});
+        }
         /// <summary>
         /// True means first player in list is defence and second is offence
         /// </summary>
@@ -20,12 +24,10 @@ namespace MvcPWy.AggRoots
 
         public void Apply(MatchPlayed e)
         {
-            
-        }
-
-        protected override void Created()
-        {
-            Emit(new MatchPlayed());
+            Team1 = e.Match.Team1;
+            Team2 = e.Match.Team2;
+            StaticFormation = e.Match.StaticFormation;
+            MatchResults = e.Match.MatchResults;
         }
     }
 }

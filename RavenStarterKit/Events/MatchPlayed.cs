@@ -5,5 +5,6 @@ namespace MvcPWy.Events
 {
     public class MatchPlayed : DomainEvent<Match>
     {
+        public Match Match { get; set; }
     }
 }
