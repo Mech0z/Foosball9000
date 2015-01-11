@@ -51,13 +51,15 @@ namespace MvcPWy.PViews
                     new LeaderboardEntry
                     {
                         UserName = player1.UserName,
-                        EloRating = match.MatchResults.Team1Won ? (int) result : -(int) result
+                        EloRating = match.MatchResults.Team1Won ? (int) result : -(int) result,
+                        NumberOfGames = 1
                     });
             }
             else
             {
                 LeaderboardEntries.Single(x => x.UserName == existingPlayer1.UserName).EloRating +=
                     match.MatchResults.Team1Won? (int) result : -(int) result;
+                LeaderboardEntries.Single(x => x.UserName == existingPlayer1.UserName).NumberOfGames++;
             }
 
             if (existingPlayer2 == null)
@@ -66,13 +68,15 @@ namespace MvcPWy.PViews
                     new LeaderboardEntry
                     {
                         UserName = player2.UserName,
-                        EloRating = match.MatchResults.Team1Won ? (int) result : -(int) result
+                        EloRating = match.MatchResults.Team1Won ? (int) result : -(int) result,
+                        NumberOfGames = 1
                     });
             }
             else
             {
                 LeaderboardEntries.Single(x => x.UserName == existingPlayer2.UserName).EloRating +=
                     match.MatchResults.Team1Won ? (int)result : -(int)result;
+                LeaderboardEntries.Single(x => x.UserName == existingPlayer2.UserName).NumberOfGames++;
             }
 
             if (existingPlayer3 == null)
@@ -81,13 +85,15 @@ namespace MvcPWy.PViews
                     new LeaderboardEntry
                     {
                         UserName = player3.UserName,
-                        EloRating = match.MatchResults.Team1Won ? -(int) result : (int) result
+                        EloRating = match.MatchResults.Team1Won ? -(int) result : (int) result,
+                        NumberOfGames = 1
                     });
             }
             else
             {
                 LeaderboardEntries.Single(x => x.UserName == existingPlayer3.UserName).EloRating +=
                     match.MatchResults.Team1Won ? -(int)result : (int)result;
+                LeaderboardEntries.Single(x => x.UserName == existingPlayer3.UserName).NumberOfGames++;
             }
 
             if (existingPlayer4 == null)
@@ -96,13 +102,15 @@ namespace MvcPWy.PViews
                     new LeaderboardEntry
                     {
                         UserName = player4.UserName,
-                        EloRating = match.MatchResults.Team1Won ? -(int) result : (int) result
+                        EloRating = match.MatchResults.Team1Won ? -(int) result : (int) result,
+                        NumberOfGames = 1
                     });
             }
             else
             {
                 LeaderboardEntries.Single(x => x.UserName == existingPlayer4.UserName).EloRating +=
                     match.MatchResults.Team1Won ? -(int)result : (int)result;
+                LeaderboardEntries.Single(x => x.UserName == existingPlayer4.UserName).NumberOfGames++;
             }
         }
 

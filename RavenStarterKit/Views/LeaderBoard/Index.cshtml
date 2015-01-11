@@ -8,8 +8,6 @@
 
 <h2>Leaderboard</h2>
 
-@Model.Id
-
 <table>
     <tr>
         <td>
@@ -17,6 +15,9 @@
         </td>
         <td>
             Username
+        </td>
+        <td>
+            # Games
         </td>
         <td>
             Rating
@@ -30,6 +31,9 @@
             </td>
             <td>
                 @e.UserName
+            </td>
+            <td>
+                @e.NumberOfGames
             </td>
             <td>
                 @e.EloRating

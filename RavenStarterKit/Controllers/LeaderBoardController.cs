@@ -22,8 +22,8 @@ namespace MvcPWy.Controllers
         public ActionResult Index()
         {
             var viewManager = new MongoDbViewManager<LeaderboardView>(_mongoDatabase, "LeaderboardView");
-            LeaderboardView test = viewManager.Load("__global__");
-            return View(test);
+            LeaderboardView view = viewManager.Load("__global__");
+            return View(view);
         }
     }
 }
