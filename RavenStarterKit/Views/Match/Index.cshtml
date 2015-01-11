@@ -1,0 +1,37 @@
+﻿@model MvcPWy.Models.MatchViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+@using (Html.BeginForm("Create", "Match", FormMethod.Post))
+{
+    @Html.ValidationMessage("ValidationError")
+
+    <h4>Team 1</h4>
+    @Html.DropDownListFor(p => p.Player1, Model.Usernames)
+    @Html.DropDownListFor(p => p.Player2, Model.Usernames)
+
+    <h4>Team 2</h4>
+    @Html.DropDownListFor(p => p.Player3, Model.Usernames)
+    @Html.DropDownListFor(p => p.Player4, Model.Usernames)
+    
+    @Html.ValidationMessage("MatchValidationError");
+
+    <h5>Score</h5>
+    <br/>
+    @Html.Label("Team 1")
+    @Html.EditorFor(p => p.MatchResults.Team1Score)
+    <br/>
+    @Html.Label("Team 2")
+    @Html.EditorFor(p => p.MatchResults.Team2Score)
+    <br/><br/>
+    @Html.Label("Did you switch attack defence?")
+    <br/>
+    @Html.CheckBoxFor(p => p.StaticFormation)
+
+    <br /><br /><br />
+    <input type="submit" value="Add result" />
+}
