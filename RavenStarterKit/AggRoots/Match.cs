@@ -8,8 +8,8 @@ namespace MvcPWy.AggRoots
 {
     public class Match : AggregateRoot, IEmit<MatchPlayed>
     {
-        public List<ApplicationUser> Team1 { get; set; }
-        public List<ApplicationUser> Team2 { get; set; }
+        public List<string> Team1UserNames { get; set; }
+        public List<string> Team2UserNames { get; set; }
 
         public void SetMatch(Match match)
         {
@@ -18,15 +18,17 @@ namespace MvcPWy.AggRoots
         /// <summary>
         /// True means first player in list is defence and second is offence
         /// </summary>
-        public bool StaticFormation { get; set; }
+        public bool StaticFormationTeam1 { get; set; }
+        public bool StaticFormationTeam2 { get; set; }
 
         public MatchResult MatchResults { get; set; }
 
         public void Apply(MatchPlayed e)
         {
-            Team1 = e.Match.Team1;
-            Team2 = e.Match.Team2;
-            StaticFormation = e.Match.StaticFormation;
+            Team1UserNames = e.Match.Team1UserNames;
+            Team2UserNames = e.Match.Team2UserNames;
+            StaticFormationTeam1 = e.Match.StaticFormationTeam1;
+            StaticFormationTeam2 = e.Match.StaticFormationTeam2;
             MatchResults = e.Match.MatchResults;
         }
     }

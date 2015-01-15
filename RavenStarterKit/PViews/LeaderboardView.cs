@@ -25,19 +25,19 @@ namespace MvcPWy.PViews
             var match = context.Load<Match>(aggregateRootId);
 
             //Team1
-            var player1 = match.Team1[0];
-            var existingPlayer1 = LeaderboardEntries.SingleOrDefault(x => x.UserName == player1.UserName);
-            var player2 = match.Team1[1];
-            var existingPlayer2 = LeaderboardEntries.SingleOrDefault(x => x.UserName == player2.UserName);
+            var player1 = match.Team1UserNames[0];
+            var existingPlayer1 = LeaderboardEntries.SingleOrDefault(x => x.UserName == player1);
+            var player2 = match.Team1UserNames[1];
+            var existingPlayer2 = LeaderboardEntries.SingleOrDefault(x => x.UserName == player2);
 
             var team1AvgElo = existingPlayer1?.EloRating ?? 1500;
             team1AvgElo += existingPlayer2?.EloRating ?? 1500;
 
             //Team2
-            var player3 = match.Team2[0];
-            var existingPlayer3 = LeaderboardEntries.SingleOrDefault(x => x.UserName == player3.UserName);
-            var player4 = match.Team2[1];
-            var existingPlayer4 = LeaderboardEntries.SingleOrDefault(x => x.UserName == player4.UserName);
+            var player3 = match.Team2UserNames[0];
+            var existingPlayer3 = LeaderboardEntries.SingleOrDefault(x => x.UserName == player3);
+            var player4 = match.Team2UserNames[1];
+            var existingPlayer4 = LeaderboardEntries.SingleOrDefault(x => x.UserName == player4);
 
             var team2AvgElo = existingPlayer3?.EloRating ?? 1500;
             team2AvgElo += existingPlayer4?.EloRating ?? 1500;
@@ -50,7 +50,7 @@ namespace MvcPWy.PViews
                 LeaderboardEntries.Add(
                     new LeaderboardEntry
                     {
-                        UserName = player1.UserName,
+                        UserName = player1,
                         EloRating = match.MatchResults.Team1Won ? (int) result : -(int) result,
                         NumberOfGames = 1
                     });
@@ -67,7 +67,7 @@ namespace MvcPWy.PViews
                 LeaderboardEntries.Add(
                     new LeaderboardEntry
                     {
-                        UserName = player2.UserName,
+                        UserName = player2,
                         EloRating = match.MatchResults.Team1Won ? (int) result : -(int) result,
                         NumberOfGames = 1
                     });
@@ -84,7 +84,7 @@ namespace MvcPWy.PViews
                 LeaderboardEntries.Add(
                     new LeaderboardEntry
                     {
-                        UserName = player3.UserName,
+                        UserName = player3,
                         EloRating = match.MatchResults.Team1Won ? -(int) result : (int) result,
                         NumberOfGames = 1
                     });
@@ -101,7 +101,7 @@ namespace MvcPWy.PViews
                 LeaderboardEntries.Add(
                     new LeaderboardEntry
                     {
-                        UserName = player4.UserName,
+                        UserName = player4,
                         EloRating = match.MatchResults.Team1Won ? -(int) result : (int) result,
                         NumberOfGames = 1
                     });

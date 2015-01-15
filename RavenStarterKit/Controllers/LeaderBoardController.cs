@@ -1,28 +1,38 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using d60.Cirqus.MongoDb.Views;
-using MongoDB.Driver;
+using d60.Cirqus;
+using d60.Cirqus.Testing;
+using d60.Cirqus.Views.ViewManagers;
 using MvcPWy.PViews;
 
 namespace MvcPWy.Controllers
 {
     public class LeaderBoardController : Controller
     {
-        private MongoDatabase _mongoDatabase;
+        private readonly IViewManager<LeaderboardView> _leaderboardViewManager;
 
-        public LeaderBoardController()
+        public LeaderBoardController(IViewManager<LeaderboardView> leaderboardViewManager)
         {
-            var connStr = ConfigurationManager.ConnectionStrings["Mongo"].ConnectionString;
-            var mongoClient = new MongoClient(connStr);
-            var mongoServer = mongoClient.GetServer();
-            _mongoDatabase = mongoServer.GetDatabase("foosball9000");
+            _leaderboardViewManager = leaderboardViewManager;
         }
 
         // GET: LeaderBoard
-        public ActionResult Index()
+        public async Task<ActionResult> Index(int? lastSequenceNumber)
         {
-            var viewManager = new MongoDbViewManager<LeaderboardView>(_mongoDatabase, "LeaderboardView");
-            LeaderboardView view = viewManager.Load("__global__");
+
+            if (lastSequenceNumber != null)
+            {
+                var commandProcessingResult = CommandProcessingResult.WithNewPosition(lastSequenceNumber.Value);
+                await _leaderboardViewManager.WaitUntilProcessed(commandProcessingResult, new TimeSpan(0, 0, 5));
+            }
+            else
+            {
+                var commandProcessingResult = CommandProcessingResult.WithNewPosition(11);
+                await _leaderboardViewManager.WaitUntilProcessed(commandProcessingResult, new TimeSpan(0, 0, 5));
+            }
+            
+            var view = _leaderboardViewManager.Load("__global__");
             return View(view);
         }
     }

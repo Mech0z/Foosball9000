@@ -24,13 +24,19 @@
     <br/>
     @Html.Label("Team 1")
     @Html.EditorFor(p => p.MatchResults.Team1Score)
+    <br />
+    @Html.Label("Did you switch attack defence?")
+    @Html.CheckBoxFor(p => p.StaticFormationTeam1)
+
+    <br/>
+    <br/>
+    <br/>
     <br/>
     @Html.Label("Team 2")
     @Html.EditorFor(p => p.MatchResults.Team2Score)
     <br/><br/>
     @Html.Label("Did you switch attack defence?")
-    <br/>
-    @Html.CheckBoxFor(p => p.StaticFormation)
+    @Html.CheckBoxFor(p => p.StaticFormationTeam2)
 
     <br /><br /><br />
     <input type="submit" value="Add result" />

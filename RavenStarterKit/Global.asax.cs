@@ -33,9 +33,6 @@ namespace MvcPWy
             container = new WindsorContainer().Install(FromAssembly.This());
             var controllerFactory = new WindsorControllerFactory(container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);
-
-            container.Register(Component.For<ICommandProcessorThing>().ImplementedBy<CommandProcessorThing>());
-            var processor = container.Resolve<ICommandProcessorThing>();
         }
 
         protected void Application_End()

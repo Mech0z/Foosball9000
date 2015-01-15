@@ -13,7 +13,8 @@ namespace MvcPWy.Models
         public string Player3 { get; set; }
         public string Player4 { get; set; }
 
-        public bool StaticFormation { get; set; }
+        public bool StaticFormationTeam1 { get; set; }
+        public bool StaticFormationTeam2 { get; set; }
         public DateTime Timestamp { get; set; }
         public MatchResult MatchResults { get; set; }
     }
