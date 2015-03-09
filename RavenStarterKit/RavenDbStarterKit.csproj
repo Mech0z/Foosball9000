@@ -216,9 +216,14 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MatchResult.cs" />
     <Compile Include="Models\MatchViewModel.cs" />
+    <Compile Include="Models\Models\Match.cs" />
     <Compile Include="Models\MongoInstance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PViews\LeaderboardView.cs" />
+    <Compile Include="Repository\IMatchRepository.cs" />
+    <Compile Include="Repository\IMongo.cs" />
+    <Compile Include="Repository\MatchRepository.cs" />
+    <Compile Include="Repository\MongoBase.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +312,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Info.cshtml" />
+    <Content Include="Views\LeaderBoard\LastGames.cshtml" />
     <None Include="Views\Match\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

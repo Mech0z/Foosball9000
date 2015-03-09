@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Foosball9000.Models.Match>
+
+@{
+    ViewBag.Title = "Last 10 games";
+}
+
+<h2>Last 10 games</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeStampUtc)
+        </th>
+        <th>
+            @Html.Label("Players team 1")
+        </th>
+        <th>
+            @Html.Label("Players team 2")
+        </th>
+        <th>
+            @Html.Label("Score Team 1")
+        </th>
+        <th>
+            @Html.Label("Score Team 2")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeStampUtc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Team1UserNames)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Team2UserNames)
+        </td>
+        <td>
+            @item.MatchResults.Team1Score
+        </td>
+        <td>
+            @item.MatchResults.Team2Score
+        </td>
+    </tr>
+}
+
+</table>
