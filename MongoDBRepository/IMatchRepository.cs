@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Foosball.Models;
+using Models;
 
-namespace Foosball.Repository
+namespace MongoDBRepository
 {
     public interface IMatchRepository
     {

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Foosball.Models;
+using Models;
 using MongoDB.Driver.Builders;
-using Microsoft.Framework.OptionsModel;
 
-namespace Foosball.Repository
+namespace MongoDBRepository
 {
     public class MatchRepository : MongoBase<Match>, IMatchRepository
     {
-        public MatchRepository(IOptions<Settings> settings) : base("Matches", settings)
+        public MatchRepository() : base("Matches")
         {
+            
         }
 
         public void SaveMatch(Match draft)
@@ -31,7 +31,7 @@ namespace Foosball.Repository
         public List<Match> GetRecentMatches(int numberOfMatches)
         {
             var sbb = new SortByBuilder();
-            sbb.Descending(nameof(Match.TimeStampUtc));
+            sbb.Descending("TimeStampUtc");
 
             var matches = Collection.FindAllAs<Match>().SetSortOrder(sbb).SetLimit(numberOfMatches).ToList();
 

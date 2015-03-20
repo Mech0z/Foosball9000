@@ -1,15 +1,14 @@
 ﻿using System;
-using Foosball.Models;
-using Foosball.Repository;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Diagnostics.Entity;
 using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Identity;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Microsoft.Framework.Logging.Console;
+using Models;
+using MongoDBRepository;
 
 namespace Foosball
 {
@@ -39,6 +38,7 @@ namespace Foosball
 
             services.Configure<Settings>(Configuration);
             services.AddSingleton<IMatchRepository, MatchRepository>();
+            services.AddSingleton<ILeaderboardViewRepository, LeaderboardViewRepository>();
             // Add MVC services to the services container.
             services.AddMvc();
 

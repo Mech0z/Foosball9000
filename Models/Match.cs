@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Foosball.Models
+namespace Models
 {
     public class Match
     {

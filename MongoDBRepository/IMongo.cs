@@ -1,4 +1,4 @@
-﻿namespace Foosball.Repository
+﻿namespace MongoDBRepository
 {
     public interface IMongo
     {

@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net45": {
+      "wrappedProject": "../../MongoDBRepository/MongoDBRepository.csproj",
+      "bin": {
+        "assembly": "../../MongoDBRepository/obj/{configuration}/MongoDBRepository.dll",
+        "pdb": "../../MongoDBRepository/obj/{configuration}/MongoDBRepository.pdb"
+      },
+      "dependencies": {
+        "mongocsharpdriver": "1.10.0",
+        "Models": "1.0.0-*"
+      }
+    }
+  }
+}

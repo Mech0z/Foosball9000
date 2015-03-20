@@ -1,6 +1,10 @@
-﻿{
-    "sources": [ "src", "test" ],
-    "sdk": {
-        "version": "1.0.0-beta3-11030"
-    }
+{
+  "sources": [
+    "src",
+    "test",
+    "wrap"
+  ],
+  "sdk": {
+    "version": "1.0.0-beta3-11030"
+  }
 }

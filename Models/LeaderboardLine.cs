@@ -1,4 +1,4 @@
-﻿namespace Foosball.Models
+﻿namespace Models
 {
     public class LeaderboardLine
     {
