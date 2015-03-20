@@ -9,10 +9,9 @@ namespace MongoDBRepository
 
         public MongoBase(string collectionName)
         {
-
-            var mongoClient = new MongoClient(mongoConnection);
+            var mongoClient = new MongoClient(ConnectionString.Default.mongoconnection);
             var mongoServer = mongoClient.GetServer();
-            MongoDatabase = mongoServer.GetDatabase(database);
+            MongoDatabase = mongoServer.GetDatabase(ConnectionString.Default.database);
 
             Collection = MongoDatabase.GetCollection<T>(collectionName);
         }

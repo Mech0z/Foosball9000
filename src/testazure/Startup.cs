@@ -7,7 +7,6 @@ using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Microsoft.Framework.Logging.Console;
-using Models;
 using MongoDBRepository;
 
 namespace Foosball
@@ -17,9 +16,6 @@ namespace Foosball
         public Startup(IHostingEnvironment env)
         {
             // Setup configuration sources.
-            Configuration = new Configuration()
-                .AddJsonFile("config.json")
-                .AddEnvironmentVariables();
         }
 
         public IConfiguration Configuration { get; set; }
@@ -35,8 +31,7 @@ namespace Foosball
             //// Add Identity services to the services container.
             //services.AddIdentity<ApplicationUser, IdentityRole>(Configuration)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            services.Configure<Settings>(Configuration);
+            
             services.AddSingleton<IMatchRepository, MatchRepository>();
             services.AddSingleton<ILeaderboardViewRepository, LeaderboardViewRepository>();
             // Add MVC services to the services container.
