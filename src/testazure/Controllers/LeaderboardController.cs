@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using Foosball.Logic;
+using Microsoft.AspNet.Mvc;
 using Models;
-using System.Collections.Generic;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,11 +9,21 @@ namespace Foosball.Controllers
     [Route("api/[controller]/[action]")]
     public class LeaderboardController : Controller
     {
+        private readonly ICreateLeaderboardView _createLeaderboardView;
+
+        public LeaderboardController(ICreateLeaderboardView createLeaderboardView)
+        {
+            _createLeaderboardView = createLeaderboardView;
+        }
+
         // GET: /<controller>/
         [HttpGet]
-        public IEnumerable<LeaderboardView> Index()
+        public LeaderboardView Index()
         {
-            return new List<LeaderboardView>();
+            var leaderboard = _createLeaderboardView.Get(true);
+            return leaderboard;
         }
+
+
     }
 }

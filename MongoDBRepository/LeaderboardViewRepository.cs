@@ -3,7 +3,7 @@ using Models;
 
 namespace MongoDBRepository
 {
-    public class LeaderboardViewRepository : MongoBase<LeaderboardView>
+    public class LeaderboardViewRepository : MongoBase<LeaderboardView>, ILeaderboardViewRepository
     {
         public LeaderboardViewRepository() : base("LeaderboardViews")
         {

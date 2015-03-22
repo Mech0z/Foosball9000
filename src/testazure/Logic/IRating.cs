@@ -1,4 +1,4 @@
-﻿namespace Logic
+﻿namespace Foosball.Logic
 {
     public interface IRating
     {

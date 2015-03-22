@@ -1,4 +1,5 @@
 ﻿using System;
+using Foosball.Logic;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Diagnostics.Entity;
@@ -34,12 +35,14 @@ namespace Foosball
             
             services.AddSingleton<IMatchRepository, MatchRepository>();
             services.AddSingleton<ILeaderboardViewRepository, LeaderboardViewRepository>();
+            services.AddSingleton<ICreateLeaderboardView, CreateLeaderboardView>();
             // Add MVC services to the services container.
             services.AddMvc();
 
             // Uncomment the following line to add Web API servcies which makes it easier to port Web API 2 controllers.
             // You need to add Microsoft.AspNet.Mvc.WebApiCompatShim package to project.json
             // services.AddWebApiConventions();
+            
 
         }
 

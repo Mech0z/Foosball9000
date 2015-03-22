@@ -1,4 +1,5 @@
-﻿namespace Logic
+﻿
+namespace Foosball.Logic
 {
     public class EloRating : IRating
     {
