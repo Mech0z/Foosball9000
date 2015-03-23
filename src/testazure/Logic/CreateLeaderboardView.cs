@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Models;
 using MongoDBRepository;
+using System.Collections.Generic;
 
 namespace Foosball.Logic
 {
@@ -24,7 +25,7 @@ namespace Foosball.Logic
         {
             if (recalculate)
             {
-                var matches = _matchRepository.GetMatches();
+                var matches = _matchRepository.GetMatches().OrderBy(x => x.TimeStampUtc);
                 var leaderboardView = new LeaderboardView();
 
                 foreach (var match in matches)
@@ -54,113 +55,38 @@ namespace Foosball.Logic
 
                     if (existingPlayer1 == null)
                     {
-                        leaderboardEntries.Add(
-                            new LeaderboardViewEntry
-                            {
-                                UserName = player1,
-                                EloRating = match.MatchResults.Team1Won ? 1500 + (int)result : 1500 - (int)result,
-                                NumberOfGames = 1,
-                                Wins = match.MatchResults.Team1Won ? 1 : 0
-                            });
+                        leaderboardEntries.Add(CreatePlayer(player1, match, result, match.MatchResults.Team1Won));
                     }
                     else
                     {
-                        var player1Entry = leaderboardEntries.Single(x => x.UserName == existingPlayer1.UserName);
-
-                        player1Entry.EloRating +=
-                            match.MatchResults.Team1Won ? (int)result : -(int)result;
-                        player1Entry.NumberOfGames++;
-                        if (match.MatchResults.Team1Won)
-                        {
-                            player1Entry.Wins++;
-                        }
-                        else
-                        {
-                            player1Entry.Losses++;
-                        }
+                        UpdateExistingLeaderboardEntry(existingPlayer1.UserName, leaderboardEntries, match, result, match.MatchResults.Team1Won);
                     }
 
                     if (existingPlayer2 == null)
                     {
-                        leaderboardEntries.Add(
-                            new LeaderboardViewEntry
-                            {
-                                UserName = player2,
-                                EloRating = match.MatchResults.Team1Won ? 1500 + (int)result : 1500 - (int)result,
-                                NumberOfGames = 1,
-                                Wins = match.MatchResults.Team1Won ? 1 : 0
-                            });
+                        leaderboardEntries.Add(CreatePlayer(player2, match, result, match.MatchResults.Team1Won));
                     }
                     else
                     {
-                        var player2Entry = leaderboardEntries.Single(x => x.UserName == existingPlayer2.UserName);
-
-                        player2Entry.EloRating +=
-                            match.MatchResults.Team1Won ? (int)result : -(int)result;
-                        player2Entry.NumberOfGames++;
-                        if (match.MatchResults.Team1Won)
-                        {
-                            player2Entry.Wins++;
-                        }
-                        else
-                        {
-                            player2Entry.Losses++;
-                        }
+                        UpdateExistingLeaderboardEntry(existingPlayer2.UserName, leaderboardEntries, match, result, match.MatchResults.Team1Won);
                     }
 
                     if (existingPlayer3 == null)
                     {
-                        leaderboardEntries.Add(
-                            new LeaderboardViewEntry
-                            {
-                                UserName = player3,
-                                EloRating = match.MatchResults.Team1Won ? 1500 -(int)result : 1500 + (int)result,
-                                NumberOfGames = 1,
-                                Wins = match.MatchResults.Team1Won ? 0 : 1
-                            });
+                        leaderboardEntries.Add(CreatePlayer(player3, match, result, !match.MatchResults.Team1Won));
                     }
                     else
                     {
-                        var player3Entry = leaderboardEntries.Single(x => x.UserName == existingPlayer3.UserName);
-                        
-                        player3Entry.EloRating +=
-                            match.MatchResults.Team1Won ? -(int)result : (int)result;
-                        player3Entry.NumberOfGames++;
-                        if (match.MatchResults.Team1Won)
-                        {
-                            player3Entry.Losses++;
-                        }
-                        else
-                        {
-                            player3Entry.Wins++;
-                        }
+                        UpdateExistingLeaderboardEntry(existingPlayer3.UserName, leaderboardEntries, match, result, !match.MatchResults.Team1Won);
                     }
 
                     if (existingPlayer4 == null)
                     {
-                        leaderboardEntries.Add(
-                            new LeaderboardViewEntry
-                            {
-                                UserName = player4,
-                                EloRating = match.MatchResults.Team1Won ? 1500 - (int)result : 1500 + (int)result,
-                                NumberOfGames = 1,
-                                Wins = match.MatchResults.Team1Won ? 0 : 1
-                            });
+                        leaderboardEntries.Add(CreatePlayer(player4, match, result, !match.MatchResults.Team1Won));
                     }
                     else
                     {
-                        var player4Entry = leaderboardEntries.Single(x => x.UserName == existingPlayer4.UserName);
-                        player4Entry.EloRating +=
-                            match.MatchResults.Team1Won ? -(int)result : (int)result;
-                        player4Entry.NumberOfGames++;
-                        if (match.MatchResults.Team1Won)
-                        {
-                            player4Entry.Losses++;
-                        }
-                        else
-                        {
-                            player4Entry.Wins++;
-                        }
+                        UpdateExistingLeaderboardEntry(existingPlayer4.UserName, leaderboardEntries, match, result, !match.MatchResults.Team1Won);
                     }
                 }
 
@@ -173,6 +99,45 @@ namespace Foosball.Logic
             {
                 return _leaderboardViewRepository.GetLeaderboardView();
             }
-        } 
+        }
+
+        public LeaderboardViewEntry CreatePlayer(string playerName, Match match, double result, bool won)
+        {
+            return new LeaderboardViewEntry
+            {
+                UserName = playerName,
+                EloRating = won ? 1500 + (int)result : 1500 - (int)result,
+                NumberOfGames = 1,
+                Wins = won ? 1 : 0,
+                Losses = won ? 0 : 1,
+                Form = won ? "W" : "L"
+            };
+        }
+
+        public void UpdateExistingLeaderboardEntry(string playerName, List<LeaderboardViewEntry> leaderboardEntries, Match match, double result, bool won)
+        {
+            var playerEntry = leaderboardEntries.Single(x => x.UserName == playerName);
+            playerEntry.EloRating += won ? (int)result : - (int)result;
+            playerEntry.NumberOfGames++;
+
+            if (playerEntry.Form.Length < 5)
+            {
+                playerEntry.Form += won ? "W" : "L";
+            }
+            else
+            {
+                playerEntry.Form = playerEntry.Form.Remove(0, 1);
+                playerEntry.Form += won ? "W" : "L";
+            }
+
+            if (won)
+            {
+                playerEntry.Wins++;
+            }
+            else
+            {
+                playerEntry.Losses++;
+            }
+        }
     }
 }

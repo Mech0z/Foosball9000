@@ -7,5 +7,6 @@
         public int Wins { get; set; }
         public int Losses { get; set; }
         public int EloRating { get; set; }
+        public string Form { get; set; }
     }
 }
