@@ -1,26 +1,14 @@
-﻿using System.Collections.Generic;
-using Foosball.Logic;
-using Microsoft.AspNet.Mvc;
-using Models;
+﻿using Microsoft.AspNet.Mvc;
 
 namespace Foosball.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ICreateLeaderboardView _createLeaderboardView;
-
-        public HomeController(ICreateLeaderboardView createLeaderboardView)
+        public ViewResult Index()
         {
-            _createLeaderboardView = createLeaderboardView;
+            ViewBag.Message = "Your application start page.";
 
-            
-        }
-
-        public IEnumerable<LeaderboardViewEntry> Index()
-        {
-            var test = _createLeaderboardView.Get(true);
-            
-            return test.Entries;
+            return View();
         }
 
         public IActionResult About()
