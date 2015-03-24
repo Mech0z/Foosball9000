@@ -129,3 +129,4 @@ packages/
 
 /src/testazure/config.json
 /MongoDBRepository/ConnectionString.settings
+/src/testazure/Properties/PublishProfiles
