@@ -15,13 +15,14 @@ namespace Foosball.Controllers
             _matchRepository = matchRepository;
         }
 
-        // GET: /<controller>/
+        // GET: /api/Match/GetAll
         [HttpGet]
         public IEnumerable<Match> GetAll()
         {
             return _matchRepository.GetMatches();
         }
 
+        // GET: /api/Match/LastGames?numberOfMatches=10
         [HttpGet]
         public IEnumerable<Match> LastGames([FromHeader]int numberOfMatches)
         {
@@ -31,12 +32,13 @@ namespace Foosball.Controllers
         }
 
         [HttpPost]
-        public void SaveDraft([FromBody]Match match)
+        public void SaveMatch([FromBody]Match match)
         {
             var existingMatch = _matchRepository.GetByTimeStamp(match.TimeStampUtc);
 
             if (existingMatch == null)
             {
+                //New match
                 return;
             }
 
