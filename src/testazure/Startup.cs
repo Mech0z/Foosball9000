@@ -38,9 +38,10 @@ namespace Foosball
             services.AddSingleton<ICreateLeaderboardView, CreateLeaderboardView>();
             services.AddSingleton<IMatchRepositoryV2, MatchRepositoryV2>();
             services.AddSingleton<ICreateLeaderboardViewV2, CreateLeaderboardViewV2>();
+            services.AddSingleton<IMatchupResultRepository, MatchupResultRepository>();
             // Add MVC services to the services container.
             services.AddMvc();
-
+                
             // Uncomment the following line to add Web API servcies which makes it easier to port Web API 2 controllers.
             // You need to add Microsoft.AspNet.Mvc.WebApiCompatShim package to project.json
             // services.AddWebApiConventions();

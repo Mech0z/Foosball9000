@@ -59,6 +59,7 @@
     <Compile Include="LeaderboardViewRepository.cs" />
     <Compile Include="MatchRepositoryV2.cs" />
     <Compile Include="MatchRepository.cs" />
+    <Compile Include="MatchupResultRepository.cs" />
     <Compile Include="MongoBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

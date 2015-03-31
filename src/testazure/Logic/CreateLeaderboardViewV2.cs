@@ -5,17 +5,12 @@ using System.Collections.Generic;
 
 namespace Foosball.Logic
 {
-    public interface ICreateLeaderboardView
-    {
-        LeaderboardView Get(bool recalculate);
-    }
-
-    public class CreateLeaderboardView : ICreateLeaderboardView
+    public class CreateLeaderboardViewV2 : ICreateLeaderboardViewV2
     {
         private readonly ILeaderboardViewRepository _leaderboardViewRepository;
-        private readonly IMatchRepository _matchRepository;
+        private readonly IMatchRepositoryV2 _matchRepository;
 
-        public CreateLeaderboardView(ILeaderboardViewRepository leaderboardViewRepository, IMatchRepository matchRepository)
+        public CreateLeaderboardViewV2(ILeaderboardViewRepository leaderboardViewRepository, IMatchRepositoryV2 matchRepository)
         {
             _leaderboardViewRepository = leaderboardViewRepository;
             _matchRepository = matchRepository;
@@ -33,18 +28,18 @@ namespace Foosball.Logic
                     var leaderboardEntries = leaderboardView.Entries;
 
                     //Team1
-                    var player1 = match.Team1UserNames[0];
+                    var player1 = match.PlayerList[0];
                     var existingPlayer1 = leaderboardEntries.SingleOrDefault(x => x.UserName == player1);
-                    var player2 = match.Team1UserNames[1];
+                    var player2 = match.PlayerList[1];
                     var existingPlayer2 = leaderboardEntries.SingleOrDefault(x => x.UserName == player2);
 
                     var team1AvgElo = existingPlayer1?.EloRating ?? 1500;
                     team1AvgElo += existingPlayer2?.EloRating ?? 1500;
 
                     //Team2
-                    var player3 = match.Team2UserNames[0];
+                    var player3 = match.PlayerList[2];
                     var existingPlayer3 = leaderboardEntries.SingleOrDefault(x => x.UserName == player3);
-                    var player4 = match.Team2UserNames[1];
+                    var player4 = match.PlayerList[3];
                     var existingPlayer4 = leaderboardEntries.SingleOrDefault(x => x.UserName == player4);
 
                     var team2AvgElo = existingPlayer3?.EloRating ?? 1500;
@@ -101,7 +96,7 @@ namespace Foosball.Logic
             }
         }
 
-        public LeaderboardViewEntry CreatePlayer(string playerName, Match match, double result, bool won)
+        public LeaderboardViewEntry CreatePlayer(string playerName, MatchV2 match, double result, bool won)
         {
             return new LeaderboardViewEntry
             {
@@ -114,7 +109,7 @@ namespace Foosball.Logic
             };
         }
 
-        public void UpdateExistingLeaderboardEntry(string playerName, List<LeaderboardViewEntry> leaderboardEntries, Match match, double result, bool won)
+        public void UpdateExistingLeaderboardEntry(string playerName, List<LeaderboardViewEntry> leaderboardEntries, MatchV2 match, double result, bool won)
         {
             var playerEntry = leaderboardEntries.Single(x => x.UserName == playerName);
             playerEntry.EloRating += won ? (int)result : - (int)result;
