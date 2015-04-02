@@ -30,7 +30,7 @@ namespace Foosball.Logic
             var team1 = new List<string> { match.PlayerList[0], match.PlayerList[1] }.OrderBy(x => x).ToList();
             var team2 = new List<string> { match.PlayerList[2], match.PlayerList[3] }.OrderBy(x => x).ToList();
 
-            var matchResultfound = false;
+            MatchupResult correctMatchupResult = null;
             foreach (var matchResult in matchingResults)
             {
                 var sortedFoundMatchResultTeam1 = new List<string> { matchResult.UserList[0], matchResult.UserList[1] }.OrderBy(x => x).ToList();
@@ -38,27 +38,69 @@ namespace Foosball.Logic
 
                 if (team1[0] == sortedFoundMatchResultTeam1[0] && team1[1] == sortedFoundMatchResultTeam1[1])
                 {
-                    matchResultfound = true;
+                    correctMatchupResult = matchResult;
                     break;
                 } else if (team2[0] == sortedFoundMatchResultTeam2[0] && team2[1] == sortedFoundMatchResultTeam2[1])
                 {
-                    matchResultfound = true;
+                    correctMatchupResult = matchResult;
                     break;
                 }
             }
             
             //Add match
-            if (!matchResultfound)
+            if (correctMatchupResult != null)
             {
-                
+                AddMatchupResult(correctMatchupResult, match);
+                _matchupResultRepository.SaveMatchupResult(correctMatchupResult);
             }
-
-            throw new System.NotImplementedException();
+            else
+            {
+                //Create new matchcupresult
+            }
         }
 
         public void RecalculateMatchupHistory()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void AddMatchupResult(MatchupResult existingMatchupResult, MatchV2 match)
+        {
+            //Find out if team 1
+            if (match.PlayerList[0] == existingMatchupResult.UserList[0] ||
+                match.PlayerList[0] == existingMatchupResult.UserList[1])
+            {
+                if (match.MatchResults.Team1Won)
+                {
+                    existingMatchupResult.Team1Wins++;
+                }
+                else
+                {
+                    existingMatchupResult.Team2Wins++;
+                }
+            }
+            else
+            {
+                if (match.MatchResults.Team1Won)
+                {
+                    existingMatchupResult.Team2Wins++;
+                }
+                else
+                {
+                    existingMatchupResult.Team1Wins++;
+                }
+            }
+
+            if (existingMatchupResult.Last5Games.Count < 5)
+            {
+                //TODO Need to take care when team 1 of existing is not the same as team1 in match
+                existingMatchupResult.Last5Games.Insert(0, match.MatchResults);
+            }
+            else
+            {
+                existingMatchupResult.Last5Games.RemoveAt(4);
+                existingMatchupResult.Last5Games.Insert(0, match.MatchResults);
+            }
         }
     }
 }
