@@ -16,9 +16,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDBRepository", "MongoDBRepository\MongoDBRepository.csproj", "{BC0F4545-EEEE-46A6-825D-0EA2596A05C2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BD5FA5CB-1F43-446F-840F-5118C26FCB20}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{BD5FA5CB-1F43-446F-840F-5118C26FCB20}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FoosballTests", "FoosballTests\FoosballTests.kproj", "{FD7D1F4C-ED08-4ED1-B446-B1472573843C}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Foosball.Tests", "Test\Foosball\Foosball.Tests.kproj", "{FD7D1F4C-ED08-4ED1-B446-B1472573843C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
