@@ -32,10 +32,13 @@ namespace Foosball.Logic
             var result = (medium * diversification - diff) / medium + minRating;
 
             if (result > maxRating)
+            {
                 result = maxRating;
-
+            }
             else if (result < minRating)
+            {
                 result = minRating;
+            }
 
             return result;
         }
