@@ -22,7 +22,7 @@ namespace Foosball.Controllers
         //        var matchv2 = new MatchV2
         //        {
         //            Id = match.Id,
-        //            MatchResults = match.MatchResults,
+        //            MatchResult = match.MatchResult,
         //            PlayerList = match.Team1UserNames,
         //            StaticFormationTeam1 = !match.StaticFormationTeam1,
         //            StaticFormationTeam2 = !match.StaticFormationTeam2,

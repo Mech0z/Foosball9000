@@ -46,42 +46,42 @@ namespace Foosball.Logic
                     team2AvgElo += existingPlayer4?.EloRating ?? 1500;
 
                     var elo = new EloRating();
-                    var result = elo.CalculateRating(team1AvgElo / 2, team2AvgElo / 2, match.MatchResults.Team1Won);
+                    var result = elo.CalculateRating(team1AvgElo / 2, team2AvgElo / 2, match.MatchResult.Team1Won);
 
                     if (existingPlayer1 == null)
                     {
-                        leaderboardEntries.Add(CreatePlayer(player1, match, result, match.MatchResults.Team1Won));
+                        leaderboardEntries.Add(CreatePlayer(player1, match, result, match.MatchResult.Team1Won));
                     }
                     else
                     {
-                        UpdateExistingLeaderboardEntry(existingPlayer1.UserName, leaderboardEntries, match, result, match.MatchResults.Team1Won);
+                        UpdateExistingLeaderboardEntry(existingPlayer1.UserName, leaderboardEntries, match, result, match.MatchResult.Team1Won);
                     }
 
                     if (existingPlayer2 == null)
                     {
-                        leaderboardEntries.Add(CreatePlayer(player2, match, result, match.MatchResults.Team1Won));
+                        leaderboardEntries.Add(CreatePlayer(player2, match, result, match.MatchResult.Team1Won));
                     }
                     else
                     {
-                        UpdateExistingLeaderboardEntry(existingPlayer2.UserName, leaderboardEntries, match, result, match.MatchResults.Team1Won);
+                        UpdateExistingLeaderboardEntry(existingPlayer2.UserName, leaderboardEntries, match, result, match.MatchResult.Team1Won);
                     }
 
                     if (existingPlayer3 == null)
                     {
-                        leaderboardEntries.Add(CreatePlayer(player3, match, result, !match.MatchResults.Team1Won));
+                        leaderboardEntries.Add(CreatePlayer(player3, match, result, !match.MatchResult.Team1Won));
                     }
                     else
                     {
-                        UpdateExistingLeaderboardEntry(existingPlayer3.UserName, leaderboardEntries, match, result, !match.MatchResults.Team1Won);
+                        UpdateExistingLeaderboardEntry(existingPlayer3.UserName, leaderboardEntries, match, result, !match.MatchResult.Team1Won);
                     }
 
                     if (existingPlayer4 == null)
                     {
-                        leaderboardEntries.Add(CreatePlayer(player4, match, result, !match.MatchResults.Team1Won));
+                        leaderboardEntries.Add(CreatePlayer(player4, match, result, !match.MatchResult.Team1Won));
                     }
                     else
                     {
-                        UpdateExistingLeaderboardEntry(existingPlayer4.UserName, leaderboardEntries, match, result, !match.MatchResults.Team1Won);
+                        UpdateExistingLeaderboardEntry(existingPlayer4.UserName, leaderboardEntries, match, result, !match.MatchResult.Team1Won);
                     }
                 }
 

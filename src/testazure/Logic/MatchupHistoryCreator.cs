@@ -56,6 +56,15 @@ namespace Foosball.Logic
             else
             {
                 //Create new matchcupresult
+                var matchup = new MatchupResult
+                {
+                    HashResult = hashcode,
+                    Last5Games = new List<MatchResult> {match.MatchResult},
+                    Team1Wins = 0,
+                    Team2Wins = 0,
+                    UserList = match.PlayerList
+                };
+                _matchupResultRepository.SaveMatchupResult(matchup);
             }
         }
 
@@ -70,7 +79,7 @@ namespace Foosball.Logic
             if (match.PlayerList[0] == existingMatchupResult.UserList[0] ||
                 match.PlayerList[0] == existingMatchupResult.UserList[1])
             {
-                if (match.MatchResults.Team1Won)
+                if (match.MatchResult.Team1Won)
                 {
                     existingMatchupResult.Team1Wins++;
                 }
@@ -81,7 +90,7 @@ namespace Foosball.Logic
             }
             else
             {
-                if (match.MatchResults.Team1Won)
+                if (match.MatchResult.Team1Won)
                 {
                     existingMatchupResult.Team2Wins++;
                 }
@@ -94,12 +103,12 @@ namespace Foosball.Logic
             if (existingMatchupResult.Last5Games.Count < 5)
             {
                 //TODO Need to take care when team 1 of existing is not the same as team1 in match
-                existingMatchupResult.Last5Games.Insert(0, match.MatchResults);
+                existingMatchupResult.Last5Games.Insert(0, match.MatchResult);
             }
             else
             {
                 existingMatchupResult.Last5Games.RemoveAt(4);
-                existingMatchupResult.Last5Games.Insert(0, match.MatchResults);
+                existingMatchupResult.Last5Games.Insert(0, match.MatchResult);
             }
         }
     }

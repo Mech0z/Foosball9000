@@ -42,6 +42,6 @@ namespace Models
         public bool StaticFormationTeam1 { get; set; }
         public bool StaticFormationTeam2 { get; set; }
 
-        public MatchResult MatchResults { get; set; }
+        public MatchResult MatchResult { get; set; }
     }
 }
