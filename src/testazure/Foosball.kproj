@@ -19,6 +19,7 @@
     <DevelopmentServerPort>30197</DevelopmentServerPort>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Logic\Logic.csproj" />
     <ProjectReference Include="..\..\Models\Models.csproj" />
     <ProjectReference Include="..\..\MongoDBRepository\MongoDBRepository.csproj" />
   </ItemGroup>

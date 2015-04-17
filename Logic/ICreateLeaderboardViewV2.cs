@@ -1,6 +1,6 @@
 using Models;
 
-namespace Foosball.Logic
+namespace Logic
 {
     public interface ICreateLeaderboardViewV2
     {

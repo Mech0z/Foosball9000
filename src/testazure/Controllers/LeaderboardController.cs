@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Foosball.Logic;
+using Logic;
 using Microsoft.AspNet.Mvc;
 using Models;
 

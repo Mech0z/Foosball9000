@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net45": {
+      "wrappedProject": "../../Logic/Logic.csproj",
+      "bin": {
+        "assembly": "../../Logic/obj/{configuration}/Logic.dll",
+        "pdb": "../../Logic/obj/{configuration}/Logic.pdb"
+      }
+    }
+  }
+}

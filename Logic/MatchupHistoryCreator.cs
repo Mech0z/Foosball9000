@@ -3,7 +3,7 @@ using System.Linq;
 using Models;
 using MongoDBRepository;
 
-namespace Foosball.Logic
+namespace Logic
 {
     public class MatchupHistoryCreator : IMatchupHistoryCreator
     {

@@ -28,7 +28,8 @@
         "aspnet50": {
             "dependencies": {
                 "Models": "1.0.0-*",
-                "MongoDBRepository": "1.0.0-*"
+                "MongoDBRepository": "1.0.0-*",
+                "Logic": "1.0.0-*"
             }
         }
         //,        "aspnetcore50": { }

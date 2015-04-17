@@ -1,5 +1,5 @@
 ﻿using System;
-using Foosball.Logic;
+using Logic;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Diagnostics.Entity;
