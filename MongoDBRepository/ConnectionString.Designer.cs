@@ -12,7 +12,7 @@ namespace MongoDBRepository {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
     internal sealed partial class ConnectionString : global::System.Configuration.ApplicationSettingsBase {
         
         private static ConnectionString defaultInstance = ((ConnectionString)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new ConnectionString())));
@@ -23,27 +23,21 @@ namespace MongoDBRepository {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("mongodb://foosball101:foosball101@ds031711.mongolab.com:31711/foosball9000")]
         public string mongoconnection {
             get {
                 return ((string)(this["mongoconnection"]));
             }
-            set {
-                this["mongoconnection"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("foosball9000")]
         public string database {
             get {
                 return ((string)(this["database"]));
-            }
-            set {
-                this["database"] = value;
             }
         }
     }

@@ -32,9 +32,8 @@ namespace Logic
                     var existingPlayer1 = leaderboardEntries.SingleOrDefault(x => x.UserName == player1);
                     var player2 = match.Team1UserNames[1];
                     var existingPlayer2 = leaderboardEntries.SingleOrDefault(x => x.UserName == player2);
-
-                    var team1AvgElo = existingPlayer1?.EloRating ?? 1500;
-                    team1AvgElo += existingPlayer2?.EloRating ?? 1500;
+                    var team1AvgElo = existingPlayer1 != null ? existingPlayer1.EloRating : 1500;
+                    team1AvgElo += existingPlayer2 != null ? existingPlayer2.EloRating : 1500;
 
                     //Team2
                     var player3 = match.Team2UserNames[0];
@@ -42,8 +41,8 @@ namespace Logic
                     var player4 = match.Team2UserNames[1];
                     var existingPlayer4 = leaderboardEntries.SingleOrDefault(x => x.UserName == player4);
 
-                    var team2AvgElo = existingPlayer3?.EloRating ?? 1500;
-                    team2AvgElo += existingPlayer4?.EloRating ?? 1500;
+                    var team2AvgElo = existingPlayer3 != null ? existingPlayer3.EloRating : 1500;
+                    team2AvgElo += existingPlayer4 != null ? existingPlayer4.EloRating : 1500;
 
                     var elo = new EloRating();
                     var result = elo.CalculateRating(team1AvgElo / 2, team2AvgElo / 2, match.MatchResults.Team1Won);

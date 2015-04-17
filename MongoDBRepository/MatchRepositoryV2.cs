@@ -10,7 +10,7 @@ namespace MongoDBRepository
     {
         public MatchRepositoryV2() : base("MatchesV2")
         {
-            
+
         }
 
         public void SaveMatch(MatchV2 draft)
