@@ -2,7 +2,7 @@ using Models;
 
 namespace Logic
 {
-    public interface ICreateLeaderboardView
+    public interface ICreateLeaderboardView : ILogic
     {
         LeaderboardView Get(bool recalculate);
     }

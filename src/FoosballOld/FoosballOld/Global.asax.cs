@@ -33,7 +33,6 @@ namespace FoosballOld
             Container.Install(new MongoInstaller());
             Container.Register(Classes.FromThisAssembly().BasedOn<ApiController>().LifestylePerWebRequest());
 
-
             GlobalConfiguration.Configuration.Services.Replace(
                 typeof(IHttpControllerActivator), new WindsorCompositionRoot(Container));
         }

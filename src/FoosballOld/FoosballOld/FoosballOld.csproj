@@ -145,9 +145,12 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\LeaderboardController.cs" />
+    <Compile Include="ContainerInstallers\LogicInstaller.cs" />
     <Compile Include="ContainerInstallers\MongoInstaller.cs" />
     <Compile Include="ContainerInstallers\WindsorCompositionRoot.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MatchController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

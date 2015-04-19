@@ -44,6 +44,7 @@
     <Compile Include="EloRating.cs" />
     <Compile Include="ICreateLeaderboardView.cs" />
     <Compile Include="ICreateLeaderboardViewV2.cs" />
+    <Compile Include="ILogic.cs" />
     <Compile Include="IMatchupHistoryCreator.cs" />
     <Compile Include="IRating.cs" />
     <Compile Include="MatchupHistoryCreator.cs" />
