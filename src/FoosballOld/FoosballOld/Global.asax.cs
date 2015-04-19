@@ -30,7 +30,7 @@ namespace FoosballOld
         {
             Container = new WindsorContainer();
 
-            Container.Install(new MongoInstaller());
+            Container.Install(new MongoInstaller(), new LogicInstaller());
             Container.Register(Classes.FromThisAssembly().BasedOn<ApiController>().LifestylePerWebRequest());
 
             GlobalConfiguration.Configuration.Services.Replace(
