@@ -8,10 +8,10 @@ namespace FoosballOld.Controllers
 {
     public class MatchController
     {
-        private readonly IMatchRepository _matchRepository;
+        private readonly IMatchRepositoryV2 _matchRepository;
         private readonly IMatchupResultRepository _matchupResultRepository;
 
-        public MatchController(IMatchRepository matchRepository, IMatchupResultRepository matchupResultRepository)
+        public MatchController(IMatchRepositoryV2 matchRepository, IMatchupResultRepository matchupResultRepository)
         {
             _matchRepository = matchRepository;
             _matchupResultRepository = matchupResultRepository;
@@ -19,20 +19,20 @@ namespace FoosballOld.Controllers
 
         // GET: /api/Match/GetAll
         [HttpGet]
-        public IEnumerable<Match> GetAll()
+        public IEnumerable<MatchV2> GetAll()
         {
             return _matchRepository.GetMatches();
         }
 
         // GET: /api/Match/LastGames?numberOfMatches=10
         [HttpGet]
-        public IEnumerable<Match> LastGames(int numberOfMatches)
+        public IEnumerable<MatchV2> LastGames(int numberOfMatches)
         {
             return _matchRepository.GetRecentMatches(numberOfMatches);
         }
 
         [HttpPost]
-        public void SaveMatch([FromBody]Match match)
+        public void SaveMatch([FromBody]MatchV2 match)
         {
             _matchRepository.SaveMatch(match);
         }

@@ -8,9 +8,9 @@ namespace Foosball.Controllers
     [Route("api/[controller]")]
     public class LeaderboardController : Controller
     {
-        private readonly ICreateLeaderboardView _createLeaderboardView;
+        private readonly ICreateLeaderboardViewV2 _createLeaderboardView;
 
-        public LeaderboardController(ICreateLeaderboardView createLeaderboardView)
+        public LeaderboardController(ICreateLeaderboardViewV2 createLeaderboardView)
         {
             _createLeaderboardView = createLeaderboardView;
         }
