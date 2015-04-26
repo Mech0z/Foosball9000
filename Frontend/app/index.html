@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <title>Sample AngularJS project using Visual Studio</title>
+    <link href="../Content/bootstrap.css" rel="stylesheet">
+    <script src="../Scripts/angular.js"></script>
+    <script src="../Scripts/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers/homeController.js"></script>
+    <script src="controllers/leaderboardController.js"></script>
+</head>
+<body>
+<div>
+        <a class="btn btn-default" href="#/">Home</a>
+        <a class="btn btn-default" href="#/leaderboard">Leaderbaord</a>
+    </div>
+
+    <div ng-controller="mainController">
+        <h1>{{message}}</h1>
+        <div ng-view>
+        </div>
+    </div>
+</body>
+</html>
