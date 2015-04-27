@@ -1,6 +1,5 @@
 ﻿var app = angular.module('Foosball', [
-    'ngRoute',
-    'leaderboardService'])
+    'leaderboardService','ngRoute'])
 .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {

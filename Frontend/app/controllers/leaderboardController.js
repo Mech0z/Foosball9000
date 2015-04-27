@@ -1,9 +1,9 @@
 ﻿'use strict';
 
 app.controller('leaderboardController',
-    function ($scope, leaderboard) {
+    function ($scope, Leaderboard) {
     $scope.message = "Now viewing leaderboard!";
 
-    $scope.movies = leaderboard.query();
+    $scope.leaderboard = Leaderboard.query();
 
 });
