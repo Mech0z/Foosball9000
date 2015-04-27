@@ -1,4 +1,6 @@
-﻿var app = angular.module('myApp', ['ngRoute'])
+﻿var app = angular.module('Foosball', [
+    'ngRoute',
+    'leaderboardService'])
 .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -10,7 +12,7 @@
           controller: 'leaderboardController'
       })
       .otherwise({
-          redirectTo: '/'
+          redirectTo: '/404.png'
       });
 }])
 .controller('mainController', function ($scope) {
