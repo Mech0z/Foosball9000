@@ -1,9 +1,13 @@
 ﻿'use strict';
 
 app.controller('leaderboardController',
-    function ($scope, Leaderboard) {
+    function ($scope, leaderboard) {
     $scope.message = "Now viewing leaderboard!";
 
-    $scope.leaderboard = Leaderboard.getLeaderboard();
 
+    $scope.leaderboardPromise = leaderboard.getLeaderboard();
+
+    $scope.leaderboardPromise.then(function (payload) {
+        $scope.leaderboard = payload;
+    });
 });

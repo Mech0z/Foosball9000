@@ -1,3 +1,32 @@
 ﻿<div ng-controller="leaderboardController">
     <h2>{{message}}</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>ELO</th>
+                <th>FORM</th>
+                <th>Wins/Games</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="item in leaderboard">
+            <td>
+                <p> <b>{{item.UserName}}</b>
+                </p>
+            </td>
+            <td>
+                <p> <b>{{item.EloRating}}</b>
+                </p>
+            </td>
+            <td>
+                <p> <b>{{item.Form}}</b>
+                </p>
+            </td>
+            <td>
+                <p> <b>{{item.Wins}}/{{item.NumberOfGames}}</b>
+                </p>
+            </td>
+        </tr>
+    </table>
 </div>

@@ -3,7 +3,7 @@
 
     var leaderboardServices = angular.module('leaderboardService', []);
 
-    leaderboardServices.factory('Leaderboard', ['$http', '$q', function ($http, $q) {
+    leaderboardServices.factory('leaderboard', ['$http', '$q', function ($http, $q) {
 
         return {
             getLeaderboard: function () {
