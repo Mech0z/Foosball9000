@@ -1,0 +1,15 @@
+﻿<div ng-controller="adduserController">
+    <form ng-submit="submit()">
+        Username
+        <input ng-model="User.Username" minlength="3" maxlength="20" type="text"/>
+        <br/>
+        Email
+        <input ng-model="User.Email" type="email">
+        <br/>
+        Gravatar email
+        <input ng-model="User.GravatarEmail" type="email">
+        <br/>
+        <br/>
+        <input type="submit" id="submit" value="Submit"/>
+    </form>
+</div>

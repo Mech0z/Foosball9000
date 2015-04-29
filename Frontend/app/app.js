@@ -1,5 +1,5 @@
 ﻿var app = angular.module('Foosball', [
-    'leaderboardService','ngRoute'])
+    'leaderboardService','matchService', 'userService','ngRoute'])
 .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -9,6 +9,14 @@
       .when('/leaderboard', {
           templateUrl: 'views/leaderboard.html',
           controller: 'leaderboardController'
+      })
+      .when('/addmatch', {
+          templateUrl: 'views/addmatch.html',
+          controller: 'addmatchController'
+      })
+      .when('/adduser', {
+          templateUrl: 'views/adduser.html',
+          controller: 'adduserController'
       })
       .otherwise({
           redirectTo: '/404.png'

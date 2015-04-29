@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Models;
 using MongoDBRepository;
 
 namespace FoosballOld.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class MatchController
     {
         private readonly IMatchRepositoryV2 _matchRepository;

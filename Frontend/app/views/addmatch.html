@@ -1,0 +1,46 @@
+﻿<div ng-controller="addmatchController">
+    <form ng-submit="submit()" >
+        <h3>Game score</h3>
+
+        <h5>Team 1</h5>
+        <input list="player1Team1" value="{{selectedUser1Email}}"/>
+        <datalist id="player1Team1">
+            <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
+        </datalist>
+
+        <br />
+
+        <input list="player2Team1" value="{{selectedUser2Email}}" />
+        <datalist id="player2Team1">
+            <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
+        </datalist>
+
+        <br />
+        <h5>Team 2</h5>
+        <input list="player1Team2" value="{{selectedUser3Email}}" />
+        <datalist id="player1Team2">
+            <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
+        </datalist>
+
+        <br />
+
+        <input list="player2Team2" value="{{selectedUser4Email}}" />
+        <datalist id="player2Team2">
+            <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
+        </datalist>
+
+        <br/>
+        <br/>
+
+        <input type="number" name="input" ng-model="example.value"
+               min="0" max="99" required>
+        -
+        <input type="number" name="input" ng-model="example.value"
+               min="0" max="99" required>
+
+        <br/><br />
+
+        <input type="submit" id="submit" value="Submit" />
+        <pre>list={{userList}}</pre>
+    </form>
+</div>
