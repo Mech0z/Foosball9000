@@ -13,7 +13,7 @@ namespace FoosballOld
             config.EnableCors();
             // Web API routes
             config.MapHttpAttributeRoutes();
-
+            config.EnableSystemDiagnosticsTracing();
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

@@ -3,21 +3,21 @@
         <h3>Game score</h3>
 
         <h5>Team 1</h5>
-        <input list="player1Team1" ng-model="match.PlayerList[0]" required/>
+        <input list="player1Team1" ng-model="playerlist.Player1" required/>
         <datalist id="player1Team1">
             <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
         </datalist>
 
         <br />
 
-        <input list="player2Team1" ng-model="match.PlayerList[1]" required/>
+        <input list="player2Team1" ng-model="playerlist.Player2" required/>
         <datalist id="player2Team1">
             <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
         </datalist>
 
         <br />
         <h5>Team 2</h5>
-        <input list="player1Team2" ng-model="match.PlayerList[2]" required/>
+        <input list="player1Team2" ng-model="playerlist.Player3" required/>
         <datalist id="player1Team2">
             <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
         </datalist>
@@ -26,7 +26,7 @@
 
         <input
             list="player2Team2"
-            ng-model="match.PlayerList[3]"
+            ng-model="playerlist.Player4"
             required
             type="email"
                />

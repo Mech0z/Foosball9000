@@ -8,7 +8,7 @@ using MongoDBRepository;
 namespace FoosballOld.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class MatchController
+    public class MatchController : ApiController
     {
         private readonly IMatchRepositoryV2 _matchRepository;
         private readonly IMatchupResultRepository _matchupResultRepository;
