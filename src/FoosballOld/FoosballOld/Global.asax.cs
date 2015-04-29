@@ -39,7 +39,8 @@ namespace FoosballOld
 
         public override void Dispose()
         {
-            Container.Dispose();
+            //TODO WHy is contianre null causing a null exception :s
+            //Container.Dispose();
             base.Dispose();
         }
     }

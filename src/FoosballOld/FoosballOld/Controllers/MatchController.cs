@@ -34,7 +34,7 @@ namespace FoosballOld.Controllers
         }
 
         [HttpPost]
-        public void SaveMatch([FromBody]MatchV2 match)
+        public void SaveMatch(MatchV2 match)
         {
             _matchRepository.SaveMatch(match);
         }

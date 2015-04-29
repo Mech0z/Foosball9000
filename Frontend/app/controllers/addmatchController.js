@@ -10,7 +10,8 @@ app.controller("addmatchController",
 
         });
 
-        $scope.submit = function() {
+        $scope.submit = function () {
+            match.addMatch($scope.match);
             console.log($scope.match);
         };
     });

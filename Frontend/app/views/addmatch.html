@@ -3,21 +3,21 @@
         <h3>Game score</h3>
 
         <h5>Team 1</h5>
-        <input list="player1Team1" ng-model="match.selectedUser1Email" required/>
+        <input list="player1Team1" ng-model="match.PlayerList[0]" required/>
         <datalist id="player1Team1">
             <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
         </datalist>
 
         <br />
 
-        <input list="player2Team1" ng-model="match.selectedUser2Email" required/>
+        <input list="player2Team1" ng-model="match.PlayerList[1]" required/>
         <datalist id="player2Team1">
             <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
         </datalist>
 
         <br />
         <h5>Team 2</h5>
-        <input list="player1Team2" ng-model="match.selectedUser3Email" required/>
+        <input list="player1Team2" ng-model="match.PlayerList[2]" required/>
         <datalist id="player1Team2">
             <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
         </datalist>
@@ -26,7 +26,7 @@
 
         <input
             list="player2Team2"
-            ng-model="match.selectedUser4Email"
+            ng-model="match.PlayerList[3]"
             required
             type="email"
                />
@@ -36,13 +36,17 @@
 
         <br/>
         <br/>
-
-        <input type="number" name="input" ng-model="match.team1Score"
+        <h5>Team 1 score</h5>
+        <input type="number" name="input" ng-model="match.MatchResult.Team1Score"
                min="0" max="99" required>
-        -
-        <input type="number" name="input" ng-model="match.team2Score"
+        Did you swap positions?
+        <input type="checkbox" ng-model="match.StaticFormationTeam1"/>
+        <br/>
+        <h5>Team 2 score</h5>
+        <input type="number" name="input" ng-model="match.MatchResult.Team2Score"
                min="0" max="99" required>
-
+        Did you swap positions?
+        <input type="checkbox" ng-model="match.StaticFormationTeam2" />
         <br/><br />
 
         <input type="submit" id="submit" value="Submit" />
