@@ -4,7 +4,7 @@ app.controller("addmatchController",
     function($scope, match, user) {
 
         $scope.playerlist = {};
-        $scope.match = {};
+        $scope.matchResult = {};
 
         user.getUsers().then(function(payload) {
             $scope.userList = payload;
@@ -12,12 +12,12 @@ app.controller("addmatchController",
         });
 
         $scope.submit = function () {
-            match.PlayerList = {};
-            match.PlayerList.push($scope.playerlist.Player1);
-            match.PlayerList.push($scope.playerlist.Player2);
-            match.PlayerList.push($scope.playerlist.Player3);
-            match.PlayerList.push($scope.playerlist.Player4);
-            match.addMatch($scope.match);
+            $scope.matchResult.PlayerList = [];
+            $scope.matchResult.PlayerList.push($scope.playerlist.Player1);
+            $scope.matchResult.PlayerList.push($scope.playerlist.Player2);
+            $scope.matchResult.PlayerList.push($scope.playerlist.Player3);
+            $scope.matchResult.PlayerList.push($scope.playerlist.Player4);
+            match.addMatch($scope.matchResult);
             console.log($scope.match);
         };
     });

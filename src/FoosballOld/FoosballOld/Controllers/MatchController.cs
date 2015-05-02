@@ -4,6 +4,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using Models;
 using MongoDBRepository;
+using System;
 
 namespace FoosballOld.Controllers
 {
@@ -36,6 +37,8 @@ namespace FoosballOld.Controllers
         [HttpPost]
         public void SaveMatch(MatchV2 match)
         {
+            match.TimeStampUtc = DateTime.UtcNow;
+
             _matchRepository.SaveMatch(match);
         }
 
