@@ -29,7 +29,7 @@ namespace FoosballOld.Controllers
 
         // GET: /api/Match/LastGames?numberOfMatches=10
         [HttpGet]
-        public IEnumerable<MatchV2> LastGames(int numberOfMatches)
+        public IEnumerable<MatchV2> LastGames([FromUri]int numberOfMatches)
         {
             return _matchRepository.GetRecentMatches(numberOfMatches);
         }

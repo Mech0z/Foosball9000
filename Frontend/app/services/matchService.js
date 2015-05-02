@@ -23,7 +23,7 @@
             getLatest(number) {
                 var deferred = $q.defer();
 
-                $http.get("http://localhost:44716/api/match/LastGames", { numberOfMatches: number })
+                $http.get("http://localhost:44716/api/match/lastgames?numberofmatches="+number)
                 .success(function (data, status, headers, config){
                     deferred.resolve(data);
                 }).error(function (data, status, headers, config) {

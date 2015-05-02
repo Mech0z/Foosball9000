@@ -9,7 +9,7 @@
             getLeaderboard: function () {
                 var deferred = $q.defer();
 
-                $http.get("http://localhost:44716/api/leaderboard")
+                $http.get("http://localhost:44716/api/leaderboard/index")
                    .success(function (data, status, headers, config) {
                        console.log(data);
                        deferred.resolve(data);
