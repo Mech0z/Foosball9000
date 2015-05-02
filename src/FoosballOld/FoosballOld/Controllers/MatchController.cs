@@ -35,11 +35,15 @@ namespace FoosballOld.Controllers
         }
 
         [HttpPost]
-        public void SaveMatch(MatchV2 match)
+        public IHttpActionResult SaveMatch(MatchV2 match)
         {
             match.TimeStampUtc = DateTime.UtcNow;
 
             _matchRepository.SaveMatch(match);
+
+            //Run validation
+
+            return Ok();
         }
 
         [HttpGet]

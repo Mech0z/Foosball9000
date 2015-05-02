@@ -8,5 +8,6 @@ app.controller("adduserController",
         $scope.submit = function() {
             console.log($scope.User);
             user.addUser($scope.User);
+
         };
     });

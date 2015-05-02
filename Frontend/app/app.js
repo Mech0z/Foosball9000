@@ -18,6 +18,10 @@
           templateUrl: 'views/adduser.html',
           controller: 'adduserController'
       })
+        .when('/lastgames', {
+            templateUrl: 'views/lastgames.html',
+            controller: 'lastgamesController'
+        })
       .otherwise({
           redirectTo: '/404.png'
       });

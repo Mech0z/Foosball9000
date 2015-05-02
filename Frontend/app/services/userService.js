@@ -7,12 +7,17 @@
 
         return {
             addUser: function (user) {
+                var deferred = $q.defer();
+
                 $http.post("http://localhost:44716/api/player/CreateUser", user)
                    .success(function (data, status, headers, config) {
-                       console.log("success");
+                       console.log("success adding user");
+                       deferred.resolve(data);
                     }).error(function (data, status, headers, config) {
-                        console.log("fail");
-                   });
+                        console.log("failed adding user");
+                        deferred.reject(data);
+                    });
+                return deferred.promise;
             },
             getUsers: function() {
                 var deferred = $q.defer();

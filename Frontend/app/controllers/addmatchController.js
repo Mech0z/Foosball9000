@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 app.controller("addmatchController",
-    function($scope, match, user) {
+    function($scope, $location, match, user) {
 
         $scope.playerlist = {};
         $scope.matchResult = {};
@@ -18,6 +18,7 @@ app.controller("addmatchController",
             $scope.matchResult.PlayerList.push($scope.playerlist.Player3);
             $scope.matchResult.PlayerList.push($scope.playerlist.Player4);
             match.addMatch($scope.matchResult);
-            console.log($scope.match);
+            console.log($scope.matchResult);
+            $location.path("leaderboard");
         };
     });
