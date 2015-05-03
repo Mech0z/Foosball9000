@@ -1,5 +1,9 @@
 ﻿<div ng-controller="adduserController">
-    <form ng-submit="submit()">
+    <div id="mydiv" ng-show="loading" align="center">
+        <img src="images/ajax-loader.gif" class="ajax-loader"/>
+    </div>
+
+    <form ng-submit="submit()" ng-show="!loading">
         Username
         <input ng-model="User.Username" minlength="3" maxlength="20" type="text"/>
         <br/>
@@ -12,7 +16,9 @@
         <br/>
         <input type="submit" id="submit" value="Submit"/>
     </form>
+    <br/>
 
-    <div hidden ng-show="showSuccess">Success adding user!</div>
-    <div hidden ng-show="showFailed">Failed adding user!</div>
+    <div ng-show="errorMessage" align="center">
+        <pre>{{errorMessage}}</pre>
+    </div>
 </div>

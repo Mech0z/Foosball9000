@@ -64,7 +64,7 @@ namespace FoosballOld.Controllers
 
             if (users.Any(x => x.Email == user.Email))
             {
-                return BadRequest();
+                return Conflict();
             }
 
             _userRepository.AddUser(user);

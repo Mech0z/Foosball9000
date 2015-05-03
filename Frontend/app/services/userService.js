@@ -14,8 +14,11 @@
                        console.log("success adding user");
                        deferred.resolve(data);
                     }).error(function (data, status, headers, config) {
-                        console.log("failed adding user");
-                        deferred.reject(data);
+                        if (status == 409) {
+                            deferred.reject("User with that email already exists");
+                        } else {
+                            deferred.reject("Server error");
+                        }
                     });
                 return deferred.promise;
             },
@@ -27,7 +30,7 @@
                        console.log(data);
                        deferred.resolve(data);
                    }).error(function (data, status, headers, config) {
-                       deferred.reject(data);
+                           deferred.reject(data);
                    });
 
                 return deferred.promise;
