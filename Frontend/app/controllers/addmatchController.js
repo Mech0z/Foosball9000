@@ -7,8 +7,10 @@ app.controller("addmatchController",
         $scope.match = {};
         $scope.validationFailed = false;
         $scope.errorMessage = "";
+        $scope.loading = true;
         user.getUsers().then(function(payload) {
             $scope.userList = payload;
+            $scope.loading = false;
         });
 
         $scope.submit = function() {
@@ -21,9 +23,19 @@ app.controller("addmatchController",
             var validationResult = match.validateMatch($scope.match);
             if (validationResult.validated) {
                 $scope.validationFailed = false;
-                match.addMatch($scope.match);
-                console.log($scope.match);
-                $location.path("leaderboard");
+                $scope.loading = true;
+                var addMatchPromise = match.addMatch($scope.match);
+
+                addMatchPromise.then(function () {
+                    $scope.loading = false;
+                    console.log($scope.match);
+                    $location.path("leaderboard");
+                }, function (reason) {
+                    $scope.loading = false;
+                    $scope.errorMessage = "Request failed: " + reason;
+                    console.log(reason);
+                });
+                
             } else {
                 $scope.validationFailed = true;
                 $scope.errorMessage = validationResult.errorMessage;

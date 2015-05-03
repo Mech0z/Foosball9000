@@ -1,5 +1,9 @@
 ﻿<div ng-controller="addmatchController">
-    <form ng-submit="submit()" >
+    <div id="mydiv" ng-show="loading" align="center">
+        <img src="images/ajax-loader.gif" class="ajax-loader" />
+    </div>
+
+    <form ng-submit="submit()" ng-show="!loading">
         <h3>Team 1</h3>
         Defender
         <input list="player1Team1" ng-model="playerlist.Player1" required/>
@@ -7,14 +11,14 @@
             <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
         </datalist>
 
-        <br />
+        <br/>
         Attacker
         <input list="player2Team1" ng-model="playerlist.Player2" required/>
         <datalist id="player2Team1">
             <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
         </datalist>
 
-        <br />
+        <br/>
         <h3>Team 2</h3>
         Defender
         <input list="player1Team2" ng-model="playerlist.Player3" required/>
@@ -22,9 +26,9 @@
             <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
         </datalist>
 
-        <br />
+        <br/>
         Attacker
-        <input list="player2Team2" ng-model="playerlist.Player4" required type="email" />
+        <input list="player2Team2" ng-model="playerlist.Player4" required type="email"/>
         <datalist id="player2Team2">
             <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
         </datalist>
@@ -43,8 +47,8 @@
         Did team 2 stay in these positions allthrough the match?
         <input type="checkbox" ng-model="
                
-               Result.StaticFormationTeam2" />
-        <br/><br />
+               Result.StaticFormationTeam2"/>
+        <br/><br/>
 
         <input type="submit" id="submit" value="Add game"/>
         <br/>
