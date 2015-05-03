@@ -1,35 +1,30 @@
 ﻿<div ng-controller="addmatchController">
     <form ng-submit="submit()" >
-        <h3>Game score</h3>
-
-        <h5>Team 1</h5>
+        <h3>Team 1</h3>
+        Defender
         <input list="player1Team1" ng-model="playerlist.Player1" required/>
         <datalist id="player1Team1">
             <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
         </datalist>
 
         <br />
-
+        Attacker
         <input list="player2Team1" ng-model="playerlist.Player2" required/>
         <datalist id="player2Team1">
             <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
         </datalist>
 
         <br />
-        <h5>Team 2</h5>
+        <h3>Team 2</h3>
+        Defender
         <input list="player1Team2" ng-model="playerlist.Player3" required/>
         <datalist id="player1Team2">
             <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
         </datalist>
 
         <br />
-
-        <input
-            list="player2Team2"
-            ng-model="playerlist.Player4"
-            required
-            type="email"
-               />
+        Attacker
+        <input list="player2Team2" ng-model="playerlist.Player4" required type="email" />
         <datalist id="player2Team2">
             <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
         </datalist>
@@ -37,21 +32,22 @@
         <br/>
         <br/>
         <h5>Team 1 score</h5>
-        <input type="number" name="input" ng-model="matchResult.MatchResult.Team1Score"
+        <input type="number" name="input" ng-model="match.MatchResult.Team1Score"
                min="0" max="99" required>
-        Did you swap positions?
-        <input type="checkbox" ng-model="matchResult.StaticFormationTeam1"/>
+        Did team 1 stay in these positions allthrough the match?
+        <input type="checkbox" ng-model="match.StaticFormationTeam1"/>
         <br/>
         <h5>Team 2 score</h5>
-        <input type="number" name="input" ng-model="matchResult.MatchResult.Team2Score"
+        <input type="number" name="input" ng-model="match.MatchResult.Team2Score"
                min="0" max="99" required>
-        Did you swap positions?
+        Did team 2 stay in these positions allthrough the match?
         <input type="checkbox" ng-model="
                
                Result.StaticFormationTeam2" />
         <br/><br />
 
-        <input type="submit" id="submit" value="Submit" />
-        <pre>list={{userList}}</pre>
+        <input type="submit" id="submit" value="Add game"/>
+        <br/>
+        <pre ng-show="validationFailed">{{errorMessage}}</pre>
     </form>
 </div>
