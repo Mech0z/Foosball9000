@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22609.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoosballOld", "src\FoosballOld\FoosballOld\FoosballOld.csproj", "{0E866A95-CA2E-4CE4-9F57-76FFE07687F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoosballOld", "FoosballOld\FoosballOld.csproj", "{0E866A95-CA2E-4CE4-9F57-76FFE07687F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDBRepository", "MongoDBRepository\MongoDBRepository.csproj", "{BC0F4545-EEEE-46A6-825D-0EA2596A05C2}"
 EndProject

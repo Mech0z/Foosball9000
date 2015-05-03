@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -222,15 +223,15 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Logic\Logic.csproj">
+    <ProjectReference Include="..\Logic\Logic.csproj">
       <Project>{b413ceba-5438-480f-a608-6a3542ce81ac}</Project>
       <Name>Logic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Models\Models.csproj">
+    <ProjectReference Include="..\Models\Models.csproj">
       <Project>{77daf158-7af5-49c6-8752-e9e5c28fa8b2}</Project>
       <Name>Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MongoDBRepository\MongoDBRepository.csproj">
+    <ProjectReference Include="..\MongoDBRepository\MongoDBRepository.csproj">
       <Project>{bc0f4545-eeee-46a6-825d-0ea2596a05c2}</Project>
       <Name>MongoDBRepository</Name>
     </ProjectReference>
