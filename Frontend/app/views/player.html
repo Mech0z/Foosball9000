@@ -1,0 +1,41 @@
+﻿<div ng-controller="playerController">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Time</th>
+            <th>Team 1</th>
+            <th>Team 2</th>
+            <th>Score</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="game in lastgames">
+            <td>
+                <p>
+                    <b>{{game.TimeStampUtc}}</b>
+                </p>
+            </td>
+
+            <td>
+                <p>
+                    <b>{{game.PlayerList[0]}}</b>
+                </p>
+                <p>
+                    <b>{{game.PlayerList[1]}}</b>
+                </p>
+            </td>
+
+            <td>
+                <p>
+                    <b>{{game.PlayerList[2]}}</b>
+                </p>
+                <p>
+                    <b>{{game.PlayerList[3]}}</b>
+                </p>
+            </td>
+
+            <td>
+                <p>{{game.MatchResult.Team1Score}} - {{game.MatchResult.Team2Score}}</p>
+            </td>
+        </tr>
+    </table>
+</div>

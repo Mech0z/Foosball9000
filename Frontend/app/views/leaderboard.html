@@ -10,8 +10,12 @@
         </thead>
         <tr ng-repeat="item in leaderboard">
             <td>
-                <p> <b>{{item.UserName}}</b>
-                </p>
+                <a ng-href="#/player/{{item.UserName}}">
+
+                    <p>
+                        <b>{{item.UserName}}</b>
+                    </p>
+                </a>
             </td>
             <td>
                 <p> <b>{{item.EloRating}}</b>
