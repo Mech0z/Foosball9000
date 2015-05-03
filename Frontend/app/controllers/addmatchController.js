@@ -30,10 +30,10 @@ app.controller("addmatchController",
                     $scope.loading = false;
                     console.log($scope.match);
                     $location.path("leaderboard");
-                }, function (reason) {
+                }, function () {
                     $scope.loading = false;
-                    $scope.errorMessage = "Request failed: " + reason;
-                    console.log(reason);
+                    $scope.errorMessage = "Request failed ";
+                    $scope.validationFailed = true;
                 });
                 
             } else {

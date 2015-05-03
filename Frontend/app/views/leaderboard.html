@@ -2,7 +2,7 @@
     <div id="mydiv" ng-show="loading" align="center">
         <img src="images/ajax-loader.gif" class="ajax-loader" />
     </div>
-    <table class="table" ng-show="!loading">
+    <table class="table" ng-show="!loading && !loadingFailed">
         <thead>
         <tr>
             <th>Username</th>
@@ -34,4 +34,9 @@
             </td>
         </tr>
     </table>
+    <div ng-show="loadingFailed" align="center">
+        <pre>{{errorMessage}}</pre>
+        <img src="images/ServerIssues.png" width="600" height="400" alt=";(">    
+    </div>
+    
 </div>
