@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>FoosballFrontend</id>
+    <version>1.0.0</version>
+    <authors>Jasper Nygaard</authors>
+    <owners>Japer Nygaard</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Frontend for Foosball WebAPI</description>
+    </metadata>
+</package>
