@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using System.Configuration;
 
 namespace MongoDBRepository
 {
@@ -9,6 +10,7 @@ namespace MongoDBRepository
 
         public MongoBase(string collectionName)
         {
+            //var sfd = ConfigurationManager.ConnectionStrings["mongodb"].ToString();
             var mongoClient = new MongoClient(ConnectionString.Default.mongoconnection);
             var mongoServer = mongoClient.GetServer();
             MongoDatabase = mongoServer.GetDatabase(ConnectionString.Default.database);
