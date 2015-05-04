@@ -2,38 +2,51 @@
     <div id="mydiv" ng-show="loading" align="center">
         <img src="images/ajax-loader.gif" class="ajax-loader" />
     </div>
-    <table class="table" ng-show="!loading && !loadingFailed">
-        <thead>
-        <tr>
-            <th>Username</th>
-            <th>ELO</th>
-            <th>FORM</th>
-            <th>Wins/Games</th>
-        </tr>
-        </thead>
-        <tr ng-repeat="item in leaderboard">
-            <td>
-                <a ng-href="#/player/{{item.UserName}}">
-
-                    <p>
-                        <b>{{item.UserName}}</b>
-                    </p>
-                </a>
-            </td>
-            <td>
-                <p> <b>{{item.EloRating}}</b>
-                </p>
-            </td>
-            <td>
-                <p> <b>{{item.Form}}</b>
-                </p>
-            </td>
-            <td>
-                <p> <b>{{item.Wins}}/{{item.NumberOfGames}}</b>
-                </p>
-            </td>
-        </tr>
-    </table>
+    <div class="container">        
+        <div class="col-md-12">
+            <table class="table table-hover" ng-show="!loading && !loadingFailed">
+                <thead>
+                    <tr>
+                        <th>HISTORY</th>
+                        <th>USERNAME</th>
+                        <th>ELO</th>
+                        <th>FORM</th>
+                        <th>WINS/GAMES</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="item in leaderboard">
+                    <td>
+                        <a ng-href="#/player/{{item.UserName}}">
+                            <p style="font-weight: normal;">
+                                <b>view</b>
+                            </p>
+                        </a>
+                    </td>
+                    <td>
+                        <p>
+                            {{item.UserName}}
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            {{item.EloRating}}
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            {{item.Form}}
+                        </p>
+                    </td>
+                    <td>
+                        <p class="playerForm">
+                            {{item.Wins}}/{{item.NumberOfGames}}
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
     <div ng-show="loadingFailed" align="center">
         <pre>{{errorMessage}}</pre>
         <img src="images/ServerIssues.png" width="600" height="400" alt=";(">    
