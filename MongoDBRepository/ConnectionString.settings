@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MongoDBRepository" GeneratedClassName="ConnectionString">
+  <Profiles />
+  <Settings>
+    <Setting Name="mongoconnection" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mongodb://foosball101:foosball101@ds031711.mongolab.com:31711/foosball9000</Value>
+    </Setting>
+    <Setting Name="database" Type="System.String" Scope="User">
+      <Value Profile="(Default)">foosball9000</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
