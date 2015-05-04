@@ -6,6 +6,7 @@
     <script src="../Scripts/angular.js"></script>
     <script src="../Scripts/angular-route.js"></script>
     <script src="../Scripts/angular-resource.js"></script>
+
     <script src="app.js"></script>
     
     <script src="controllers/homeController.js"></script>
@@ -20,13 +21,15 @@
     <script src="services/leaderboardService.js"></script>
     <script src="services/playerService.js"></script>
 </head>
-<body>
-<div>
-        <a class="btn btn-default" href="#/">Home</a>
-        <a class="btn btn-default" href="#/leaderboard">Leaderboard</a>
-        <a class="btn btn-default" href="#/addmatch">Add Match</a>
-        <a class="btn btn-default" href="#/adduser">Add User</a>
-        <a class="btn btn-default" href="#/lastgames">Last Games</a>
+<body>   
+    <div class="container" >
+        <div class="col-md-12" style="margin: 10px 10px 10px 0px;">
+            <a class="btn btn-default" href="#/">Home</a>
+            <a class="btn btn-default" href="#/leaderboard">Leaderboard</a>
+            <a class="btn btn-default" href="#/addmatch">Add Match</a>
+            <a class="btn btn-default" href="#/adduser">Add User</a>
+            <a class="btn btn-default" href="#/lastgames">Last Games</a>
+        </div>
     </div>
 
     <div ng-controller="mainController">
