@@ -10,8 +10,7 @@ namespace MongoDBRepository
 
         public MongoBase(string collectionName)
         {
-            //var sfd = ConfigurationManager.ConnectionStrings["mongodb"].ToString();
-            var mongoClient = new MongoClient(ConnectionString.Default.mongoconnection);
+            var mongoClient = new MongoClient(ConfigurationManager.ConnectionStrings["mongodb"].ToString());
             var mongoServer = mongoClient.GetServer();
             MongoDatabase = mongoServer.GetDatabase(ConnectionString.Default.database);
 
