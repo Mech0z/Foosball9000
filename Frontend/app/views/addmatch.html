@@ -3,55 +3,100 @@
         <img src="images/ajax-loader.gif" class="ajax-loader" />
     </div>
 
-    <form ng-submit="submit()" ng-show="!loading">
-        <h3>Team 1</h3>
-        Defender
-        <input list="player1Team1" ng-model="playerlist.Player1" required/>
-        <datalist id="player1Team1">
-            <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
-        </datalist>
+    <form class="form-horizontal" ng-submit="submit()" ng-show="!loading">
+        <div class="col-md-5">
+            <div class="form-group">
+                <h3>Team 1</h3>
+            </div>       
+            <div class="form-group">
+                <!--team 1-->
+                <label class="col-md-2 control-label" for="defenceTeamOne">Defence</label>
+                 <!--<input class="col-md-10" id="defenceTeamOne" list="player1Team1" ng-model="playerlist.Player1" required />
+               <datalist class="col-md-10" id="player1Team1">
+                    <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
+                </datalist>-->
+                <select class="col-md-10" id="defenceTeamOne" list="player1Team1" ng-model="playerlist.Player1" required >
+                    <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
+                </select>
+            </div>  
+            
+            <div class="form-group">
+                <!--team 1-->
+                <label class="col-md-2 control-label" for="offenceTeamOne">Offence</label>
+                <!--<input class="col-md-10" id="offenceTeamOne" list="player2Team1" ng-model="playerlist.Player2" required />
+                <datalist id="player2Team1">
+                    <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
+                </datalist>-->
 
-        <br/>
-        Attacker
-        <input list="player2Team1" ng-model="playerlist.Player2" required/>
-        <datalist id="player2Team1">
-            <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
-        </datalist>
+                <select class="col-md-10" id="offenceTeamOne" list="player2Team1" ng-model="playerlist.Player2" required>
+                    <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
+                </select>
+            </div>  
+            <div class="form-group">
+                <!--team 1-->
+                <label class="col-md-2 control-label" for="scoreTeamOne">Score</label>
+                <input class="col-md-10" id="scoreTeamOne" type="number" name="input" ng-model="match.MatchResult.Team1Score"
+                       min="0" max="99" required>
+            </div>
+            <div class="form-group">
+                <!--team 1-->
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="checkbox" ng-model="match.StaticFormationTeam1" />Did team 1 stay in these positions allthrough the match?
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <h3>VS</h3>
+        </div>
 
-        <br/>
-        <h3>Team 2</h3>
-        Defender
-        <input list="player1Team2" ng-model="playerlist.Player3" required/>
-        <datalist id="player1Team2">
-            <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
-        </datalist>
+        <div class="col-md-5">
+            <div class="form-group">
+                <h3 class="col-md-10">Team 2</h3>
+            </div>
+            <div class="form-group">
+                <!--team 2-->
+                <label class="col-md-2 control-label" for="defenceTeamTwo">Defence</label>
+                <!--<input class="col-md-10" id="defenceTeamTwo" list="player1Team2" ng-model="playerlist.Player3" required />
+                <datalist id="player1Team2">
+                    <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
+                </datalist>-->
 
-        <br/>
-        Attacker
-        <input list="player2Team2" ng-model="playerlist.Player4" required type="email"/>
-        <datalist id="player2Team2">
-            <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
-        </datalist>
+                <select class="col-md-10" id="defenceTeamTwo" list="player1Team2" ng-model="playerlist.Player3" required>
+                    <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <!--team 2-->
+                <label class="col-md-2 control-label" for="offenceTeamTwo">Offence</label>
+                <!--<input id="offenceTeamTwo" class="col-md-10" list="player2Team2" ng-model="playerlist.Player4" required type="email" />
+                <datalist id="player2Team2">
+                    <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
+                </datalist>-->
 
-        <br/>
-        <br/>
-        <h5>Team 1 score</h5>
-        <input type="number" name="input" ng-model="match.MatchResult.Team1Score"
-               min="0" max="99" required>
-        Did team 1 stay in these positions allthrough the match?
-        <input type="checkbox" ng-model="match.StaticFormationTeam1"/>
-        <br/>
-        <h5>Team 2 score</h5>
-        <input type="number" name="input" ng-model="match.MatchResult.Team2Score"
-               min="0" max="99" required>
-        Did team 2 stay in these positions allthrough the match?
-        <input type="checkbox" ng-model="
-               
-               Result.StaticFormationTeam2"/>
-        <br/><br/>
+                <select class="col-md-10" id="offenceTeamTwo" list="player2Team2" ng-model="playerlist.Player4" required>
+                    <option ng-repeat="user in userList" value="{{user.Email}}">{{user.Username}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <!--team 2-->
+                <label class="col-md-2 control-label" for="scoreTeamTwo">Score</label>
+                <input id="scoreTeamTwo" class="col-md-10" type="number" name="input" ng-model="match.MatchResult.Team2Score"
+                       min="0" max="99" required>
+            </div>
 
-        <input type="submit" id="submit" value="Add game"/>
-        <br/>
+            <div class="form-group">
+                <!--team 2-->
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="checkbox" ng-model="match.StaticFormationTeam2" />Did team 2 stay in these positions allthrough the match?
+                </div>
+            </div>
+        </div>   
+                
+        <div class="form-group">
+            <div class="col-sm-10">
+                <button id="submit" type="submit" class="btn btn-primary">Add game</button>
+            </div>
+        </div>
         <pre ng-show="validationFailed">{{errorMessage}}</pre>
-    </form>
+</form>
 </div>
