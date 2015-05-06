@@ -27,7 +27,7 @@ Task CreateRelease {
     if($OctopusApiKey) {
         Exec {& $Nuget  install octopustools -OutputDirectory tools -Version 2.6.1.52 } "Failed to install octopus tools"
         $Octo = $here+'\tools\OctopusTools.2.6.1.52\octo.exe'
-        Exec { & $Octo create-release --server http://octopus.sovs.net:5602 --apikey $OctopusApiKey --project Foosball9000 --enableservicemessages --version $Version --deployto Production --package=FoosballOld:$Version --package=FoosballFrontend:$Version } "Failed to create Octopus release"
+        Exec { & $Octo create-release --server http://octopus.sovs.net:5602 --apikey $OctopusApiKey --project Foosball9000 --enableservicemessages --version $Version --deployto Staging --package=FoosballOld:$Version --package=FoosballFrontend:$Version } "Failed to create Octopus release"
     } else {
         Write-Host "Skipping creating release"
     }
