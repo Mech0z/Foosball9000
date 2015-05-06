@@ -4,10 +4,9 @@ properties {
     $NuGet = "$here\Tools\NuGet.exe"
     $MsBuild = "msbuild.exe"
     $FrontendhNuspec = "$here\frontend\FoosballFrontend.nuspec"
-    $OctopusApiKey = ""
 }
 
-Task Default -Depends Clean,CompileBackend, PackFrontend
+Task Default -Depends Clean,CompileBackend, PackFrontend, CreateRelease
 
 
 Task Clean {
@@ -21,12 +20,15 @@ Task CompileBackend {
 }
 
 Task PackFrontend {
-       Exec {& $NuGet pack $FrontendhNuspec -NoPackageAnalysis -version $version} "Failed to pack $FrontendhNuspec"
+    Exec {& $NuGet pack $FrontendhNuspec -NoPackageAnalysis -version $version} "Failed to pack $FrontendhNuspec"
 }
 
-Task Publish {
-    get-childitem -path $here -filter "*.nupkg" | foreach {
-        Exec {& $NuGet push $_.fullName 'API-YWAJKOJLP4XLKW10WVDQWMQUNG' -Source https://octopus.vfl.dk/nuget/packages} "Failed to push nupkg"
-
+Task CreateRelease {
+    if($OctopusApiKey) {
+        Exec {& $Nuget  install octopustools -OutputDirectory tools -Version 2.6.1.52 } "Failed to install octopus tools"
+        $Octo = $here+'\tools\OctopusTools.2.6.1.52\octo.exe'
+        Exec { & $Octo create-release --server http://octopus.sovs.net:5602 --apikey $OctopusApiKey --project Foosball9000 --enableservicemessages --version $Version --deployto Production --package=FoosballOld:$Version --package=FoosballFrontend:$Version } "Failed to create Octopus release"
+    } else {
+        Write-Host "Skipping creating release"
     }
 }
