@@ -1,20 +1,44 @@
 ﻿"use strict";
 
 app.controller("lastgamesController",
-    function($scope, match) {
+    function ($scope, $q, match, user) {
 
         $scope.errorMessage = "";
         $scope.loading = true;
 
-        $scope.lastgamesPromise = match.getLatest(5);
 
-        $scope.lastgamesPromise.then(function(payload) {
-            $scope.lastgames = payload;
+        $q.all([match.getLatest(5), user.getUsers()]).then(function (payload) {
+            var matches = payload[0];
+            var users = payload[1];
+            
+            setLocalTimeOnMatch(matches);
+            setupUsersMatches(matches, users);
+
+            $scope.lastgames = matches
+
             $scope.loading = false;
-        }, function(error) {
+            $scope.leaderboard = matches;
+
+        }, function (error) {
             $scope.loading = false;
             $scope.errorMessage = error;
             $scope.loadingFailed = true;
             console.log(error);
         });
+
+
+        //$scope.lastgamesPromise = match.getLatest(5);
+
+        //$scope.lastgamesPromise.then(function (payload) {
+        //    var matches = payload;
+        //    setLocalTimeOnMatch(matches);
+
+        //    $scope.lastgames = matches;
+        //    $scope.loading = false;
+        //}, function(error) {
+        //    $scope.loading = false;
+        //    $scope.errorMessage = error;
+        //    $scope.loadingFailed = true;
+        //    console.log(error);
+        //});
     });

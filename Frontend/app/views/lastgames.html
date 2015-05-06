@@ -15,25 +15,23 @@
         <tr ng-repeat="game in lastgames">
             <td>
                 <p>
-                    <b>{{game.TimeStampUtc}}</b>
+                    {{game.LocalTime}}
                 </p>
             </td>
 
             <td>
                 <p>
-                    <b>{{game.PlayerList[0]}}</b>
-                </p>
-                <p>
-                    <b>{{game.PlayerList[1]}}</b>
+                    {{game.PlayerList[0]}}
+                    <br/>
+                    {{game.PlayerList[1]}}
                 </p>
             </td>
 
             <td>
                 <p>
-                    <b>{{game.PlayerList[2]}}</b>
-                </p>
-                <p>
-                    <b>{{game.PlayerList[3]}}</b>
+                    {{game.PlayerList[2]}}            
+                    <br />    
+                    {{game.PlayerList[3]}}
                 </p>
             </td>
 

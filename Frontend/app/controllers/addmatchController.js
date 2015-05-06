@@ -8,9 +8,10 @@ app.controller("addmatchController",
         $scope.validationFailed = false;
         $scope.errorMessage = "";
         $scope.loading = true;
-        user.getUsers().then(function(payload) {
+        user.getUsers().then(function (payload) {
             $scope.userList = payload;
-            $scope.loading = false;
+            $scope.loading = false;           
+
         });
 
         $scope.submit = function() {
