@@ -25,20 +25,4 @@ app.controller("lastgamesController",
             $scope.loadingFailed = true;
             console.log(error);
         });
-
-
-        //$scope.lastgamesPromise = match.getLatest(5);
-
-        //$scope.lastgamesPromise.then(function (payload) {
-        //    var matches = payload;
-        //    setLocalTimeOnMatch(matches);
-
-        //    $scope.lastgames = matches;
-        //    $scope.loading = false;
-        //}, function(error) {
-        //    $scope.loading = false;
-        //    $scope.errorMessage = error;
-        //    $scope.loadingFailed = true;
-        //    console.log(error);
-        //});
     });
