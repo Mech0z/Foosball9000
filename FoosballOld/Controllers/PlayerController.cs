@@ -13,42 +13,22 @@ namespace FoosballOld.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PlayerController : ApiController
     {
-        private readonly ICreateLeaderboardViewV2 _leaderboardViewV2;
+        private readonly ILeaderboardService _leaderboardService;
         private readonly IMatchRepository _matchRepository;
-        private readonly IMatchRepositoryV2 _matchRepositoryV2;
         private readonly IUserRepository _userRepository;
 
-        public PlayerController(IMatchRepository matchRepository, ICreateLeaderboardViewV2 leaderboardViewV2,
-            IMatchRepositoryV2 matchRepositoryV2, IUserRepository userRepository)
+        public PlayerController(ILeaderboardService leaderboardService,
+            IMatchRepository matchRepository, IUserRepository userRepository)
         {
+            _leaderboardService = leaderboardService;
             _matchRepository = matchRepository;
-            _leaderboardViewV2 = leaderboardViewV2;
-            _matchRepositoryV2 = matchRepositoryV2;
             _userRepository = userRepository;
         }
 
         [HttpGet]
-        public IEnumerable<MatchV2> GetPlayerMatches(string email)
+        public IEnumerable<Match> GetPlayerMatches(string email)
         {
-            //var originalMatches = _matchRepository.GetMatches();
-
-            //foreach (var match in originalMatches)
-            //{
-            //    match.Team1UserNames.AddRange(match.Team2UserNames);
-            //    var matchv2 = new MatchV2
-            //    {
-            //        Id = match.Id,
-            //        MatchResult = match.MatchResults,
-            //        PlayerList = match.Team1UserNames,
-            //        StaticFormationTeam1 = !match.StaticFormationTeam1,
-            //        StaticFormationTeam2 = !match.StaticFormationTeam2,
-            //        TimeStampUtc = match.TimeStampUtc
-            //    };
-
-            //    _matchRepositoryV2.SaveMatch(matchv2);
-            //}
-
-            return _matchRepositoryV2.GetPlayerMatches(email).OrderByDescending(x => x.TimeStampUtc);
+            return _matchRepository.GetPlayerMatches(email).OrderByDescending(x => x.TimeStampUtc);
         }
 
         [HttpGet]

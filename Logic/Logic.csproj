@@ -39,11 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreateLeaderboardView.cs" />
-    <Compile Include="CreateLeaderboardViewV2.cs" />
+    <Compile Include="LeaderboardService.cs" />
     <Compile Include="EloRating.cs" />
-    <Compile Include="ICreateLeaderboardView.cs" />
-    <Compile Include="ICreateLeaderboardViewV2.cs" />
+    <Compile Include="ILeaderboardService.cs" />
     <Compile Include="ILogic.cs" />
     <Compile Include="IMatchupHistoryCreator.cs" />
     <Compile Include="IRating.cs" />

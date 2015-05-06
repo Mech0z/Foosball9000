@@ -8,9 +8,9 @@ namespace MongoDBRepository
 {
     public class MatchRepository : MongoBase<Match>, IMatchRepository
     {
-        public MatchRepository() : base("Matches")
+        public MatchRepository() : base("MatchesV2")
         {
-            
+
         }
 
         public void SaveMatch(Match draft)
@@ -36,6 +36,11 @@ namespace MongoDBRepository
             var matches = Collection.FindAllAs<Match>().SetSortOrder(sbb).SetLimit(numberOfMatches).ToList();
 
             return matches;
+        }
+
+        public List<Match> GetPlayerMatches(string email)
+        {
+            return Collection.Find(Query<Match>.Where(x => x.PlayerList.Contains(email))).ToList();
         }
     }
 }

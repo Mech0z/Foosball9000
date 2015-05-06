@@ -14,13 +14,13 @@ namespace Logic
             _matchupResultRepository = matchupResultRepository;
         }
 
-        public void AddMatch(MatchV2 match)
+        public void AddMatch(Match match)
         {
             //Sort
             var sortedUserlist = match.PlayerList.OrderBy(x => x).ToList();
             var addedList = string.Join("", sortedUserlist.ToArray());
 
-            //Get hashstring
+            //RecalculateLeaderboard hashstring
             var hashcode = addedList.GetHashCode();
 
             //Find existing matchup historys that have the same players
@@ -73,7 +73,7 @@ namespace Logic
             throw new System.NotImplementedException();
         }
 
-        public void AddMatchupResult(MatchupResult existingMatchupResult, MatchV2 match)
+        public void AddMatchupResult(MatchupResult existingMatchupResult, Match match)
         {
             //Find out if team 1
             if (match.PlayerList[0] == existingMatchupResult.UserList[0] ||

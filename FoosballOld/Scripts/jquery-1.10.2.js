@@ -246,8 +246,8 @@ jQuery.fn = jQuery.prototype = {
 		return core_slice.call( this );
 	},
 
-	// Get the Nth element in the matched element set OR
-	// Get the whole matched element set as a clean array
+	// RecalculateLeaderboard the Nth element in the matched element set OR
+	// RecalculateLeaderboard the whole matched element set as a clean array
 	get: function( num ) {
 		return num == null ?
 
@@ -2008,7 +2008,7 @@ Expr = Sizzle.selectors = {
 
 			// Strip excess characters from unquoted arguments
 			} else if ( unquoted && rpseudo.test( unquoted ) &&
-				// Get excess from tokenize (recursively)
+				// RecalculateLeaderboard excess from tokenize (recursively)
 				(excess = tokenize( unquoted, true )) &&
 				// advance to the next closing parenthesis
 				(excess = unquoted.indexOf( ")", unquoted.length - excess ) - unquoted.length) ) {
@@ -2584,7 +2584,7 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 			postMap = [],
 			preexisting = results.length,
 
-			// Get initial elements from seed or context
+			// RecalculateLeaderboard initial elements from seed or context
 			elems = seed || multipleContexts( selector || "*", context.nodeType ? [ context ] : context, [] ),
 
 			// Prefilter to get matcher input, preserving a map for seed-results synchronization
@@ -2625,7 +2625,7 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 		if ( seed ) {
 			if ( postFinder || preFilter ) {
 				if ( postFinder ) {
-					// Get the final matcherOut by condensing this intermediate into postFinder contexts
+					// RecalculateLeaderboard the final matcherOut by condensing this intermediate into postFinder contexts
 					temp = [];
 					i = matcherOut.length;
 					while ( i-- ) {
@@ -3229,7 +3229,7 @@ jQuery.extend({
 						fns = null;
 					}).promise();
 				},
-				// Get a promise for this deferred
+				// RecalculateLeaderboard a promise for this deferred
 				// If obj is provided, the promise aspect is added to the object
 				promise: function( obj ) {
 					return obj != null ? jQuery.extend( obj, promise ) : promise;
@@ -3367,7 +3367,7 @@ jQuery.support = (function( support ) {
 	// This requires a wrapper element in IE
 	support.htmlSerialize = !!div.getElementsByTagName("link").length;
 
-	// Get the style information from getAttribute
+	// RecalculateLeaderboard the style information from getAttribute
 	// (IE uses .cssText instead)
 	support.style = /top/.test( a.getAttribute("style") );
 
@@ -4027,7 +4027,7 @@ jQuery.fn.extend({
 	clearQueue: function( type ) {
 		return this.queue( type || "fx", [] );
 	},
-	// Get a promise resolved when queues of a certain type
+	// RecalculateLeaderboard a promise resolved when queues of a certain type
 	// are emptied (fx is the type by default)
 	promise: function( type, obj ) {
 		var tmp,
@@ -4322,7 +4322,7 @@ jQuery.extend({
 							( jQuery.support.optDisabled ? !option.disabled : option.getAttribute("disabled") === null ) &&
 							( !option.parentNode.disabled || !jQuery.nodeName( option.parentNode, "optgroup" ) ) ) {
 
-						// Get the specific value for the option
+						// RecalculateLeaderboard the specific value for the option
 						value = jQuery( option ).val();
 
 						// We don't need an array for one selects
@@ -6991,7 +6991,7 @@ jQuery.extend({
 		"float": jQuery.support.cssFloat ? "cssFloat" : "styleFloat"
 	},
 
-	// Get and set the style property on a DOM Node
+	// RecalculateLeaderboard and set the style property on a DOM Node
 	style: function( elem, name, value, extra ) {
 		// Don't set styles on text and comment nodes
 		if ( !elem || elem.nodeType === 3 || elem.nodeType === 8 || !elem.style ) {
@@ -8125,7 +8125,7 @@ jQuery.extend({
 			jqXHR[ i ]( s[ i ] );
 		}
 
-		// Get transport
+		// RecalculateLeaderboard transport
 		transport = inspectPrefiltersOrTransports( transports, s, options, jqXHR );
 
 		// If no transport, we auto-abort
@@ -8190,7 +8190,7 @@ jQuery.extend({
 			// Determine if successful
 			isSuccess = status >= 200 && status < 300 || status === 304;
 
-			// Get response data
+			// RecalculateLeaderboard response data
 			if ( responses ) {
 				response = ajaxHandleResponses( s, jqXHR, responses );
 			}
@@ -8563,7 +8563,7 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 	// Handle iff the expected data type is "jsonp" or we have a parameter to set
 	if ( jsonProp || s.dataTypes[ 0 ] === "jsonp" ) {
 
-		// Get callback name, remembering preexisting value associated with it
+		// RecalculateLeaderboard callback name, remembering preexisting value associated with it
 		callbackName = s.jsonpCallback = jQuery.isFunction( s.jsonpCallback ) ?
 			s.jsonpCallback() :
 			s.jsonpCallback;
@@ -8674,7 +8674,7 @@ if ( xhrSupported ) {
 			return {
 				send: function( headers, complete ) {
 
-					// Get a new xhr
+					// RecalculateLeaderboard a new xhr
 					var handle, i,
 						xhr = s.xhr();
 
@@ -9657,10 +9657,10 @@ jQuery.fn.extend({
 			// we assume that getBoundingClientRect is available when computed position is fixed
 			offset = elem.getBoundingClientRect();
 		} else {
-			// Get *real* offsetParent
+			// RecalculateLeaderboard *real* offsetParent
 			offsetParent = this.offsetParent();
 
-			// Get correct offsets
+			// RecalculateLeaderboard correct offsets
 			offset = this.offset();
 			if ( !jQuery.nodeName( offsetParent[ 0 ], "html" ) ) {
 				parentOffset = offsetParent.offset();
@@ -9744,7 +9744,7 @@ jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 					return elem.document.documentElement[ "client" + name ];
 				}
 
-				// Get document width or height
+				// RecalculateLeaderboard document width or height
 				if ( elem.nodeType === 9 ) {
 					doc = elem.documentElement;
 
@@ -9758,7 +9758,7 @@ jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 				}
 
 				return value === undefined ?
-					// Get width or height on the element, requesting but not forcing parseFloat
+					// RecalculateLeaderboard width or height on the element, requesting but not forcing parseFloat
 					jQuery.css( elem, type, extra ) :
 
 					// Set width or height on the element

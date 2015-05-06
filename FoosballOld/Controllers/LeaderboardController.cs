@@ -9,18 +9,18 @@ namespace FoosballOld.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class LeaderboardController : ApiController
     {
-        private readonly ICreateLeaderboardViewV2 _createLeaderboardView;
+        private readonly ILeaderboardService _leaderboardService;
 
-        public LeaderboardController(ICreateLeaderboardViewV2 createLeaderboardView)
+        public LeaderboardController(ILeaderboardService leaderboardService)
         {
-            _createLeaderboardView = createLeaderboardView;
+            _leaderboardService = leaderboardService;
         }
 
         // GET: /<controller>/
         [HttpGet]
         public IEnumerable<LeaderboardViewEntry> Index()
         {
-            var leaderboard = _createLeaderboardView.Get(true);
+            var leaderboard = _leaderboardService.GetLatestLeaderboardView();
             return leaderboard.Entries;
         }
     }

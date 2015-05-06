@@ -36,12 +36,12 @@ namespace FoosballOld.Areas.HelpPage
             //config.SetSampleRequest("1234", new MediaTypeHeaderValue("text/plain"), "Values", "Put");
 
             //// Uncomment the following to use the image on "../images/aspNetHome.png" directly as the response sample for media type "image/png"
-            //// on the controller named "Values" and action named "Get" with parameter "id".
-            //config.SetSampleResponse(new ImageSample("../images/aspNetHome.png"), new MediaTypeHeaderValue("image/png"), "Values", "Get", "id");
+            //// on the controller named "Values" and action named "RecalculateLeaderboard" with parameter "id".
+            //config.SetSampleResponse(new ImageSample("../images/aspNetHome.png"), new MediaTypeHeaderValue("image/png"), "Values", "RecalculateLeaderboard", "id");
 
             //// Uncomment the following to correct the sample request when the action expects an HttpRequestMessage with ObjectContent<string>.
-            //// The sample will be generated as if the controller named "Values" and action named "Get" were having string as the body parameter.
-            //config.SetActualRequestType(typeof(string), "Values", "Get");
+            //// The sample will be generated as if the controller named "Values" and action named "RecalculateLeaderboard" were having string as the body parameter.
+            //config.SetActualRequestType(typeof(string), "Values", "RecalculateLeaderboard");
 
             //// Uncomment the following to correct the sample response when the action returns an HttpResponseMessage with ObjectContent<string>.
             //// The sample will be generated as if the controller named "Values" and action named "Post" were returning a string.

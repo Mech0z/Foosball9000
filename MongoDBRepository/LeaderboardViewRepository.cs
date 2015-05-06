@@ -12,7 +12,7 @@ namespace MongoDBRepository
 
         public LeaderboardView GetLeaderboardView()
         {
-            return Collection.FindAll().ToList().First();
+            return Collection.FindAll().ToList().OrderByDescending(x => x.Timestamp).FirstOrDefault();
         }
 
         public void SaveLeaderboardView(LeaderboardView view)

@@ -5,43 +5,57 @@ using System.Web.Http.Cors;
 using Models;
 using MongoDBRepository;
 using System;
+using Logic;
 
 namespace FoosballOld.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class MatchController : ApiController
     {
-        private readonly IMatchRepositoryV2 _matchRepository;
+        private readonly IMatchRepository _matchRepository;
         private readonly IMatchupResultRepository _matchupResultRepository;
+        private readonly ILeaderboardService _leaderboardService;
+        private readonly ILeaderboardViewRepository _leaderboardViewRepository;
 
-        public MatchController(IMatchRepositoryV2 matchRepository, IMatchupResultRepository matchupResultRepository)
+        public MatchController(IMatchRepository matchRepository, 
+            IMatchupResultRepository matchupResultRepository, 
+            ILeaderboardService leaderboardService,
+            ILeaderboardViewRepository leaderboardViewRepository)
         {
             _matchRepository = matchRepository;
             _matchupResultRepository = matchupResultRepository;
+            _leaderboardService = leaderboardService;
+            _leaderboardViewRepository = leaderboardViewRepository;
         }
 
         // GET: /api/Match/GetAll
         [HttpGet]
-        public IEnumerable<MatchV2> GetAll()
+        public IEnumerable<Match> GetAll()
         {
             return _matchRepository.GetMatches();
         }
 
         // GET: /api/Match/LastGames?numberOfMatches=10
         [HttpGet]
-        public IEnumerable<MatchV2> LastGames([FromUri]int numberOfMatches)
+        public IEnumerable<Match> LastGames([FromUri]int numberOfMatches)
         {
             return _matchRepository.GetRecentMatches(numberOfMatches);
         }
 
         [HttpPost]
-        public IHttpActionResult SaveMatch(MatchV2 match)
+        public IHttpActionResult SaveMatch(Match match)
         {
             match.TimeStampUtc = DateTime.UtcNow;
+            
+            //TODO Run validation
 
             _matchRepository.SaveMatch(match);
 
-            //Run validation
+            var currentLeaderboard = _leaderboardService.GetLatestLeaderboardView();
+
+            _leaderboardService.AddMatchToLeaderboard(currentLeaderboard, match);
+
+            _leaderboardViewRepository.SaveLeaderboardView(currentLeaderboard);
 
             return Ok();
         }
@@ -53,10 +67,10 @@ namespace FoosballOld.Controllers
             var sortedUserlist = userlist.OrderBy(x => x).ToList();
             var addedList = string.Join("", sortedUserlist.ToArray());
 
-            //Get hashstring
+            //RecalculateLeaderboard hashstring
             var hashcode = addedList.GetHashCode();
 
-            //Get the correct one
+            //RecalculateLeaderboard the correct one
             var results = _matchupResultRepository.GetByHashResult(hashcode);
 
             //TODO dont seem optimal to create a list every time
