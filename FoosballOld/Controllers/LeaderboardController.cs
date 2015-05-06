@@ -9,9 +9,9 @@ namespace FoosballOld.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class LeaderboardController : ApiController
     {
-        private readonly ICreateLeaderboardView _createLeaderboardView;
+        private readonly ICreateLeaderboardViewV2 _createLeaderboardView;
 
-        public LeaderboardController(ICreateLeaderboardView createLeaderboardView)
+        public LeaderboardController(ICreateLeaderboardViewV2 createLeaderboardView)
         {
             _createLeaderboardView = createLeaderboardView;
         }
