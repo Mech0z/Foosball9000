@@ -7,7 +7,7 @@ app.controller("lastgamesController",
         $scope.loading = true;
 
 
-        $q.all([match.getLatest(5), user.getUsers()]).then(function (payload) {
+        $q.all([match.getLatest(20), user.getUsers()]).then(function (payload) {
             var matches = payload[0];
             var users = payload[1];
             
