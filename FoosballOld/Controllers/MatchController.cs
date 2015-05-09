@@ -43,7 +43,7 @@ namespace FoosballOld.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "{ExceptionSource} had an error", ex.Source);
+                _logger.Error(ex, "An error occured");
                 throw;
             }
         }
@@ -58,7 +58,7 @@ namespace FoosballOld.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error(ex,"{ExceptionSource} had an error", ex.Source);
+                _logger.Error(ex,"An error occured");
                 throw;
             }
         }
@@ -84,7 +84,7 @@ namespace FoosballOld.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "{ExceptionSource} had an error", ex.Source);
+                _logger.Error(ex, "An error occured");
                 throw;
             }
         }
@@ -120,7 +120,7 @@ namespace FoosballOld.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "{ExceptionSource} had an error", ex.Source);
+                _logger.Error(ex, "An error occured");
                 throw;
             }
         }
