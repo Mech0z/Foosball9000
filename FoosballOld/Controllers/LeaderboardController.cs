@@ -26,7 +26,6 @@ namespace FoosballOld.Controllers
         {
             try
             {
-                throw new Exception("test");
                 var leaderboard = _leaderboardService.GetLatestLeaderboardView();
                 return leaderboard.Entries;
             }
