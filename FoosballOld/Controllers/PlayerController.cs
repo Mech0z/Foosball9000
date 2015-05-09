@@ -1,26 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using Logic;
 using Models;
 using MongoDBRepository;
 
 namespace FoosballOld.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors("*", "*", "*")]
     public class PlayerController : ApiController
     {
-        private readonly ILeaderboardService _leaderboardService;
         private readonly IMatchRepository _matchRepository;
         private readonly IUserRepository _userRepository;
 
-        public PlayerController(ILeaderboardService leaderboardService,
-            IMatchRepository matchRepository, IUserRepository userRepository)
+        public PlayerController(IMatchRepository matchRepository,
+            IUserRepository userRepository)
         {
-            _leaderboardService = leaderboardService;
             _matchRepository = matchRepository;
             _userRepository = userRepository;
         }

@@ -16,7 +16,7 @@ Task Clean {
 Task CompileBackend {
     Exec { & $nuget restore foosballold.sln } "Unable to restore nuget packages for foosballold.sln"
     #/logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll
-    Exec { & $msbuild "foosballold.sln" /verbosity:minimal  /p:RunOctoPack=true /p:OctoPackPackageVersion=$Version}
+    Exec { & $msbuild "foosballold.sln" /verbosity:normal  /p:RunOctoPack=true /p:OctoPackPackageVersion=$Version}
 }
 
 Task PackFrontend {

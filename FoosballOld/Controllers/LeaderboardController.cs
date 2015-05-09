@@ -6,7 +6,7 @@ using Models;
 
 namespace FoosballOld.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors("*", "*", "*")]
     public class LeaderboardController : ApiController
     {
         private readonly ILeaderboardService _leaderboardService;
