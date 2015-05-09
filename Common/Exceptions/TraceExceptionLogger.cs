@@ -14,7 +14,7 @@ namespace Common.Exceptions
 
         public override void Log(ExceptionLoggerContext context)
         {
-            _logger.Fatal(context.Exception, "Unhandled exception: {ExceptionContext}", context.ExceptionContext);
+            _logger.Error(context.Exception, "Unhandled exception: {ExceptionContext}", context.ExceptionContext);
         }
     }
 }
