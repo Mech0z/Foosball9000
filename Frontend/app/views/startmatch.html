@@ -3,14 +3,21 @@
         <img src="images/ajax-loader.gif" class="ajax-loader" />
     </div>
     
+    <h3>Matchup:</h3>
+    <p>{{bestMatchup.Message}}</p>
     <h3>SELECT YOUR PLAYERS:</h3>
     <div class="container">
-        <div class="col-md-2" ng-repeat="p in userList">
-            <img src="images/PlayAllTheGames.png" style="width: 100px; height: 100px;"/>
-            <p style="text-align: center;">{{p.Username}}</p>
+        <!---->
+        <div class="col-sm-4 col-md-2" ng-repeat="p in userList" ng-click="playerClick(p)">
+            <div class="selectplayer" ng-class="{ 'Selected' : p.Selected }">
+                <img src="images/PlayAllTheGames.png" style="width: 80%; height: 80%;" />
+                <p style="text-align: center; min-height: 60px;">{{p.displayName}} <br/> {{p.EloRating}}</p>
+            </div>
         </div>
 
     </div>
-    
-    <p style="color: crimson;">Debug: {{Debug}}</p>
+
+    <p style="color: crimson;">{{Debug}}</p>
+
+    <p style="color: crimson;">{{autoMatchup}}</p>
 </div>

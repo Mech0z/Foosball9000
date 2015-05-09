@@ -1,2 +1,32 @@
 ﻿body {
 }
+
+/*generel stuff*/
+th, h3, h2, h1, p {
+  color: forestgreen;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
+}
+th {
+    font-size: 12px;
+}
+
+
+/*specific*/
+div.selectplayer {
+    padding: 10px;
+    margin: 10px;
+    background-color: whitesmoke;
+}
+
+div.selectplayer:hover {
+}
+
+div.selectplayer:active {
+}
+
+div.Selected {
+    background-color: greenyellow;
+
+}
+
