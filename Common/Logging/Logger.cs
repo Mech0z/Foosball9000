@@ -2,6 +2,7 @@
 using System.Configuration;
 using Serilog;
 using Serilog.Events;
+using Serilog.Sinks.LogReceiver;
 
 namespace Common.Logging
 {
@@ -21,7 +22,7 @@ namespace Common.Logging
                         .Enrich.WithProperty("Environment",environment)
                         .Enrich.WithProperty("Application","FoosballApi")
                         .WriteTo.Loggly()
-                        .WriteTo.File(@"c:\temp\foosball9000.log",LogEventLevel.Information)
+                        .WriteTo.LogReceiver()
                         .MinimumLevel.Debug()
                         .CreateLogger();
             }
