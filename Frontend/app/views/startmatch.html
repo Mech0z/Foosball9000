@@ -3,19 +3,47 @@
         <img src="images/ajax-loader.gif" class="ajax-loader" />
     </div>
     
-    <h3>SELECT YOUR PLAYERS:</h3>
-    <div class="container">
-        <!---->
-        <div class="col-sm-4 col-md-2" ng-repeat="p in userList" ng-click="playerClick(p)">
-            <div class="selectplayer" ng-class="{ 'Selected' : p.Selected, 'TeamOne' : p.Team1, 'TeamTwo' : p.Team2  }">
-                <img src="images/PlayAllTheGames.png" style="width: 80%; height: 80%;" />
-                <p style="text-align: center; min-height: 60px;">{{p.displayName}} <br/> {{p.EloRating}}</p>
+    <section ng-show="!loading">
+        <h3>SELECT THE PLAYERS</h3>
+        <div class="container">
+            <div class="col-sm-4 col-md-2" ng-repeat="p in userList" ng-click="playerClick(p)">
+                <div class="selectplayer" ng-class="{ 'Selected' : p.Selected, 'TeamOne' : p.Team1, 'TeamTwo' : p.Team2  }">
+                    <img src="images/PlayAllTheGames.png" style="width: 80%; height: 80%;" />
+                    <p style="text-align: center; min-height: 60px;">{{p.displayName}} <br /> {{p.EloRating}}</p>
+                </div>
             </div>
+
         </div>
+    </section>
+    <section ng-show="!loading">
+        <h3>SUBMIT SCORE</h3>
+        <h4>first match</h4>
+        <label>RED</label>
+        <input type="number"/>
+        <label>GREEN</label>
+        <input type="number" />
 
-    </div>
+        <h4>second match</h4>
+        <label>RED</label>
+        <input type="number" />
+        <label>GREEN</label>
+        <input type="number" />
 
-    <p style="color: crimson;">{{Debug}}</p>
-    <p style="color: crimson;">{{autoMatchup}}</p>
-    <p style="color: crimson;">{{bestMatchup.Message}}</p>
+
+        <h4>third match</h4>
+        <label>RED</label>
+        <input type="number" />
+        <label>GREEN</label>
+        <input type="number" />
+        <br/>
+
+        <button id="submit" type="submit" class="btn btn-primary">Add games</button>
+
+        <pre ng-show="validationFailed">{{errorMessage}}</pre>
+    </section>
+
+
+        <p style="color: crimson;">{{Debug}}</p>
+        <p style="color: crimson;">{{autoMatchup}}</p>
+        <p style="color: crimson;">{{bestMatchup.Message}}</p>
 </div>
