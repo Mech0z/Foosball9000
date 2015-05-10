@@ -26,27 +26,27 @@
         
         <h4>1st Match</h4>
         <label>Score:</label>
-        <input type="number" style="background-color: dodgerblue"/>
-        <input type="number" style="background-color: darkseagreen" />
+        <input type="number" style="background-color: dodgerblue" ng-model="match1.MatchResult.Team1Score"/>
+        <input type="number" style="background-color: darkseagreen" ng-model="match1.MatchResult.Team2Score" />
 
         <h4>2nd Match</h4>
         <label>Score:</label>
-        <input type="number" style="background-color: dodgerblue" />
-        <input type="number" style="background-color: darkseagreen" />
+        <input type="number" style="background-color: dodgerblue" ng-model="match2.MatchResult.Team1Score"/>
+        <input type="number" style="background-color: darkseagreen" ng-model="match2.MatchResult.Team2Score"/>
         
         <h4>3rd Match</h4>
         <label>Score:</label>
-        <input type="number" style="background-color: dodgerblue" />
-        <input type="number" style="background-color: darkseagreen" />
+        <input type="number" style="background-color: dodgerblue" ng-model="match3.MatchResult.Team1Score"/>
+        <input type="number" style="background-color: darkseagreen" ng-model="match3.MatchResult.Team2Score"/>
         <br/>
 
-        <button id="submit" type="submit" class="btn btn-primary">Add games</button>
+        <button ng-click="doStuff()" class="btn">Add Games</button>
 
         <pre ng-show="validationFailed">{{errorMessage}}</pre>
     </section>
 
 
         <p style="color: crimson;">{{Debug}}</p>
-        <p style="color: crimson;">{{autoMatchup}}</p>
-        <p style="color: crimson;">{{bestMatchup.Message}}</p>
+        <!--<p style="color: crimson;">{{autoMatchup}}</p>
+        <p style="color: crimson;">{{bestMatchup.Message}}</p>-->
 </div>
