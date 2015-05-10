@@ -38,7 +38,7 @@ app.controller("startmatchController",
 
             if($scope.bestMatchup.IsMatchReady)
             {
-                //save data for addmatch
+                //do stuff
             }
         };
     });
@@ -55,6 +55,12 @@ var CalculateBestMatchup = function () {
 
     this.addPlayer = function (p) {
 
+        for (var i = 0; i < this.playerlist.length; i++)
+        {
+            this.playerlist[i].Team1 = false;
+            this.playerlist[i].Team2 = false;
+        }
+
         var index = this.playerlist.indexOf(p);
         if (index > -1) {
             p.Selected = false;
@@ -64,6 +70,7 @@ var CalculateBestMatchup = function () {
             if (this.playerlist.length >= 4) {
 
                 this.playerlist[0].Selected = false;
+
                 this.playerlist.splice(0, 1);
             }
 
@@ -93,32 +100,39 @@ var CalculateBestMatchup = function () {
         var game = new Game();
 
         var m1 = new Matchup();
-        m1.setTeamTwoPoints(p1.EloRating, p1.UserName, p3.EloRating, p3.UserName);
-        m1.setTeamOnePoints(p4.EloRating, p4.UserName, p2.EloRating, p2.UserName);
+        m1.setTeamTwoPoints(p1, p3);
+        m1.setTeamOnePoints(p4, p2);
 
         game.addMatchup(m1);
 
         var m2 = new Matchup();
-        m1.setTeamTwoPoints(p1.EloRating, p1.UserName, p2.EloRating, p2.UserName);
-        m1.setTeamOnePoints(p4.EloRating, p4.UserName, p3.EloRating, p3.UserName);
+        m1.setTeamTwoPoints(p1, p2);
+        m1.setTeamOnePoints(p4, p3);
 
         game.addMatchup(m2);
 
         var m3 = new Matchup();
-        m1.setTeamTwoPoints(p1.EloRating, p1.UserName, p4.EloRating, p4.UserName);
-        m1.setTeamOnePoints(p2.EloRating, p2.UserName, p3.EloRating, p3.UserName);
+        m1.setTeamTwoPoints(p1, p4);
+        m1.setTeamOnePoints(p2, p3);
 
         game.addMatchup(m3);
 
         var bestMatchup = game.getBestCombination();
         
-        this.Message = bestMatchup.t1p1name + " and " + bestMatchup.t1p2name
-        + " vs " + bestMatchup.t2p1name + " and " + bestMatchup.t2p2name;
+        bestMatchup.t1p1.Team1 = true;
+        bestMatchup.t1p2.Team1 = true;
 
-        this.Debug = "points team 1: (" + bestMatchup.t1points + ") " + bestMatchup.t1p1name + " and " + bestMatchup.t1p2name
-        + " vs team 2: (" + bestMatchup.t2points + ") " + bestMatchup.t2p1name + " and " + bestMatchup.t2p2name;
+        bestMatchup.t2p1.Team2 = true;
+        bestMatchup.t2p2.Team2 = true;
+
+
+        this.Message = bestMatchup.t1p1.UserName + " and " + bestMatchup.t1p2.UserName
+        + " vs " + bestMatchup.t2p1.UserName + " and " + bestMatchup.t2p2.UserName;
+
+        this.Debug = "points team 1: (" + bestMatchup.t1points + ") " + bestMatchup.t1p1.UserName + " and " + bestMatchup.t1p2.UserName
+        + " vs team 2: (" + bestMatchup.t2points + ") " + bestMatchup.t2p1.UserName + " and " + bestMatchup.t2p2.UserName;
         
-        this.autoMatchup = [bestMatchup.t1p1name, bestMatchup.t1p2name, bestMatchup.t2p1name, bestMatchup.t2p2name];
+        this.autoMatchup = [bestMatchup.t1p1.UserName, bestMatchup.t1p2.UserName, bestMatchup.t2p1.UserName, bestMatchup.t2p2.UserName];
 
         return true;
     }
@@ -126,24 +140,24 @@ var CalculateBestMatchup = function () {
 
 var Matchup = function () {
     var t1points = 0;
-    var t1p1name = "";
-    var t1p2name = "";
+    var t1p1 = null;
+    var t1p2 = null;
 
     var t2points = 0;
-    var t2p1name = "";
-    var t2p2name = "";
+    var t2p1 = null;
+    var t2p2 = null;
 
 
-    this.setTeamOnePoints = function (p1, p1name, p2, p2name) {
-        this.t1points = p1 + p2;
-        this.t1p1name = p1name;
-        this.t1p2name = p2name;
+    this.setTeamOnePoints = function (p1, p2) {
+        this.t1points = p1.EloRating + p2.EloRating;
+        this.t1p1 = p1
+        this.t1p2 = p2;
         return;
     };
-    this.setTeamTwoPoints = function (p1, p1name, p2, p2name) {
-        this.t2points = p1 + p2;
-        this.t2p1name = p1name;
-        this.t2p2name = p2name;
+    this.setTeamTwoPoints = function (p1, p2) {
+        this.t2points = p1.EloRating + p2.EloRating;
+        this.t2p1 = p1;
+        this.t2p2 = p2;
         return;
     };
 

@@ -27,6 +27,15 @@ div.selectplayer:active {
 
 div.Selected {
     background-color: greenyellow;
+}
+
+div.TeamOne {
+    background-color: orangered;
 
 }
+div.TeamTwo {
+    background-color: darkseagreen;
+
+}
+
 
