@@ -15,26 +15,29 @@
 
         </div>
     </section>
-    <section ng-show="!loading">
-        <h3>SUBMIT SCORE</h3>
-        <h4>first match</h4>
-        <label>RED</label>
-        <input type="number"/>
-        <label>GREEN</label>
-        <input type="number" />
 
-        <h4>second match</h4>
-        <label>RED</label>
-        <input type="number" />
-        <label>GREEN</label>
-        <input type="number" />
+    <h3>SUBMIT SCORE</h3>
 
+    <section ng-show="!loading && !bestMatchup.IsMatchReady">
+        <p>Select 4 players to enter score.</p>
+    </section>
 
-        <h4>third match</h4>
-        <label>RED</label>
-        <input type="number" />
-        <label>GREEN</label>
-        <input type="number" />
+    <section ng-show="!loading && bestMatchup.IsMatchReady">
+        
+        <h4>1st Match</h4>
+        <label>Score:</label>
+        <input type="number" style="background-color: dodgerblue"/>
+        <input type="number" style="background-color: darkseagreen" />
+
+        <h4>2nd Match</h4>
+        <label>Score:</label>
+        <input type="number" style="background-color: dodgerblue" />
+        <input type="number" style="background-color: darkseagreen" />
+        
+        <h4>3rd Match</h4>
+        <label>Score:</label>
+        <input type="number" style="background-color: dodgerblue" />
+        <input type="number" style="background-color: darkseagreen" />
         <br/>
 
         <button id="submit" type="submit" class="btn btn-primary">Add games</button>
