@@ -5,15 +5,22 @@
     
     <section ng-show="!loading">
         <h3>SELECT THE PLAYERS</h3>
-        <div class="container">
-            <div class="col-sm-4 col-md-2" ng-repeat="p in userList" ng-click="playerClick(p)">
-                <div class="selectplayer" ng-class="{ 'Selected' : p.Selected, 'TeamOne' : p.Team1, 'TeamTwo' : p.Team2  }">
-                    <img src="images/PlayAllTheGames.png" style="width: 80%; height: 80%;" />
-                    <p style="text-align: center; min-height: 60px;">{{p.displayName}} <br /> {{p.EloRating}}</p>
+        <ul  class="list-inline">
+            <li ng-repeat="p in userList">
+                <div ng-click="playerClick(p)">
+                    <div class="selectplayer" ng-class="{ 'Selected' : p.Selected, 'TeamOne' : p.Team1, 'TeamTwo' : p.Team2  }">
+                        <!--<img src="images/PlayAllTheGames.png" style="width: 50px; height: 50px; float: left; margin: 0px 10px 0px 0px;" />-->
+                        <img src="{{p.gravatar}}" style="width: 50px; height: 50px; float: left; margin: 0px 10px 0px 0px;" />
+                        <p style="width: 240px;">
+                            <b>{{p.displayName}}</b>
+                            <p style="font-style: italic">rating: {{p.EloRating}}</p> 
+                        </p>
+                        
+                    </div>
                 </div>
-            </div>
-
-        </div>
+            </li>            
+        </ul>
+           
     </section>
 
     <h3>SUBMIT SCORE</h3>

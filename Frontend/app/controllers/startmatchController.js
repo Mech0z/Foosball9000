@@ -37,6 +37,7 @@ app.controller("startmatchController",
 
         $scope.playerClick = function (user) {
             $scope.bestMatchup.addPlayer(user);
+            $scope.Debug = $scope.bestMatchup.Message;
         };
 
         $scope.doStuff = function () {
@@ -68,7 +69,7 @@ app.controller("startmatchController",
             for (var i = 0; i < matchList.length; i++) {
                 matchList[i].PlayerList = [p1, p2, p3, p4];
 
-                var validationResult = match.validateMatch($scope.match1);
+                var validationResult = match.validateMatch(matchList[i]);
                 if (!validationResult.validated)
                 {
                     $scope.validationFailed = true;
@@ -135,7 +136,6 @@ var CalculateBestMatchup = function () {
             if (this.playerlist.length >= 4) {
 
                 this.playerlist[0].Selected = false;
-
                 this.playerlist.splice(0, 1);
             }
 
@@ -156,99 +156,18 @@ var CalculateBestMatchup = function () {
 
         this.Message = "All players selected!!";
 
-        var p1 = this.playerlist[0];
-        var p2 = this.playerlist[1];
-        var p3 = this.playerlist[2];
-        var p4 = this.playerlist[3];
-
-        var game = new Game();
-
-        var m1 = new Matchup();
-        m1.setTeamTwoPoints(p1, p3);
-        m1.setTeamOnePoints(p4, p2);
-
-        game.addMatchup(m1);
-
-        var m2 = new Matchup();
-        m1.setTeamTwoPoints(p1, p2);
-        m1.setTeamOnePoints(p4, p3);
-
-        game.addMatchup(m2);
-
-        var m3 = new Matchup();
-        m1.setTeamTwoPoints(p1, p4);
-        m1.setTeamOnePoints(p2, p3);
-
-        game.addMatchup(m3);
-
-        var bestMatchup = game.getBestCombination();
+        var sortedList = this.playerlist.sort(function (a, b) { return b.EloRating - a.EloRating });
+            
+        sortedList[0].Team1 = true;
+        sortedList[3].Team1 = true;
         
-        bestMatchup.t1p1.Team1 = true;
-        bestMatchup.t1p2.Team1 = true;
+        sortedList[1].Team2 = true;
+        sortedList[2].Team2 = true;
 
-        bestMatchup.t2p1.Team2 = true;
-        bestMatchup.t2p2.Team2 = true;
+        this.autoMatchup = [sortedList[0].UserName, sortedList[3].UserName, sortedList[1].UserName, sortedList[2].UserName];
 
-
-        this.Message = bestMatchup.t1p1.UserName + " and " + bestMatchup.t1p2.UserName
-        + " vs " + bestMatchup.t2p1.UserName + " and " + bestMatchup.t2p2.UserName;
-              
-        this.autoMatchup = [bestMatchup.t1p1.UserName, bestMatchup.t1p2.UserName, bestMatchup.t2p1.UserName, bestMatchup.t2p2.UserName];
+        this.Message = this.autoMatchup;
 
         return true;
     }
 };
-
-var Matchup = function () {
-    var t1points = 0;
-    var t1p1 = null;
-    var t1p2 = null;
-
-    var t2points = 0;
-    var t2p1 = null;
-    var t2p2 = null;
-
-
-    this.setTeamOnePoints = function (p1, p2) {
-        this.t1points = p1.EloRating + p2.EloRating;
-        this.t1p1 = p1
-        this.t1p2 = p2;
-        return;
-    };
-    this.setTeamTwoPoints = function (p1, p2) {
-        this.t2points = p1.EloRating + p2.EloRating;
-        this.t2p1 = p1;
-        this.t2p2 = p2;
-        return;
-    };
-
-    this.getDifference = function () {
-        if (this.t2points > this.t1points) {
-            return this.t2points - this.t1points;
-        }
-
-        return this.t1points - this.t2points
-    };
-};
-
-var Game = function () {
-    this.matchups = [];
-
-    this.addMatchup = function (m) {
-        this.matchups[this.matchups.length] = m;
-        return;
-    };
-    this.getNumberOfCombinations = function () {
-        return this.matchups.length;
-    };
-    this.getBestCombination = function () {
-        var m = this.matchups[0];
-        for (var i = 1; i < this.matchups.length; i++) {
-            if (m.getDifference() > this.matchups[i].getDifference()) {
-                m = this.matchups[i];
-            }
-        }
-        return m;
-    }
-};
-
