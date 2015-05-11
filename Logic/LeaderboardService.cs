@@ -41,6 +41,8 @@ namespace Logic
                 return RecalculateLeaderboard();
             }
 
+            result.Entries = result.Entries.OrderByDescending(x => x.EloRating).ToList();
+
             return result;
         }
 
