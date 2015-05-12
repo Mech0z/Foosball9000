@@ -20,13 +20,14 @@ div.selectplayer {
 }
 
 div.selectplayer:hover {
+    background-color: #66B2FF;
 }
 
 div.selectplayer:active {
 }
 
 div.Selected {
-    background-color: greenyellow;
+    background-color: #7ADBFF;
 }
 
 div.TeamOne {
@@ -35,7 +36,11 @@ div.TeamOne {
 }
 div.TeamTwo {
     background-color: darkseagreen;
+}
 
+input.Score {
+    width: 80px;
+    margin: 4px;
 }
 
 

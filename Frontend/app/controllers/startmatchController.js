@@ -40,6 +40,17 @@ app.controller("startmatchController",
             $scope.Debug = $scope.bestMatchup.Message;
         };
 
+        $scope.sleep = function()
+        {
+            var start = new Date().getTime();
+            for (var i = 0; i < 1e7; i++) {
+                if ((new Date().getTime() - start) > 10) {
+                    break;
+                }
+            }
+            return;
+        };
+
         $scope.doStuff = function () {
             
             var p1 = $scope.bestMatchup.autoMatchup[0];            
@@ -67,6 +78,7 @@ app.controller("startmatchController",
             }
 
             for (var i = 0; i < matchList.length; i++) {
+
                 matchList[i].PlayerList = [p1, p2, p3, p4];
 
                 var validationResult = match.validateMatch(matchList[i]);
@@ -79,14 +91,14 @@ app.controller("startmatchController",
             }
             
             for (var i = 0; i < matchList.length; i++) {
+                $scope.sleep();
+
                 $scope.addMatch(matchList[i], i == matchList.length - 1)
             }
         };
 
         $scope.addMatch = function (m, navigate) {
             
-            //$scope.Debug = $scope.Debug + " " + m.MatchResult.Team1Score;
-
             $scope.validationFailed = false;
             $scope.loading = true;
             var addMatchPromise = match.addMatch(m);
@@ -155,8 +167,7 @@ var CalculateBestMatchup = function () {
         }
 
         this.Message = "All players selected!!";
-
-        var sortedList = this.playerlist.sort(function (a, b) { return b.EloRating - a.EloRating });
+        var sortedList = this.playerlist.slice().sort(function (a, b) { return b.EloRating - a.EloRating });
             
         sortedList[0].Team1 = true;
         sortedList[3].Team1 = true;

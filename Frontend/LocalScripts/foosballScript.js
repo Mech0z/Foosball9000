@@ -11,6 +11,7 @@ var setLocalTimeOnMatch = function (matches) {
 var toLocalFormat = function (date) {
 
     return dateFormat(date, "dd/mmmm/yy HH:MM");
+   // return dateFormat(date, "dd/mmmm/yy HH:MM:ss:mm l");
 };
 
 var setupUsers = function (leaderboard, users) {

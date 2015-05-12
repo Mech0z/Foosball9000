@@ -11,10 +11,12 @@
                 addMatch: function(match) {
                     var deferred = $q.defer();
 
+                    match.TimeStampUtc = new Date().toJSON();
+                    
                     $http.post("http://localhost:44716/api/match/SaveMatch", match)
                         .success(function(data, status, headers, config) {
                             console.log("success sending add match request");
-                            deferred.resolve(data);
+                            deferred.resolve(data);                            
                         }).error(function(data, status, headers, config) {
                             console.log("failed sending add match request");
                             deferred.reject(data);

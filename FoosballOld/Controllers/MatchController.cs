@@ -66,7 +66,12 @@ namespace FoosballOld.Controllers
         [HttpPost]
         public IHttpActionResult SaveMatch(Match match)
         {
-            match.TimeStampUtc = DateTime.UtcNow;
+            //Sat i AddMatch java
+
+            if (match.TimeStampUtc == DateTime.MinValue)
+            {
+                match.TimeStampUtc = DateTime.UtcNow;
+            }
 
             //TODO Run validation
 
