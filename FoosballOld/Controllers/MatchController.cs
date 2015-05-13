@@ -77,11 +77,11 @@ namespace FoosballOld.Controllers
 
             try
             {
-                _matchRepository.SaveMatch(match);
-
                 var currentLeaderboard = _leaderboardService.GetLatestLeaderboardView();
-
+                
                 _leaderboardService.AddMatchToLeaderboard(currentLeaderboard, match);
+                
+                _matchRepository.SaveMatch(match);
 
                 _leaderboardViewRepository.SaveLeaderboardView(currentLeaderboard);
 

@@ -25,5 +25,7 @@ namespace Models
         public bool StaticFormationTeam2 { get; set; }
 
         public MatchResult MatchResult { get; set; }
+
+        public int? Points { get; set; }
     }
 }

@@ -11,6 +11,26 @@ th {
     font-size: 14px;
 }
 
+body {
+     padding-top: 70px;
+}
+
+.navbar {
+  background-color: white;
+  border-color: white;
+}
+
+.navbar-nav > li > a {
+  color: black;
+}
+
+.navbar-nav > li > a:hover {
+  /*color: darkblue;*/
+}
+
+.navbar-toggle .icon-bar {
+  background: darkblue;
+}
 
 /*specific*/
 div.selectplayer {

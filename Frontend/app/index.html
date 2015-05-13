@@ -7,6 +7,10 @@
     <script src="../Scripts/angular.js"></script>
     <script src="../Scripts/angular-route.js"></script>
     <script src="../Scripts/angular-resource.js"></script>
+    <script src="../Scripts/jquery-2.1.3.js"></script>
+
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
+    <script src="../Scripts/bootstrap.js"></script>
     <script src="../Scripts/date.format.js"></script>
 
     <script src="../LocalScripts/foosballScript.js"></script>
@@ -27,20 +31,31 @@
     <script src="services/playerService.js"></script>
     
 </head>
-<body>   
-    <div class="container" >
-        <div class="col-md-12" style="margin: 10px 10px 10px 0px;">
-            <a class="btn btn-default" href="#/">Home</a>
-            <a class="btn btn-default" href="#/leaderboard">Leaderboard</a>
-            <a class="btn btn-default" href="#/addmatch">Add Match</a>
-            <a class="btn btn-default" href="#/adduser">Add User</a>
-            <a class="btn btn-default" href="#/lastgames">Last Games</a>
-            <a class="btn btn-default" href="#/startmatch">Start Match</a>
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><!--<a class="btn navbar-btn" href="#/">Home</a>--></li>
+                    <li><a class="btn navbar-btn" href="#/leaderboard">Leaderboard</a></li>
+                    <li><a class="btn navbar-btn" href="#/startmatch">Start Match</a></li>
+                    <li><a class="btn navbar-btn" href="#/lastgames">Last Games</a></li>
+                    <li><a class="btn navbar-btn" href="#/addmatch">Add Match</a></li>
+                    <li><a class="btn navbar-btn" href="#/adduser">Add User</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 
     <div class="container" ng-controller="mainController">
-        <div class="col-md-12" ng-view/>
+        <div class="col-md-12" ng-view></div>
     </div>
 
 </body>

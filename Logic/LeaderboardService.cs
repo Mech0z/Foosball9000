@@ -71,6 +71,8 @@ namespace Logic
             var elo = new EloRating();
             var result = elo.CalculateRating(team1AvgElo/2, team2AvgElo/2, match.MatchResult.Team1Won);
 
+            match.Points = (int)result;
+
             if (existingPlayer1 == null)
             {
                 leaderboardEntries.Add(CreatePlayer(player1, match, result, match.MatchResult.Team1Won));
