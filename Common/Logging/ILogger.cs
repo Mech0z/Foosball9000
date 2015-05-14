@@ -14,5 +14,9 @@ namespace Common.Logging
         void Error(Exception exception, string messageTemplate, params object[] propertyValues);
         void Fatal(string messageTemplate, params object[] propertyValues);
         void Fatal(Exception exception, string messageTemplate, params object[] propertyValues);
+        ITaskTimer StartTask(string name);
+        ITaskTimer StartTask(string name, ITaskTimer parentTaskTimer);
+        ITaskTimer StartTaskFormat(string formatName, params object[] args);
+        ITaskTimer StartTaskFormat(ITaskTimer parentTaskTimer, string formatName, params object[] args);
     }
 }

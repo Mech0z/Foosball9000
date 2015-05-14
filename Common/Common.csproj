@@ -76,7 +76,9 @@
   <ItemGroup>
     <Compile Include="Exceptions\TraceExceptionLogger.cs" />
     <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\ITaskTimer.cs" />
     <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\TaskTimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
