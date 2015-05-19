@@ -186,6 +186,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AchievementsController.cs" />
     <Compile Include="Controllers\LeaderboardController.cs" />
     <Compile Include="ContainerInstallers\LogicInstaller.cs" />
     <Compile Include="ContainerInstallers\MongoInstaller.cs" />
