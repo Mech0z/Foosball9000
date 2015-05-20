@@ -1,21 +1,21 @@
 ﻿(function () {
     'use strict';
 
-    var leaderboardServices = angular.module('leaderboardService', []);
+    var achievementsServices = angular.module('achievementsService', []);
 
-    leaderboardServices.factory('leaderboard', ['$http', '$q', function ($http, $q) {
+    achievementsServices.factory('achievements', ['$http', '$q', function ($http, $q) {
 
         return {
-            getLeaderboard: function () {
+            getAchievements: function () {
                 var deferred = $q.defer();
 
-                $http.get("http://localhost:44716/api/leaderboard/index")
+                $http.get("http://localhost:44716/api/achievements/index")
                    .success(function (data, status, headers, config) {
                        console.log(data);
                        deferred.resolve(data);
                    }).error(function (data, status, headers, config) {
                        deferred.reject("Server error");
-                });
+                   });
 
                 return deferred.promise;
             }

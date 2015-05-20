@@ -38,20 +38,59 @@ namespace Logic
 
             var view = new AchievementsView
             {
-                MostGamesPlayer = mostGames.UserName,
-                MostGamesCount = mostGames.NumberOfGames,
-
-                MostWinsPlayer = mostWins.UserName,
-                MostWinsCount = mostWins.Wins,
-                
-                BestRatioPlayer = bestRatio.UserName,
-                BestRatioPercent = (int)((double)((double)bestRatio.Wins / (double)bestRatio.NumberOfGames) * 100),
-
-                WinStreakPlayer = playerWin.UserName,
-                WinStreakMatches = winStreak,
-
-                LossStreakPlayer = playerLoss.UserName,
-                LossStreakMatches = lossStreak,
+                Achievements = new List<Achievement>()
+                {
+                    new Achievement()
+                    {
+                        Headline = "Most games",
+                        UserName = mostGames.UserName,
+                        Count = mostGames.NumberOfGames.ToString(),
+                        Type = "Games"
+                    },
+                    new Achievement()
+                    {
+                        Headline = "Most wins",
+                        UserName = mostWins.UserName,
+                        Count = mostWins.Wins.ToString(),
+                        Type = "Games"
+                    },
+                    new Achievement()
+                    {
+                        Headline = "Best win ratio",
+                        UserName = bestRatio.UserName,
+                        Count =
+                            ((int) ((double) ((double) bestRatio.Wins/(double) bestRatio.NumberOfGames)*100)).ToString(),
+                        Type = "Ratio"
+                    },
+                    new Achievement()
+                    {
+                        Headline = "Longest win streak",
+                        UserName = playerWin.UserName,
+                        Count = winStreak.ToString(),
+                        Type = "Games"
+                    },
+                    new Achievement()
+                    {
+                        Headline = "Longest loss streak",
+                        UserName = playerLoss.UserName,
+                        Count = lossStreak.ToString(),
+                        Type = "Games"
+                    },
+                    new Achievement()
+                    {
+                        Headline = "Most points for single match",
+                        UserName = "Unknown",
+                        Count = "",
+                        Type = "Points"
+                    },
+                    new Achievement()
+                    {
+                        Headline = "10-0 win",
+                        UserName = "Unknown",
+                        Count = "",
+                        Type = "Victory"
+                    }
+                }
             };
 
             return view;

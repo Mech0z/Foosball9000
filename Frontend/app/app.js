@@ -1,5 +1,5 @@
 ﻿var app = angular.module("Foosball", [
-        "leaderboardService", "matchService", "userService", "playerService", "ngRoute"
+        "leaderboardService", "matchService", "userService", "playerService", "ngRoute", "achievementsService"
     ])
     .config([
         "$routeProvider", function($routeProvider) {
@@ -31,6 +31,10 @@
                 .when("/lastgames", {
                     templateUrl: "views/lastgames.html",
                     controller: "lastgamesController"
+                })
+                .when("/achievements", {
+                    templateUrl: "views/achievements.html",
+                    controller: "achievementsController"
                 })
                 .when("/player/:email", {
                     templateUrl: "views/player.html",

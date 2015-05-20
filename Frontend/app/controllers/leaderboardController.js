@@ -22,3 +22,5 @@ app.controller("leaderboardController",
                 console.log(error);
             });
     });
+
+"use strict";
