@@ -3,8 +3,9 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using Serilog;
-using Serilog.Events;
+using Serilog.Sinks.Elasticsearch;
 using Serilog.Sinks.LogReceiver;
+
 
 namespace Common.Logging
 {
@@ -16,6 +17,7 @@ namespace Common.Logging
         {
             var version = ConfigurationManager.AppSettings["Version"];
             var environment = ConfigurationManager.AppSettings["Environment"];
+            var elasticsearchEndpointValue = ConfigurationManager.AppSettings["ElasticsearchEndpoint"];
 
             try
             {
@@ -23,8 +25,8 @@ namespace Common.Logging
                         .Enrich.WithProperty("Version",version)
                         .Enrich.WithProperty("Environment",environment)
                         .Enrich.WithProperty("Application","FoosballApi")
-                        .WriteTo.Loggly()
-                        .WriteTo.LogReceiver()
+                        .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(elasticsearchEndpointValue)){AutoRegisterTemplate = true,})
+                        .WriteTo.LogReceiver()                        
                         .MinimumLevel.Debug()
                         .CreateLogger();
             }
