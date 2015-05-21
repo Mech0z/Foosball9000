@@ -23,11 +23,8 @@ namespace Foosball9000Api.Controllers
         [HttpGet]
         public IEnumerable<LeaderboardViewEntry> Index()
         {
-            using (_logger.StartTask("GetLatestLeaderboard"))
-            {
                 var leaderboard = _leaderboardService.GetLatestLeaderboardView();
                 return leaderboard.Entries;
-            }
         }
     }
 }
