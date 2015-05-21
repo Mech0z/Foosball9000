@@ -9,6 +9,7 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Common.Exceptions;
 using Common.Logging;
+using FoosballOld.ActionFilters;
 using FoosballOld.ContainerInstallers;
 
 namespace FoosballOld
@@ -24,7 +25,7 @@ namespace FoosballOld
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+            RegisterWebApiFilters(GlobalConfiguration.Configuration.Filters);
             ContainerInstaller();
         }
 
@@ -55,5 +56,11 @@ namespace FoosballOld
             //Container.Dispose();
             base.Dispose();
         }
+
+        public static void RegisterWebApiFilters(System.Web.Http.Filters.HttpFilterCollection filters)
+        {
+            filters.Add(new TraceActionFilter(new Logger()));
+        }
+
     }
 }
