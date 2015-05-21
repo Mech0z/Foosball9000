@@ -2,7 +2,7 @@
 using System.Web.Http.Filters;
 using Common.Logging;
 
-namespace FoosballOld.ActionFilters
+namespace Foosball9000Api.ActionFilters
 {
     public class TraceActionFilter : ActionFilterAttribute
     {

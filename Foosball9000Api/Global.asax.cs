@@ -8,8 +8,8 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Common.Exceptions;
 using Common.Logging;
-using FoosballOld.ActionFilters;
-using FoosballOld.ContainerInstallers;
+using Foosball9000Api.ContainerInstallers;
+using Foosball9000Api.ActionFilters;
 
 namespace Foosball9000Api
 {
@@ -21,9 +21,7 @@ namespace Foosball9000Api
         {
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
             RegisterWebApiFilters(GlobalConfiguration.Configuration.Filters);
             ContainerInstaller();
         }
