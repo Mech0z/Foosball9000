@@ -131,4 +131,5 @@ packages/
 /MongoDBRepository/ConnectionString.settings
 /src/testazure/Properties/PublishProfiles
 /MongoDBRepository/mongodb.config
-/FoosballOld/mongodb.config
+/Foosball9000api/mongodb.config
+/Foosballold/mongodb.config
