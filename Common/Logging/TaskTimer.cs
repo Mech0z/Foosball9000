@@ -6,8 +6,8 @@ namespace Common.Logging
 {
     public class TaskTimer : ITaskTimer
     {
-        private readonly object syncRoot = new object();
-        private readonly List<ITaskTimer> taskTimers = new List<ITaskTimer>();
+        private readonly object _syncRoot = new object();
+        private readonly List<ITaskTimer> _taskTimers = new List<ITaskTimer>();
 
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -26,18 +26,18 @@ namespace Common.Logging
         {
             get
             {
-                lock (syncRoot)
+                lock (_syncRoot)
                 {
-                    return taskTimers.ToList();
+                    return _taskTimers.ToList();
                 }
             }
         }
 
         public void AddChild(ITaskTimer taskTimer)
         {
-            lock (syncRoot)
+            lock (_syncRoot)
             {
-                taskTimers.Add(taskTimer);
+                _taskTimers.Add(taskTimer);
             }
         }
 

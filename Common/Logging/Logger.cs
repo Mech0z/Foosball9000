@@ -37,8 +37,7 @@ namespace Common.Logging
             }
             catch (Exception)
             {
-
-                throw;
+                //ignore
             }
         }
 
