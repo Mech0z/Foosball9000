@@ -10,6 +10,8 @@ Task Default -Depends Clean,CompileBackend, PackFrontend, CreateRelease
 
 
 Task Clean {
+
+    Write-Host $releasenotes
     remove-item $here\*.nupkg -force
 }
 

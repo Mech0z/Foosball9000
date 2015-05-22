@@ -2,7 +2,8 @@ param (
     [Parameter(Mandatory=$True,Position=1)]
     [string]$Version = "0.0.0.0",
     [string]$Configuration = "Release",
-    [string]$OctopusApiKey = $null
+    [string]$OctopusApiKey = $null,
+    [string]$ReleaseNotes
 )
 
 Write-Host $Version
@@ -26,5 +27,5 @@ if((Get-Module psake) -eq $null)
 #[IO.Directory]::CreateDirectory($TmpPath)
 
 $psake.use_exit_on_error = $true
-Invoke-psake -buildFile $here'.\Default.ps1' -parameters @{"Version"=$Version;"Configuration"=$Configuration;"NuGetPack"="true";"OctopusApiKey"=$OctopusApiKey}
+Invoke-psake -buildFile $here'.\Default.ps1' -parameters @{"Version"=$Version;"Configuration"=$Configuration;"NuGetPack"="true";"OctopusApiKey"=$OctopusApiKey;"ReleaseNotes"=$releasenotes}
 if ($psake.build_success -eq $false) { exit 1 } else { exit 0 }
