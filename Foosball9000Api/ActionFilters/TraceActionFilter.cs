@@ -1,4 +1,5 @@
-﻿using System.Web.Http.Controllers;
+﻿using System.Net.Http;
+using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using Common.Logging;
 
@@ -20,9 +21,10 @@ namespace Foosball9000Api.ActionFilters
                 new UnitOfWorkTimer(
                     (stopWatch =>
                     {
-                        _logger.Information("Request {Request} took {Elapsed}ms",
+                        _logger.Information("Request {Request} took {Elapsed}ms. LocalPath {LocalPath}",
                             actionContext.Request.RequestUri,
-                            stopWatch.ElapsedMilliseconds);
+                            stopWatch.ElapsedMilliseconds,
+                            actionContext.Request.RequestUri.LocalPath);
                     }));
         }
 
