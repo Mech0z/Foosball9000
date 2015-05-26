@@ -4,6 +4,7 @@ using Models;
 
 namespace Foosball9000Api.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class AchievementsController : ApiController
     {
         private readonly IAchievementsService _achievementsService;
