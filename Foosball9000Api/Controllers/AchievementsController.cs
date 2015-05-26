@@ -1,6 +1,9 @@
-﻿using System.Web.Http;
+using System.Web.Http;
 using Logic;
 using Models;
+using System.Collections.Generic;
+using System.Web.Http.Cors;
+using Common.Logging;
 
 namespace Foosball9000Api.Controllers
 {
