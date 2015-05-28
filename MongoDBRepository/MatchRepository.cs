@@ -28,6 +28,12 @@ namespace MongoDBRepository
             return Collection.Find(Query<Match>.Where(x => x.TimeStampUtc == time)).SingleOrDefault();
         }
 
+        public IEnumerable<Match> GetMatchesByTimeStamp(DateTime time)
+        {
+            return Collection.Find(Query<Match>.Where(x => x.TimeStampUtc >= time)).ToList();
+        }
+
+
         public List<Match> GetRecentMatches(int numberOfMatches)
         {
             var sbb = new SortByBuilder();

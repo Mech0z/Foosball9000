@@ -11,5 +11,6 @@ namespace MongoDBRepository
         Match GetByTimeStamp(DateTime dateTime);
         List<Match> GetRecentMatches(int numberOfMatches);
         List<Match> GetPlayerMatches(string email);
+        IEnumerable<Match> GetMatchesByTimeStamp(DateTime time);
     }
 }

@@ -10,17 +10,17 @@ using MongoDBRepository;
 
 namespace Foosball9000Api.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors("*", "*", "*")]
     public class MatchController : ApiController
     {
-        private readonly IMatchRepository _matchRepository;
-        private readonly IMatchupResultRepository _matchupResultRepository;
         private readonly ILeaderboardService _leaderboardService;
         private readonly ILeaderboardViewRepository _leaderboardViewRepository;
         private readonly ILogger _logger;
+        private readonly IMatchRepository _matchRepository;
+        private readonly IMatchupResultRepository _matchupResultRepository;
 
-        public MatchController(IMatchRepository matchRepository, 
-            IMatchupResultRepository matchupResultRepository, 
+        public MatchController(IMatchRepository matchRepository,
+            IMatchupResultRepository matchupResultRepository,
             ILeaderboardService leaderboardService,
             ILeaderboardViewRepository leaderboardViewRepository,
             ILogger logger)
@@ -39,7 +39,6 @@ namespace Foosball9000Api.Controllers
             try
             {
                 return _matchRepository.GetMatches();
-
             }
             catch (Exception ex)
             {
@@ -50,17 +49,9 @@ namespace Foosball9000Api.Controllers
 
         // GET: /api/Match/LastGames?numberOfMatches=10
         [HttpGet]
-        public IEnumerable<Match> LastGames([FromUri]int numberOfMatches)
+        public IEnumerable<Match> LastGames([FromUri] int numberOfMatches)
         {
-            try
-            {
-                return _matchRepository.GetRecentMatches(numberOfMatches);
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex,"{ExceptionSource} had an error", ex.Source);
-                throw;
-            }
+            return _matchRepository.GetRecentMatches(numberOfMatches);
         }
 
         [HttpPost]
@@ -75,23 +66,15 @@ namespace Foosball9000Api.Controllers
 
             //TODO Run validation
 
-            try
-            {
-                var currentLeaderboard = _leaderboardService.GetLatestLeaderboardView();
-                
-                _leaderboardService.AddMatchToLeaderboard(currentLeaderboard, match);
-                
-                _matchRepository.SaveMatch(match);
+            var currentLeaderboard = _leaderboardService.GetLatestLeaderboardView();
 
-                _leaderboardViewRepository.SaveLeaderboardView(currentLeaderboard);
+            _leaderboardService.AddMatchToLeaderboard(currentLeaderboard, match);
 
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, "{ExceptionSource} had an error", ex.Source);
-                throw;
-            }
+            _matchRepository.SaveMatch(match);
+
+            _leaderboardViewRepository.SaveLeaderboardView(currentLeaderboard);
+
+            return Ok();
         }
 
         [HttpGet]
@@ -110,16 +93,16 @@ namespace Foosball9000Api.Controllers
                 var results = _matchupResultRepository.GetByHashResult(hashcode);
 
                 //TODO dont seem optimal to create a list every time
-                var team1list = new List<string> { userlist[0], userlist[1] };
+                var team1list = new List<string> {userlist[0], userlist[1]};
                 var team1Hashcode = team1list.OrderBy(x => x).GetHashCode();
 
-                var team2list = new List<string> { userlist[3], userlist[4] };
+                var team2list = new List<string> {userlist[3], userlist[4]};
                 var team2Hashcode = team2list.OrderBy(x => x).GetHashCode();
 
                 var result =
                     results.Single(x =>
-                    (x.Team1HashCode == team1Hashcode || x.Team1HashCode == team2Hashcode) &&
-                    (x.Team2HashCode == team1Hashcode || x.Team2HashCode == team2Hashcode));
+                        (x.Team1HashCode == team1Hashcode || x.Team1HashCode == team2Hashcode) &&
+                        (x.Team2HashCode == team1Hashcode || x.Team2HashCode == team2Hashcode));
 
                 return result;
             }
@@ -128,6 +111,12 @@ namespace Foosball9000Api.Controllers
                 _logger.Error(ex, "{ExceptionSource} had an error", ex.Source);
                 throw;
             }
+        }
+
+        [HttpGet]
+        public IEnumerable<Match> TodaysMatches()
+        {
+            return _matchRepository.GetMatchesByTimeStamp(DateTime.Today);
         }
     }
 }
