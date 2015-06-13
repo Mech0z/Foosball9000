@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Models;
+using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 
 namespace MongoDBRepository
@@ -15,7 +16,7 @@ namespace MongoDBRepository
 
         public void SaveMatch(Match draft)
         {
-            Collection.Save(draft);
+            Collection.Save(draft, WriteConcern.Unacknowledged);
         }
 
         public List<Match> GetMatches()
