@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using Models;
 using MongoDBRepository;
 
@@ -24,16 +21,12 @@ namespace Logic
         {
             var matches = _matchRepository.GetMatches().OrderBy(x => x.TimeStampUtc);
             var leaderboardView = new LeaderboardView();
-            var t = new Stopwatch();
-            t.Start();
             
             foreach (var match in matches)
             {
-                Console.WriteLine("time:" + t.Elapsed);
                 AddMatchToLeaderboard(leaderboardView, match);
                 _matchRepository.SaveMatch(match);
             }
-            Console.WriteLine("Total: " +t.Elapsed);
             leaderboardView.Entries = leaderboardView.Entries.OrderByDescending(x => x.EloRating).ToList();
 
             _leaderboardViewRepository.SaveLeaderboardView(leaderboardView);
