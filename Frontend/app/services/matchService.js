@@ -8,16 +8,18 @@
         "$http", "$q", function($http, $q) {
 
             return {
-                addMatch: function(match) {
+                addMatches: function (matches) {
                     var deferred = $q.defer();
 
-                    match.TimeStampUtc = new Date().toJSON();
-                    
-                    $http.post("http://localhost:44716/api/match/SaveMatch", match)
-                        .success(function(data, status, headers, config) {
+                    for (var i = 0; i < matches.length; i++) {
+                        matches[i].TimeStampUtc = new Date().toJSON();
+                    }
+
+                    $http.post("http://localhost:44716/api/match/SaveMatch", matches)
+                        .success(function (data, status, headers, config) {
                             console.log("success sending add match request");
-                            deferred.resolve(data);                            
-                        }).error(function(data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).error(function (data, status, headers, config) {
                             console.log("failed sending add match request");
                             deferred.reject(data);
                         });

@@ -90,25 +90,19 @@ app.controller("startmatchController",
                 }
             }
             
-            for (var i = 0; i < matchList.length; i++) {
-                $scope.sleep();
-
-                $scope.addMatch(matchList[i], i == matchList.length - 1)
-            }
+            $scope.addMatches(matchList);
         };
 
-        $scope.addMatch = function (m, navigate) {
+        $scope.addMatches = function (m) {
             
             $scope.validationFailed = false;
             $scope.loading = true;
-            var addMatchPromise = match.addMatch(m);
+            var addMatchPromise = match.addMatches(m);
 
             addMatchPromise.then(function () {
                 $scope.loading = false;
                 console.log(m);
-                if (navigate) {
-                    $location.path("leaderboard");
-                }
+                $location.path("leaderboard");
             }, function () {
                 $scope.loading = false;
                 $scope.errorMessage = "Request failed ";

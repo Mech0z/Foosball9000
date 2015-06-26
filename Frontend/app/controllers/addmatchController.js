@@ -25,7 +25,7 @@ app.controller("addmatchController",
             if (validationResult.validated) {
                 $scope.validationFailed = false;
                 $scope.loading = true;
-                var addMatchPromise = match.addMatch($scope.match);
+                var addMatchPromise = match.addMatches([$scope.match]);
 
                 addMatchPromise.then(function () {
                     $scope.loading = false;

@@ -55,24 +55,26 @@ namespace Foosball9000Api.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult SaveMatch(Match match)
+        public IHttpActionResult SaveMatch(List<Match> matches)
         {
             //Sat i AddMatch java
-
-            if (match.TimeStampUtc == DateTime.MinValue)
+            foreach (var match in matches)
             {
-                match.TimeStampUtc = DateTime.UtcNow;
+                if (match.TimeStampUtc == DateTime.MinValue)
+                {
+                    match.TimeStampUtc = DateTime.UtcNow;
+                }
+
+                LeaderboardView currentLeaderboard = _leaderboardService.GetLatestLeaderboardView();
+
+                _leaderboardService.AddMatchToLeaderboard(currentLeaderboard, match);
+
+                _matchRepository.SaveMatch(match);
+
+                _leaderboardViewRepository.SaveLeaderboardView(currentLeaderboard);
             }
 
             //TODO Run validation
-
-            var currentLeaderboard = _leaderboardService.GetLatestLeaderboardView();
-
-            _leaderboardService.AddMatchToLeaderboard(currentLeaderboard, match);
-
-            _matchRepository.SaveMatch(match);
-
-            _leaderboardViewRepository.SaveLeaderboardView(currentLeaderboard);
 
             return Ok();
         }
