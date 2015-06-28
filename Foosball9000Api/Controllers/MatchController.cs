@@ -84,8 +84,10 @@ namespace Foosball9000Api.Controllers
         {
             try
             {
+                userlist = new List<string> { "jasper@sovs.net", "maso@seges.dk", "madsskipper@gmail.com", "anjaskott@gmail.com"};
+
                 //Sort
-                var sortedUserlist = userlist.OrderBy(x => x).ToList();
+                    var sortedUserlist = userlist.OrderBy(x => x).ToList();
                 var addedList = string.Join("", sortedUserlist.ToArray());
 
                 //RecalculateLeaderboard hashstring
