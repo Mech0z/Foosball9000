@@ -57,6 +57,8 @@ namespace Foosball9000Api.Controllers
         [HttpPost]
         public IHttpActionResult SaveMatch(List<Match> matches)
         {
+            matches = matches.OrderBy(x => x.TimeStampUtc).ToList();
+
             //Sat i AddMatch java
             foreach (var match in matches)
             {

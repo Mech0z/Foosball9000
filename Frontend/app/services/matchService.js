@@ -12,7 +12,11 @@
                     var deferred = $q.defer();
 
                     for (var i = 0; i < matches.length; i++) {
-                        matches[i].TimeStampUtc = new Date().toJSON();
+                        var date = new Date();
+
+                        date = new Date(date.getTime() -60000 + (5 * 60000 * i));
+
+                        matches[i].TimeStampUtc = date.toJSON();
                     }
 
                     $http.post("http://localhost:44716/api/match/SaveMatch", matches)

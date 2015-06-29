@@ -6,6 +6,11 @@ namespace Models
 {
     public class Match
     {
+        public Match()
+        {
+            IsThisRandom = true;
+        }
+        
         public Guid Id { get; set; }
 
         public DateTime TimeStampUtc { get; set; }
@@ -24,6 +29,8 @@ namespace Models
         /// </summary>
         public bool StaticFormationTeam1 { get; set; }
         public bool StaticFormationTeam2 { get; set; }
+
+        public bool IsThisRandom { get; set; }
 
         public int Team1HashCode
         {

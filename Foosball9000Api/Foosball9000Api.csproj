@@ -172,9 +172,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-        <Compile Include="Controllers\AchievementsController.cs" />
-
-	<Compile Include="Controllers\LeaderboardController.cs" />
+    <Compile Include="Controllers\AchievementsController.cs" />
+    <Compile Include="Controllers\LeaderboardController.cs" />
     <Compile Include="ContainerInstallers\LogicInstaller.cs" />
     <Compile Include="ContainerInstallers\MongoInstaller.cs" />
     <Compile Include="ContainerInstallers\WindsorCompositionRoot.cs" />
