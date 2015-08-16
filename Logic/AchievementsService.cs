@@ -36,6 +36,11 @@ namespace Logic
             var mostWins = leaderboardView.Entries.OrderByDescending(e => e.Wins).First();
             var bestRatio = leaderboardView.Entries.OrderByDescending(e => e.Wins/e.NumberOfGames).First();
 
+
+            var flawlessVictoryWinners = new List<string>();
+            var flawlessVictoryLoosers = new List<string>();
+            GetFlawlessVictory(matches, flawlessVictoryWinners, flawlessVictoryLoosers);
+            
             var view = new AchievementsView
             {
                 Achievements = new List<Achievement>()
@@ -76,19 +81,19 @@ namespace Logic
                         Count = lossStreak.ToString(),
                         Type = "Games"
                     },
+                    //new Achievement()
+                    //{
+                    //    Headline = "Most points for single match",
+                    //    UserName = "Unknown",
+                    //    Count = "",
+                    //    Type = "Points"
+                    //},
                     new Achievement()
                     {
-                        Headline = "Most points for single match",
-                        UserName = "Unknown",
-                        Count = "",
-                        Type = "Points"
-                    },
-                    new Achievement()
-                    {
-                        Headline = "10-0 win",
-                        UserName = "Unknown",
-                        Count = "",
-                        Type = "Victory"
+                        Headline = "Flawless victory (10-0 win)",
+                        UserName = "Winners: " + string.Join(" and ", flawlessVictoryWinners.ToArray()),
+                        Count = string.Join(" and ", flawlessVictoryLoosers.ToArray()),
+                        Type = "Loosers"
                     }
                 }
             };
@@ -124,6 +129,26 @@ namespace Logic
                 }
 
                 currentStreak = 0;
+            }
+        }
+
+        private void GetFlawlessVictory(IOrderedEnumerable<Match> matches, List<string> winners, List<string> loosers)
+        {
+            var orderedMatches = matches.Where(m=>m.PlayerList.Count == 4).OrderByDescending(m => m.TimeStampUtc).ToList();
+            foreach (var match in orderedMatches)
+            {
+                if(match.MatchResult.Team1Score == 0 )
+                {
+                    winners.AddRange(match.PlayerList.GetRange(2, 2));
+                    loosers.AddRange(match.PlayerList.GetRange(0, 2));
+                    return;
+                }
+                else if (match.MatchResult.Team2Score == 0)
+                {
+                    winners.AddRange(match.PlayerList.GetRange(0, 2));
+                    loosers.AddRange(match.PlayerList.GetRange(2, 2));
+                    return;
+                }
             }
         }
 
