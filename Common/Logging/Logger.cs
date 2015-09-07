@@ -25,12 +25,12 @@ namespace Common.Logging
                         .Enrich.WithProperty("Version",version)
                         .Enrich.WithProperty("Environment",environment)
                         .Enrich.WithProperty("Application","FoosballApi")
-                        .WriteTo.Elasticsearch(
+                        /*.WriteTo.Elasticsearch(
                                 new ElasticsearchSinkOptions(new Uri(elasticsearchEndpointValue))
                                 {
                                     AutoRegisterTemplate = true,
                                     BufferBaseFilename = @"c:\temp\logs\elasticsearchbuffer"
-                                })
+                                })*/
                         .WriteTo.LogReceiver()                        
                         .MinimumLevel.Debug()
                         .CreateLogger();
