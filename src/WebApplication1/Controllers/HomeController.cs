@@ -23,11 +23,11 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
-
+            
             return View();
         }
 
-        private void GetMatches()
+        private void GetMatches(List<ApplicationUser> applicationUsers)
         {
             RestClient client = new RestClient("http://foosball9000api.sovs.net/api/");
 
@@ -36,6 +36,26 @@ namespace WebApplication1.Controllers
             IRestResponse<List<Match>> response2 = client.Execute<List<Match>>(restRequest2);
             
             List<Match> mathces = response2.Data;
+
+            List<FoosballMatch> foosballMatches = new List<FoosballMatch>();
+
+            foreach (Match match in mathces)
+            {
+                FoosballMatch foosballMatch = new FoosballMatch();
+
+                foosballMatch.TimeStampUtc = match.TimeStampUtc;
+
+                foosballMatch.Team1Player1 = applicationUsers.SingleOrDefault(x => x.Email == match.PlayerList[0]);
+                foosballMatch.Team1Player2 = applicationUsers.SingleOrDefault(x => x.Email == match.PlayerList[1]);
+                foosballMatch.Team2Player1 = applicationUsers.SingleOrDefault(x => x.Email == match.PlayerList[2]);
+                foosballMatch.Team2Player2 = applicationUsers.SingleOrDefault(x => x.Email == match.PlayerList[3]);
+
+                foosballMatch.Points = match.Points;
+                foosballMatch.Team1Score = match.MatchResult.Team1Score;
+                foosballMatch.Team2Score = match.MatchResult.Team2Score;
+
+                foosballMatches.Add(foosballMatch);
+            }
         }
 
         private void CreatePlayers()
