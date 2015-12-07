@@ -1,0 +1,81 @@
+@model WebApplication1.Models.FoosballMatch
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>FoosballMatch</h4>
+        <hr />
+        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ID" />
+        <div class="form-group">
+            <label asp-for="Points" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Points" class="form-control" />
+                <span asp-validation-for="Points" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Team1HashCode" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Team1HashCode" class="form-control" />
+                <span asp-validation-for="Team1HashCode" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Team1Score" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Team1Score" class="form-control" />
+                <span asp-validation-for="Team1Score" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="Team1Won" />
+                    <label asp-for="Team1Won"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Team2HashCode" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Team2HashCode" class="form-control" />
+                <span asp-validation-for="Team2HashCode" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Team2Score" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Team2Score" class="form-control" />
+                <span asp-validation-for="Team2Score" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TimeStampUtc" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="TimeStampUtc" class="form-control" />
+                <span asp-validation-for="TimeStampUtc" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

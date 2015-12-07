@@ -1,0 +1,68 @@
+@model IEnumerable<WebApplication1.Models.FoosballMatch>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Points)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Team1HashCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Team1Score)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Team1Won)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Team2HashCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Team2Score)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeStampUtc)
+        </th>
+        <th></th>
+    </tr>
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Points)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Team1HashCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Team1Score)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Team1Won)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Team2HashCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Team2Score)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeStampUtc)
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+        </td>
+    </tr>
+}
+</table>

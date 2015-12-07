@@ -6,6 +6,8 @@ namespace WebApplication1.Models
 {
     public class FoosballMatch
     {
+        public long ID { get; set; }
+
         public DateTime TimeStampUtc { get; set; }
         
         public ApplicationUser Team1Player1 { get; set; }

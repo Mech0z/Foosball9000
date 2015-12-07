@@ -14,16 +14,23 @@ namespace WebApplication1.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IServiceProvider _serviceProvider;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(UserManager<ApplicationUser> userManager, IServiceProvider serviceProvider)
+        public HomeController(UserManager<ApplicationUser> userManager, IServiceProvider serviceProvider, ApplicationDbContext context)
         {
             _userManager = userManager;
             _serviceProvider = serviceProvider;
+            _context = context;
         }
 
         public IActionResult Index()
         {
+            CreatePlayers();
+
+            var users = _context.Users.ToList();
             
+            
+
             return View();
         }
 
@@ -93,7 +100,7 @@ namespace WebApplication1.Controllers
                 }
                 else
                 {
-                    
+                    Console.WriteLine(newUser.Errors.First().Description);
                 }
             }
 
