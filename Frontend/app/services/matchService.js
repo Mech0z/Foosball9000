@@ -56,11 +56,11 @@
                     }
                         
 
-                    if (match.MatchResult.Team1Score >= 10 ||
-                        match.MatchResult.Team2Score >= 10) {
+                    if (match.MatchResult.Team1Score >= 8 ||
+                        match.MatchResult.Team2Score >= 8) {
                         //valid
                     } else {
-                        return { validated: false, errorMessage: "One team must have a score of 10 or greater!" }
+                        return { validated: false, errorMessage: "One team must have a score of 8 or greater!" }
                     }
 
                     return { validated: true, errorMessage: "" }
