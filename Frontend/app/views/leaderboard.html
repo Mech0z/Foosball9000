@@ -10,6 +10,7 @@
                         <th>ELO</th>
                         <th>FORM</th>
                         <th>WINS/GAMES</th>
+                        <th>WIN %</th>
                         <th>HISTORY</th>
                     </tr>
                 </thead>
@@ -32,7 +33,12 @@
                     </td>
                     <td>
                         <p class="playerForm">
-                            {{item.Wins}}/{{item.NumberOfGames}} {{(item.Wins / item.NumberOfGames * 100) | number : 2}}%
+                            {{item.Wins}}/{{item.NumberOfGames}}
+                        </p>
+                    </td>
+                    <td>
+                        <p class="playerForm">
+                            {{(item.Wins / item.NumberOfGames * 100) | number : 2}}%
                         </p>
                     </td>
                     <td>
