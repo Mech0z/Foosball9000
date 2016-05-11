@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Common.Logging;
+using Foosball9000Api.RequestResponse;
 using Logic;
 using Models;
 using MongoDBRepository;
@@ -16,6 +17,7 @@ namespace Foosball9000Api.Controllers
         private readonly ILeaderboardService _leaderboardService;
         private readonly ILeaderboardViewRepository _leaderboardViewRepository;
         private readonly ILogger _logger;
+        private readonly IUserRepository _userRepository;
         private readonly IMatchRepository _matchRepository;
         private readonly IMatchupResultRepository _matchupResultRepository;
 
@@ -23,13 +25,15 @@ namespace Foosball9000Api.Controllers
             IMatchupResultRepository matchupResultRepository,
             ILeaderboardService leaderboardService,
             ILeaderboardViewRepository leaderboardViewRepository,
-            ILogger logger)
+            ILogger logger,
+            IUserRepository userRepository)
         {
             _matchRepository = matchRepository;
             _matchupResultRepository = matchupResultRepository;
             _leaderboardService = leaderboardService;
             _leaderboardViewRepository = leaderboardViewRepository;
             _logger = logger;
+            _userRepository = userRepository;
         }
 
         // GET: /api/Match/GetAll
@@ -52,6 +56,37 @@ namespace Foosball9000Api.Controllers
         public IEnumerable<Match> LastGames([FromUri] int numberOfMatches)
         {
             return _matchRepository.GetRecentMatches(numberOfMatches);
+        }
+
+        [HttpPost]
+        public IHttpActionResult SaveMatch(SaveMatchesRequest saveMatchesRequest)
+        {
+            var validated = _userRepository.Validate(saveMatchesRequest.User);
+            if (!validated)
+            {
+                return Unauthorized();
+            }
+
+            var matches = saveMatchesRequest.Matches.OrderBy(x => x.TimeStampUtc).ToList();
+
+            //Sat i AddMatch java
+            foreach (var match in matches)
+            {
+                if (match.TimeStampUtc == DateTime.MinValue)
+                {
+                    match.TimeStampUtc = DateTime.UtcNow;
+                }
+
+                LeaderboardView currentLeaderboard = _leaderboardService.GetLatestLeaderboardView();
+
+                _leaderboardService.AddMatchToLeaderboard(currentLeaderboard, match);
+
+                _matchRepository.SaveMatch(match);
+
+                _leaderboardViewRepository.SaveLeaderboardView(currentLeaderboard);
+            }
+            
+            return Ok();
         }
 
         [HttpPost]

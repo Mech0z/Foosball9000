@@ -45,5 +45,17 @@ namespace Foosball9000Api.Controllers
             _userRepository.AddUser(user);
             return Ok();
         }
+
+        [HttpPost]
+        public IHttpActionResult Login(User user)
+        {
+            var hash = _userRepository.Login(user);
+            if (hash == string.Empty)
+            {
+                return Unauthorized();
+            }
+            
+            return Ok(hash);
+        }
     }
 }

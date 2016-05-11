@@ -34,6 +34,19 @@
                    });
 
                 return deferred.promise;
+            },
+            login: function (user) {
+                var deferred = $q.defer();
+
+                $http.post("http://localhost:44716/api/player/Login", user)
+                   .success(function (data, status, headers, config) {
+                       console.log(data);
+                       deferred.resolve(data);
+                   }).error(function (data, status, headers, config) {
+                       deferred.reject(data);
+                   });
+
+                return deferred.promise;
             }
         };
 

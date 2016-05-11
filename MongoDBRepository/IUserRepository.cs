@@ -7,5 +7,7 @@ namespace MongoDBRepository
     {
         List<User> GetUsers();
         void AddUser(User user);
+        string Login(User inputUser);
+        bool Validate(User inputUser);
     }
 }
