@@ -61,6 +61,10 @@ namespace Foosball9000Api.Controllers
         [HttpPost]
         public IHttpActionResult SaveMatch(SaveMatchesRequest saveMatchesRequest)
         {
+            if (saveMatchesRequest == null)
+            {
+                return BadRequest();
+            }
             var validated = _userRepository.Validate(saveMatchesRequest.User);
             if (!validated)
             {
@@ -86,33 +90,6 @@ namespace Foosball9000Api.Controllers
                 _leaderboardViewRepository.SaveLeaderboardView(currentLeaderboard);
             }
             
-            return Ok();
-        }
-
-        [HttpPost]
-        public IHttpActionResult SaveMatch(List<Match> matches)
-        {
-            matches = matches.OrderBy(x => x.TimeStampUtc).ToList();
-
-            //Sat i AddMatch java
-            foreach (var match in matches)
-            {
-                if (match.TimeStampUtc == DateTime.MinValue)
-                {
-                    match.TimeStampUtc = DateTime.UtcNow;
-                }
-
-                LeaderboardView currentLeaderboard = _leaderboardService.GetLatestLeaderboardView();
-
-                _leaderboardService.AddMatchToLeaderboard(currentLeaderboard, match);
-
-                _matchRepository.SaveMatch(match);
-
-                _leaderboardViewRepository.SaveLeaderboardView(currentLeaderboard);
-            }
-
-            //TODO Run validation
-
             return Ok();
         }
 

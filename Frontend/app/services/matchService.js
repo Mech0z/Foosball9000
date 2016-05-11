@@ -5,7 +5,7 @@
     var matchServices = angular.module("matchService", []);
 
     matchServices.factory("match", [
-        "$http", "$q", function($http, $q) {
+        "$http", "$q", "$cookieStore", function ($http, $q, $cookieStore) {
 
             return {
                 addMatches: function (matches) {
@@ -19,7 +19,17 @@
                         matches[i].TimeStampUtc = date.toJSON();
                     }
 
-                    $http.post("http://localhost:44716/api/match/SaveMatch", matches)
+                    var user = {
+                        Email: $cookieStore.get("email"),
+                        Password: $cookieStore.get("password")
+                    };
+
+                    var request = {
+                        User: user,
+                        Matches: matches
+                    };
+
+                    $http.post("http://localhost:44716/api/match/SaveMatch", request)
                         .success(function (data, status, headers, config) {
                             console.log("success sending add match request");
                             deferred.resolve(data);
