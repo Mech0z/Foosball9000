@@ -65,11 +65,11 @@ namespace Foosball9000Api.Controllers
             {
                 return BadRequest();
             }
-            var validated = _userRepository.Validate(saveMatchesRequest.User);
-            if (!validated)
-            {
-                return Unauthorized();
-            }
+            //var validated = _userRepository.Validate(saveMatchesRequest.User);
+            //if (!validated)
+            //{
+            //    return Unauthorized();
+            //}
 
             var matches = saveMatchesRequest.Matches.OrderBy(x => x.TimeStampUtc).ToList();
 
