@@ -103,9 +103,9 @@ app.controller("startmatchController",
                 $scope.loading = false;
                 console.log(m);
                 $location.path("leaderboard");
-            }, function () {
+            }, function (error) {
                 $scope.loading = false;
-                $scope.errorMessage = "Request failed ";
+                $scope.errorMessage = error;
                 $scope.validationFailed = true;
             });
 

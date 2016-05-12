@@ -35,7 +35,10 @@
                             deferred.resolve(data);
                         }).error(function (data, status, headers, config) {
                             console.log("failed sending add match request");
-                            deferred.reject(data);
+                            if (status == 401) {
+                                deferred.reject("You must be logged in to save a match");
+                            }
+                            deferred.reject("Request failed");
                         });
                     return deferred.promise;
                 },

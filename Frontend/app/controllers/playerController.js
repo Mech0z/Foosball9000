@@ -6,14 +6,15 @@ app.controller('playerController', function ($scope, $q, $routeParams, player, u
     $scope.loading = true;
     $scope.loadingFailed = false;
         
-    $q.all([player.getPlayerMatches($routeParams.email), user.getUsers()]).then(function (payload) {
+    $q.all([player.getPlayerMatches($routeParams.email), user.getUsers(), player.getPlayerPartnerWinPercent($routeParams.email)]).then(function (payload) {
         var matches = payload[0];
         var users = payload[1];
+        var playerPartnerWinPercent = payload[2];
 
         setLocalTimeOnMatch(matches);
         setupUsersMatches(matches, users);
 
-        $scope.lastgames = matches
+        $scope.lastgames = matches;
 
         $scope.loading = false;
         $scope.leaderboard = matches;

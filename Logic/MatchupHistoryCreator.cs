@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Models;
 using MongoDBRepository;
@@ -8,10 +9,83 @@ namespace Logic
     public class MatchupHistoryCreator : IMatchupHistoryCreator
     {
         private readonly IMatchupResultRepository _matchupResultRepository;
+        private readonly IMatchRepository _matchRepository;
+        private readonly IUserRepository _userRepository;
 
-        public MatchupHistoryCreator(IMatchupResultRepository matchupResultRepository)
+        public MatchupHistoryCreator(IMatchupResultRepository matchupResultRepository, IMatchRepository matchRepository, IUserRepository userRepository)
         {
             _matchupResultRepository = matchupResultRepository;
+            _matchRepository = matchRepository;
+            _userRepository = userRepository;
+        }
+
+
+        public List<PartnerPercentResult> GetPartnerWinPercent(string email)
+        {
+            var result = new List<PartnerPercentResult>();
+
+            foreach (User user in _userRepository.GetUsers())
+            {
+                if (user.Email != email)
+                {
+                    result.Add(new PartnerPercentResult
+                    {
+                        Username = user.Username,
+                        Email = user.Email
+                    });
+                }
+            }
+
+
+            var matches = _matchRepository.GetMatches();
+
+            foreach (Match match in matches)
+            {
+                if (match.PlayerList[0] == email)
+                {
+                    PartnerPercentResult resultToManipulate = result.Single(x => x.Email == match.PlayerList[1]);
+                    resultToManipulate.Matches++;
+                    if (match.MatchResult.Team1Won)
+                    {
+                        resultToManipulate.Wins++;
+                    }
+                }
+
+                if (match.PlayerList[1] == email)
+                {
+                    PartnerPercentResult resultToManipulate = result.Single(x => x.Email == match.PlayerList[0]);
+                    resultToManipulate.Matches++;
+                    if (match.MatchResult.Team1Won)
+                    {
+                        resultToManipulate.Wins++;
+                    }
+                }
+
+                if (match.PlayerList[2] == email)
+                {
+                    PartnerPercentResult resultToManipulate = result.Single(x => x.Email == match.PlayerList[3]);
+                    resultToManipulate.Matches++;
+                    if (!match.MatchResult.Team1Won)
+                    {
+                        resultToManipulate.Wins++;
+                    }
+                }
+
+                if (match.PlayerList[3] == email)
+                {
+                    PartnerPercentResult resultToManipulate = result.Single(x => x.Email == match.PlayerList[2]);
+                    resultToManipulate.Matches++;
+                    if (!match.MatchResult.Team1Won)
+                    {
+                        resultToManipulate.Wins++;
+                    }
+                }
+            }
+
+            return result
+                .Where(x => x.Matches > 0)
+                .OrderBy(x => x.Wins / x.Matches)
+                .ToList();
         }
 
         public void AddMatch(Match match)

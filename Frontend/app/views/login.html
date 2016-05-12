@@ -3,7 +3,7 @@
         <img src="images/ajax-loader.gif" class="ajax-loader"/>
     </div>
 
-    <form class="form-horizontal" ng-submit="submit()" ng-show="!loading">
+    <form ng-show="!loggedIn" class="form-horizontal" ng-submit="login()" ng-show="!loading">
         <div class="col-md-5">
             <div class="form-group">
                 <h3>Email</h3>
@@ -37,11 +37,19 @@
         <pre ng-show="validationFailed">{{errorMessage}}</pre>
     </form>
 
+    <form ng-show="loggedIn" class="form-horizontal" ng-submit="logout()" ng-show="!loading">
+        <div class="form-group">
+            <div class="col-sm-10">
+                <button id="submit" type="submit" class="btn btn-primary">Logout</button>
+            </div>
+        </div>
+        <pre ng-show="validationFailed">{{errorMessage}}</pre>
+    </form>
 
-    <b>Cookie stuff</b><br/>    
-    Email: <b>{{cookieEmail}}</b>
-    <br/>
-
-    Passwordhash: <b>{{cookiePasswordHash}}</b>
-
+    <div ng-show="loggedIn" >
+        <b>Cookie stuff</b><br />
+        Email: <b>{{cookieEmail}}</b>
+        <br />
+        Passwordhash: <b>{{cookiePasswordHash}}</b>
+    </div>
 </div>

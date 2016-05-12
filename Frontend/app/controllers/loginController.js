@@ -7,10 +7,17 @@ app.controller('loginController', function ($scope, $q, $routeParams, $cookieSto
     $scope.validationFailed = false;
     $scope.user = {};
 
+
+    if ($cookieStore.get("email") == null) {
+        $scope.loggedIn = false;
+    } else {
+        $scope.loggedIn = true;
+    }
+
     $scope.cookieEmail = $cookieStore.get("email");
     $scope.cookiePasswordHash = $cookieStore.get("password");
 
-    $scope.submit = function () {
+    $scope.login = function () {
         
         $scope.loading = true;
 
@@ -31,5 +38,12 @@ app.controller('loginController', function ($scope, $q, $routeParams, $cookieSto
             $scope.loading = false;
             $scope.errorMessage = error;
         });
+    }
+
+    $scope.logout = function () {
+        
+        $cookieStore.put("email", null);
+        $cookieStore.put("password", null);
+        $scope.loggedIn = false;
     }
 });

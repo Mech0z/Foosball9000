@@ -43,7 +43,7 @@
                        console.log(data);
                        deferred.resolve(data);
                    }).error(function (data, status, headers, config) {
-                       if (status == 401) {
+                       if (status === 401) {
                            deferred.reject("Wrong email or password!");
                        }
 
