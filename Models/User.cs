@@ -13,5 +13,7 @@ namespace Models
         public string Username { get; set; }
 
         public string GravatarEmail { get; set; }
+
+        public string Password { get; set; }
     }
 }
