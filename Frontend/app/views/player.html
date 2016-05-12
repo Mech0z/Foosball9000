@@ -39,6 +39,34 @@
             </td>
         </tr>
     </table>
+
+    <table class="table table-hover" ng-show="!loading">
+        <thead>
+            <tr>
+                <th>Partner</th>
+                <th>Win/Matches</th>
+                <th>Win%</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="result in partnerMatches">
+            <td>
+                <p>
+                    {{result.Username}}
+                </p>
+            </td>
+            <td>
+                <p>
+                    {{result.Wins}} / {{result.Matches}}
+                </p>
+            </td>
+
+            <td>
+                <p>
+                    {{(result.Wins / result.Matches * 100) | number : 2}}%
+                </p>
+            </td>
+        </tr>
+    </table>
     <div ng-show="loadingFailed" align="center">
         <pre>{{errorMessage}}</pre>
         <img src="images/ServerIssues.png" width="600" height="400" alt=";(">
