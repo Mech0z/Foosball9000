@@ -43,7 +43,11 @@
                        console.log(data);
                        deferred.resolve(data);
                    }).error(function (data, status, headers, config) {
-                       deferred.reject(data);
+                       if (status == 401) {
+                           deferred.reject("Wrong email or password!");
+                       }
+
+                       deferred.reject("Unknown login failure");
                    });
 
                 return deferred.promise;

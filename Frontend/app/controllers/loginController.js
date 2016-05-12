@@ -26,7 +26,7 @@ app.controller('loginController', function ($scope, $q, $routeParams, $cookieSto
 
             $location.path("leaderboard");
 
-        }, function (error) {
+        }, function (error, status) {
             $scope.validationFailed = true;
             $scope.loading = false;
             $scope.errorMessage = error;
