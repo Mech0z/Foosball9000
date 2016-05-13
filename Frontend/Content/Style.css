@@ -63,4 +63,11 @@ input.Score {
     margin: 4px;
 }
 
+.winner{
+   /*color: gold;*/
+    font-weight: bold;
+}
 
+.loser{
+    color: sandybrown;
+}

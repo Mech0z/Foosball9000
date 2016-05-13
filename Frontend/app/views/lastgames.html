@@ -19,17 +19,18 @@
                     {{game.LocalTime}}
                 </p>
             </td>
-
+            
             <td>
-                <p>
+                <p data-ng-class="{'winner':game.MatchResult.Team1Won}">
                     {{game.PlayerList[0]}}
                     <br/>
                     {{game.PlayerList[1]}}
                 </p>
             </td>
 
+
             <td>
-                <p>
+                <p data-ng-class="{'winner':!game.MatchResult.Team1Won}">
                     {{game.PlayerList[2]}}            
                     <br />    
                     {{game.PlayerList[3]}}
