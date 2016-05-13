@@ -84,7 +84,7 @@ namespace Logic
 
             return result
                 .Where(x => x.Matches > 0)
-                .OrderByDescending(x => x.Wins / x.Matches)
+                .OrderByDescending(x => (double)x.Wins / (double)x.Matches)
                 .ToList();
         }
 
