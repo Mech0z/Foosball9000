@@ -9,5 +9,6 @@ namespace MongoDBRepository
         void AddUser(User user);
         string Login(User inputUser);
         bool Validate(User inputUser);
+        string ChangePassword(string email, string hashedPassword, string newPassword);
     }
 }

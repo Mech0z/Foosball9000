@@ -67,5 +67,23 @@ namespace Foosball9000Api.Controllers
             
             return Ok(hash);
         }
+
+        [HttpPost]
+        public IHttpActionResult ChangePassword(ChangePasswordRequest request)
+        {
+            if (request.NewPassword.Length < 6)
+            {
+                return BadRequest("Password too short");
+            }
+
+            var hash = _userRepository.ChangePassword(request.Email, request.OldPassword, request.NewPassword);
+            
+            if (hash == string.Empty)
+            {
+                return Unauthorized();
+            }
+            
+            return Ok(hash);
+        }
     }
 }

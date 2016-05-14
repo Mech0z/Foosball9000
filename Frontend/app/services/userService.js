@@ -3,7 +3,7 @@
 
     var userServices = angular.module('userService', []);
 
-    userServices.factory('user', ['$http', '$q', function ($http, $q) {
+    userServices.factory('user', ['$http', '$q', '$cookieStore', function ($http, $q, $cookieStore) {
 
         return {
             addUser: function (user) {
@@ -42,6 +42,29 @@
                    .success(function (data, status, headers, config) {
                        console.log(data);
                        deferred.resolve(data);
+                   }).error(function (data, status, headers, config) {
+                       if (status === 401) {
+                           deferred.reject("Wrong email or password!");
+                       }
+
+                       deferred.reject("Unknown login failure");
+                   });
+
+                return deferred.promise;
+            },
+            changePassword: function (email, oldPassword, newPassword) {
+                var deferred = $q.defer();
+
+                var changePasswordRequest = {};
+
+                changePasswordRequest.Email = email;
+                changePasswordRequest.OldPassword = oldPassword;
+                changePasswordRequest.NewPassword = newPassword;
+
+                $http.post("http://localhost:44716/api/player/ChangePassword", changePasswordRequest)
+                   .success(function (data, status, headers, config) {
+                       console.log(data);
+                       deferred.resolve(data);  
                    }).error(function (data, status, headers, config) {
                        if (status === 401) {
                            deferred.reject("Wrong email or password!");

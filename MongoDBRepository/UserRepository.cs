@@ -49,6 +49,22 @@ namespace MongoDBRepository
             return string.Empty;
         }
 
+        public string ChangePassword(string email, string oldPassword, string newPassword)
+        {
+            var user = Collection.Find(Query<User>.Where(x => x.Email == email)).SingleOrDefault();
+
+            if (!BCrypt.Net.BCrypt.CheckPassword(oldPassword, user.Password))
+            {
+                return string.Empty;
+            }
+
+            user.Password = BCrypt.Net.BCrypt.HashPassword(newPassword, BCrypt.Net.BCrypt.GenerateSalt());
+
+            Collection.Save(user);
+
+            return user.Password;
+        }
+
         public bool Validate(User inputUser)
         {
             var user = Collection.Find(Query<User>.Where(x => x.Email == inputUser.Email)).SingleOrDefault();
