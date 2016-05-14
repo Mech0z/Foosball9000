@@ -11,17 +11,28 @@ namespace Logic
         private readonly IMatchupResultRepository _matchupResultRepository;
         private readonly IMatchRepository _matchRepository;
         private readonly IUserRepository _userRepository;
+        private readonly ILeaderboardViewRepository _leaderboardViewRepository;
 
-        public MatchupHistoryCreator(IMatchupResultRepository matchupResultRepository, IMatchRepository matchRepository, IUserRepository userRepository)
+
+        public MatchupHistoryCreator(IMatchupResultRepository matchupResultRepository, IMatchRepository matchRepository, IUserRepository userRepository, ILeaderboardViewRepository leaderboardViewRepository)
         {
             _matchupResultRepository = matchupResultRepository;
             _matchRepository = matchRepository;
             _userRepository = userRepository;
+            _leaderboardViewRepository = leaderboardViewRepository;
         }
 
 
         public List<PartnerPercentResult> GetPartnerWinPercent(string email)
         {
+
+            var leaderboard = _leaderboardViewRepository.GetLeaderboardView();
+            double? normalWinRate = null;
+            if (leaderboard != null)
+            {
+                normalWinRate = leaderboard.Entries.Where(e => e.UserName == email).Select(e => Math.Round((((double)e.Wins / (double)e.NumberOfGames) * 100),2)).FirstOrDefault();
+            }
+
             var result = new List<PartnerPercentResult>();
 
             foreach (User user in _userRepository.GetUsers())
@@ -31,7 +42,8 @@ namespace Logic
                     result.Add(new PartnerPercentResult
                     {
                         Username = user.Username,
-                        Email = user.Email
+                        Email = user.Email,
+                        UsersNormalWinrate = normalWinRate
                     });
                 }
             }
@@ -84,7 +96,7 @@ namespace Logic
 
             return result
                 .Where(x => x.Matches > 0)
-                .OrderBy(x => x.Wins / x.Matches)
+                .OrderByDescending(x => (double)x.Wins / (double)x.Matches)
                 .ToList();
         }
 

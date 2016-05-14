@@ -6,10 +6,39 @@
     <table class="table table-hover" ng-show="!loading">
         <thead>
             <tr>
+                <th>Partner</th>
+                <th>Win/Matches</th>
+                <th>Win% (average%)</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="result in partnerMatches">
+            <td>
+                <p>
+                    {{result.Username}}
+                </p>
+            </td>
+            <td>
+                <p>
+                    {{result.Wins}} / {{result.Matches}}
+                </p>
+            </td>
+
+            <td>
+                <p>
+                    {{(result.Wins / result.Matches * 100) | number : 2}}%  ({{result.UsersNormalWinrate}}%)
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <table class="table table-hover" ng-show="!loading">
+        <thead>
+            <tr>
                 <th>Time</th>
                 <th>Team 1</th>
                 <th>Team 2</th>
                 <th>Score</th>
+                <th>Points</th>
             </tr>
         </thead>
         <tr ng-repeat="game in lastgames">
@@ -19,7 +48,7 @@
                 </p>
             </td>
             <td>
-                <p>
+                <p data-ng-class="{'winner':game.MatchResult.Team1Won}">
                     {{game.PlayerList[0]}}
                     <br />
                     {{game.PlayerList[1]}}
@@ -27,7 +56,8 @@
             </td>
 
             <td>
-                <p>
+                <!--<p data-ng-class="{'winner':!game.MatchResult.Team1Won}">-->
+                <p data-ng-class="{'winner':!game.MatchResult.Team1Won}">
                     {{game.PlayerList[2]}}
                     <br />
                     {{game.PlayerList[3]}}
@@ -36,6 +66,10 @@
 
             <td>
                 <p>{{game.MatchResult.Team1Score}} - {{game.MatchResult.Team2Score}}</p>
+            </td>
+            
+            <td>
+                <p>{{game.Points}}</p>
             </td>
         </tr>
     </table>

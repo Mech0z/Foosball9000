@@ -9,7 +9,7 @@ app.controller('playerController', function ($scope, $q, $routeParams, player, u
     $q.all([player.getPlayerMatches($routeParams.email), user.getUsers(), player.getPlayerPartnerWinPercent($routeParams.email)]).then(function (payload) {
         var matches = payload[0];
         var users = payload[1];
-        var playerPartnerWinPercent = payload[2];
+        $scope.partnerMatches = payload[2];
 
         setLocalTimeOnMatch(matches);
         setupUsersMatches(matches, users);
