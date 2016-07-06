@@ -55,12 +55,15 @@
     <Compile Include="ILeaderboardViewRepository.cs" />
     <Compile Include="IMatchRepository.cs" />
     <Compile Include="IMongo.cs" />
+    <Compile Include="ISeasonRepository.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="LeaderboardViewRepository.cs" />
+    <Compile Include="MatchSeason1LegacyRepository.cs" />
     <Compile Include="MatchRepository.cs" />
     <Compile Include="MatchupResultRepository.cs" />
     <Compile Include="MongoBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeasonRepository.cs" />
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

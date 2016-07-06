@@ -9,7 +9,7 @@ namespace MongoDBRepository
 {
     public class MatchRepository : MongoBase<Match>, IMatchRepository
     {
-        public MatchRepository() : base("MatchesV2")
+        public MatchRepository() : base("MatchesV3")
         {
 
         }

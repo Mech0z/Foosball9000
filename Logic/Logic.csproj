@@ -48,6 +48,7 @@
     <Compile Include="IRating.cs" />
     <Compile Include="MatchupHistoryCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeasonLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

@@ -54,5 +54,7 @@ namespace Models
         public MatchResult MatchResult { get; set; }
 
         public int? Points { get; set; }
+
+        public String SeasonName { get; set; }
     }
 }
