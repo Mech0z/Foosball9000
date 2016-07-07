@@ -18,7 +18,7 @@ namespace Foosball9000Api.Controllers
         private readonly ILeaderboardViewRepository _leaderboardViewRepository;
         private readonly ILogger _logger;
         private readonly IUserRepository _userRepository;
-        private readonly ISeasonRepository _seasonRepository;
+        private readonly ISeasonLogic _seasonLogic;
         private readonly IMatchRepository _matchRepository;
         private readonly IMatchupResultRepository _matchupResultRepository;
 
@@ -28,7 +28,7 @@ namespace Foosball9000Api.Controllers
             ILeaderboardViewRepository leaderboardViewRepository,
             ILogger logger,
             IUserRepository userRepository,
-            ISeasonRepository seasonRepository)
+            ISeasonLogic seasonLogic)
         {
             _matchRepository = matchRepository;
             _matchupResultRepository = matchupResultRepository;
@@ -36,7 +36,7 @@ namespace Foosball9000Api.Controllers
             _leaderboardViewRepository = leaderboardViewRepository;
             _logger = logger;
             _userRepository = userRepository;
-            _seasonRepository = seasonRepository;
+            _seasonLogic = seasonLogic;
         }
 
         // GET: /api/Match/GetAll
@@ -58,6 +58,15 @@ namespace Foosball9000Api.Controllers
         [HttpGet]
         public IEnumerable<Match> LastGames([FromUri] int numberOfMatches)
         {
+            var seasons = _seasonLogic.GetSeasons();
+
+            //TODO remove!
+            if (seasons.Count == 0)
+            {
+                _seasonLogic.CreateSeasons();
+                _seasonLogic.ConvertOldMatches();
+            }
+
             return _matchRepository.GetRecentMatches(numberOfMatches);
         }
 
@@ -74,12 +83,14 @@ namespace Foosball9000Api.Controllers
             //    return Unauthorized();
             //}
 
-            var seasons = _seasonRepository.GetSeasons();
+            var seasons = _seasonLogic.GetSeasons();
 
             if (seasons.All(x => x.EndDate != null))
             {
                 return BadRequest("No active seaons");
             }
+
+            var currentSeason = seasons.Single(x => x.EndDate != null);
 
             var matches = saveMatchesRequest.Matches.OrderBy(x => x.TimeStampUtc).ToList();
 
@@ -90,6 +101,8 @@ namespace Foosball9000Api.Controllers
                 {
                     match.TimeStampUtc = DateTime.UtcNow;
                 }
+                
+                match.SeasonName = currentSeason.Name;
 
                 LeaderboardView currentLeaderboard = _leaderboardService.GetLatestLeaderboardView();
 
