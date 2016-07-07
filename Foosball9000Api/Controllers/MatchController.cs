@@ -18,6 +18,7 @@ namespace Foosball9000Api.Controllers
         private readonly ILeaderboardViewRepository _leaderboardViewRepository;
         private readonly ILogger _logger;
         private readonly IUserRepository _userRepository;
+        private readonly ISeasonRepository _seasonRepository;
         private readonly IMatchRepository _matchRepository;
         private readonly IMatchupResultRepository _matchupResultRepository;
 
@@ -26,7 +27,8 @@ namespace Foosball9000Api.Controllers
             ILeaderboardService leaderboardService,
             ILeaderboardViewRepository leaderboardViewRepository,
             ILogger logger,
-            IUserRepository userRepository)
+            IUserRepository userRepository,
+            ISeasonRepository seasonRepository)
         {
             _matchRepository = matchRepository;
             _matchupResultRepository = matchupResultRepository;
@@ -34,6 +36,7 @@ namespace Foosball9000Api.Controllers
             _leaderboardViewRepository = leaderboardViewRepository;
             _logger = logger;
             _userRepository = userRepository;
+            _seasonRepository = seasonRepository;
         }
 
         // GET: /api/Match/GetAll
@@ -70,6 +73,13 @@ namespace Foosball9000Api.Controllers
             //{
             //    return Unauthorized();
             //}
+
+            var seasons = _seasonRepository.GetSeasons();
+
+            if (seasons.All(x => x.EndDate != null))
+            {
+                return BadRequest("No active seaons");
+            }
 
             var matches = saveMatchesRequest.Matches.OrderBy(x => x.TimeStampUtc).ToList();
 

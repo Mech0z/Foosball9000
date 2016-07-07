@@ -6,7 +6,7 @@ namespace MongoDBRepository
 {
     public interface IMatchRepository
     {
-        void SaveMatch(Match draft);
+        void SaveMatch(Match match);
         List<Match> GetMatches();
         Match GetByTimeStamp(DateTime dateTime);
         List<Match> GetRecentMatches(int numberOfMatches);

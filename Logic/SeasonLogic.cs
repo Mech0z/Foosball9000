@@ -41,17 +41,21 @@ namespace Logic
         {
             List<Match> season1Matches = _matchSeason1LegacyRepository.GetMatches();
 
-
-
             foreach (Match match in season1Matches)
             {
-                match.SeasonName = seasons.Single(x => x.EndDate != null);
+                match.SeasonName = "Season 1";
                 _matchRepository.SaveMatch(match);
             }
 
             List<Match> season2Matches = _matchSeason2LegacyRepository.GetMatches();
-            
-            
+
+            foreach (Match match in season2Matches)
+            {
+                match.SeasonName = "Season 2";
+                _matchRepository.SaveMatch(match);
+            }
+
+
         }
     }
 

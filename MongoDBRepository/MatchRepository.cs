@@ -14,9 +14,9 @@ namespace MongoDBRepository
 
         }
 
-        public void SaveMatch(Match draft)
+        public void SaveMatch(Match match)
         {
-            Collection.Save(draft, WriteConcern.Unacknowledged);
+            Collection.Save(match, WriteConcern.Unacknowledged);
         }
 
         public List<Match> GetMatches()
