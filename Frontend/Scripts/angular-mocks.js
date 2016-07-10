@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.5.7
+ * @license AngularJS v1.5.6
  * (c) 2010-2016 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -2201,15 +2201,9 @@ angular.mock.$RootElementProvider = function() {
 angular.mock.$ControllerDecorator = ['$delegate', function($delegate) {
   return function(expression, locals, later, ident) {
     if (later && typeof later === 'object') {
-      var instantiate = $delegate(expression, locals, true, ident);
-      angular.extend(instantiate.instance, later);
-
-      var instance = instantiate();
-      if (instance !== instantiate.instance) {
-        angular.extend(instance, later);
-      }
-
-      return instance;
+      var create = $delegate(expression, locals, true, ident);
+      angular.extend(create.instance, later);
+      return create();
     }
     return $delegate(expression, locals, later, ident);
   };
@@ -2331,7 +2325,6 @@ angular.module('ngMock', ['ng']).provider({
  * the {@link ngMockE2E.$httpBackend e2e $httpBackend} mock.
  */
 angular.module('ngMockE2E', ['ng']).config(['$provide', function($provide) {
-  $provide.value('$httpBackend', angular.injector(['ng']).get('$httpBackend'));
   $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
 }]);
 
