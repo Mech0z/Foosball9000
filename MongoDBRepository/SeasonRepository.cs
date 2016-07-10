@@ -26,7 +26,7 @@ namespace MongoDBRepository
 
         public void EndSeason(Season season)
         {
-            var currentSeason = Collection.Find(Query<Season>.Where(x => x.Id == season.Id)).SingleOrDefault();
+            var currentSeason = Collection.Find(Query<Season>.Where(x => x.Name == season.Name)).SingleOrDefault();
 
             currentSeason.EndDate = DateTime.Today;
             Collection.Save(currentSeason, WriteConcern.Unacknowledged);
