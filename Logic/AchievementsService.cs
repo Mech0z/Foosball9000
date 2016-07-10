@@ -17,10 +17,10 @@ namespace Logic
         private readonly ILeaderboardViewRepository _leaderboardViewRepository;
         private readonly IMatchRepository _matchRepository;
         
-        public AchievementsView GetAchievementsView()
+        public AchievementsView GetAchievementsView(string season)
         {
-            var leaderboardView = _leaderboardViewRepository.GetLeaderboardView();
-            var matches = _matchRepository.GetMatches().OrderBy(m=>m.TimeStampUtc);
+            var leaderboardView = _leaderboardViewRepository.GetLeaderboardView(season);
+            var matches = _matchRepository.GetMatches(season).OrderBy(m=>m.TimeStampUtc);
 
             int winStreak;
             LeaderboardViewEntry playerWin;
@@ -166,6 +166,6 @@ namespace Logic
 
     public interface IAchievementsService : ILogic
     {
-        AchievementsView GetAchievementsView();
+        AchievementsView GetAchievementsView(string season);
     }
 }

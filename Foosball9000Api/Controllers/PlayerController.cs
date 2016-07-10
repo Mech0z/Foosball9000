@@ -15,13 +15,17 @@ namespace Foosball9000Api.Controllers
         private readonly IMatchRepository _matchRepository;
         private readonly IUserRepository _userRepository;
         private readonly IMatchupHistoryCreator _matchupHistoryCreator;
+        private readonly ISeasonLogic _seasonLogic;
 
         public PlayerController(IMatchRepository matchRepository,
-            IUserRepository userRepository, IMatchupHistoryCreator matchupHistoryCreator)
+            IUserRepository userRepository, 
+            IMatchupHistoryCreator matchupHistoryCreator, 
+            ISeasonLogic seasonLogic)
         {
             _matchRepository = matchRepository;
             _userRepository = userRepository;
             _matchupHistoryCreator = matchupHistoryCreator;
+            _seasonLogic = seasonLogic;
         }
 
         [HttpGet]
@@ -33,7 +37,9 @@ namespace Foosball9000Api.Controllers
         [HttpGet]
         public List<PartnerPercentResult> GetPlayerPartnerResults(string email)
         {
-            return _matchupHistoryCreator.GetPartnerWinPercent(email);
+            var activeSeason = _seasonLogic.GetActiveSeason();
+
+            return _matchupHistoryCreator.GetPartnerWinPercent(email, activeSeason.Name);
         }
 
         [HttpGet]
