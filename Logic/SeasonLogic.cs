@@ -21,6 +21,17 @@ namespace Logic
             _seasonRepository = seasonRepository;
         }
 
+        public void StartNewSeason(string name)
+        {
+            var newSeason = new Season
+            {
+                StartDate = DateTime.Today,
+                Name = name
+            };
+
+            _seasonRepository.CreateNewSeason(newSeason);
+        }
+
         public void CreateSeasons()
         {
             _seasonRepository.CreateNewSeason(new Season
@@ -37,10 +48,15 @@ namespace Logic
             });
         }
 
+        public List<Season> GetSeasons()
+        {
+            return _seasonRepository.GetSeasons();
+        }
+
         public void ConvertOldMatches()
         {
             List<Match> season1Matches = _matchSeason1LegacyRepository.GetMatches();
-
+            var count1 = season1Matches.Count;
             foreach (Match match in season1Matches)
             {
                 match.SeasonName = "Season 1";
@@ -48,7 +64,9 @@ namespace Logic
             }
 
             List<Match> season2Matches = _matchSeason2LegacyRepository.GetMatches();
+            var count2 = season2Matches.Count;
 
+            var count3 = season1Matches.Count + season2Matches.Count;
             foreach (Match match in season2Matches)
             {
                 match.SeasonName = "Season 2";
@@ -62,5 +80,7 @@ namespace Logic
     public interface ISeasonLogic
     {
         void ConvertOldMatches();
+        void CreateSeasons();
+        List<Season> GetSeasons();  
     }
 }
