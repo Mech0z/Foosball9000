@@ -12,5 +12,9 @@ namespace MongoDBRepository
         List<Match> GetRecentMatches(int numberOfMatches);
         List<Match> GetPlayerMatches(string email);
         IEnumerable<Match> GetMatchesByTimeStamp(DateTime time);
+        Match GetMatchById(Guid guid);
+
+
+        
     }
 }

@@ -14,7 +14,7 @@ app.controller("lastgamesController",
             setLocalTimeOnMatch(matches);
             setupUsersMatches(matches, users);
 
-            $scope.lastgames = matches
+            $scope.lastgames = matches;
 
             $scope.loading = false;
             $scope.leaderboard = matches;

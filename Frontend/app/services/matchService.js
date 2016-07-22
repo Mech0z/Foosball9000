@@ -53,6 +53,17 @@
                         });
                     return deferred.promise;
                 },
+                getMatch: function (matchId) {
+                    var deferred = $q.defer();
+
+                    $http.get("http://localhost:44716/api/match/GetMatch?guid=" + matchId)
+                        .success(function (data, status, headers, config) {
+                            deferred.resolve(data);
+                        }).error(function (data, status, headers, config) {
+                            deferred.reject(data);
+                        });
+                    return deferred.promise;
+                },
                 validateMatch: function(match) {
                     if (match.MatchResult.Team1Score >= match.MatchResult.Team2Score + 2||
                         match.MatchResult.Team2Score >= match.MatchResult.Team1Score + 2) {

@@ -11,7 +11,7 @@ namespace Models
             IsThisRandom = true;
         }
         
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         public DateTime TimeStampUtc { get; set; }
 

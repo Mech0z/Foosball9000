@@ -33,7 +33,10 @@ namespace MongoDBRepository
         {
             return Collection.Find(Query<Match>.Where(x => x.TimeStampUtc >= time)).ToList();
         }
-
+        public Match GetMatchById(Guid guid)
+        {
+            return Collection.Find(Query<Match>.Where(x => x.Id == guid)).SingleOrDefault();
+        }
 
         public List<Match> GetRecentMatches(int numberOfMatches)
         {

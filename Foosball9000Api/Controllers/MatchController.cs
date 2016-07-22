@@ -106,11 +106,16 @@ namespace Foosball9000Api.Controllers
 
                 LeaderboardView currentLeaderboard = _leaderboardService.GetLatestLeaderboardView();
 
-                _leaderboardService.AddMatchToLeaderboard(currentLeaderboard, match);
-
+                if (match.Id != null)
+                {
+                    _leaderboardService.AddMatchToLeaderboard(currentLeaderboard, match);
+                    _leaderboardViewRepository.SaveLeaderboardView(currentLeaderboard);
+                }
+                
                 _matchRepository.SaveMatch(match);
 
-                _leaderboardViewRepository.SaveLeaderboardView(currentLeaderboard);
+                _leaderboardService.RecalculateLeaderboard();
+
             }
             
             return Ok();
@@ -158,6 +163,13 @@ namespace Foosball9000Api.Controllers
         public IEnumerable<Match> TodaysMatches()
         {
             return _matchRepository.GetMatchesByTimeStamp(DateTime.Today);
+        }
+
+        [HttpGet]
+        public Match GetMatch(Guid guid)
+        {
+            if (guid == null) return null;
+            return _matchRepository.GetMatchById(guid);
         }
     }
 }
