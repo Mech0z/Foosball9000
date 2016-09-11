@@ -9,18 +9,21 @@ namespace Logic
     {
         private readonly ILeaderboardViewRepository _leaderboardViewRepository;
         private readonly IMatchRepository _matchRepository;
+        private readonly ISeasonLogic _seasonLogic;
 
         public LeaderboardService(ILeaderboardViewRepository leaderboardViewRepository,
-            IMatchRepository matchRepository)
+            IMatchRepository matchRepository,
+            ISeasonLogic seasonLogic)
         {
             _leaderboardViewRepository = leaderboardViewRepository;
             _matchRepository = matchRepository;
+            _seasonLogic = seasonLogic;
         }
 
-        public LeaderboardView RecalculateLeaderboard()
+        public LeaderboardView RecalculateLeaderboard(string season)
         {
-            var matches = _matchRepository.GetMatches().OrderBy(x => x.TimeStampUtc);
-            var leaderboardView = new LeaderboardView();
+            var matches = _matchRepository.GetMatches(season).OrderBy(x => x.TimeStampUtc);
+            var leaderboardView = new LeaderboardView {SeasonName = season};
             
             foreach (var match in matches)
             {
@@ -33,17 +36,33 @@ namespace Logic
             return leaderboardView;
         }
 
-        public LeaderboardView GetLatestLeaderboardView()
+        public LeaderboardView GetActiveLeaderboard()
         {
-            var result = _leaderboardViewRepository.GetLeaderboardView();
-            if (result == null)
+            throw new System.NotImplementedException();
+        }
+
+        public List<LeaderboardView> GetLatestLeaderboardViews()
+        {
+            var seasons = _seasonLogic.GetSeasons();
+
+            var latestLeaderboardViews = _leaderboardViewRepository.GetLeaderboardViews();
+
+            foreach (var season in seasons)
             {
-                return RecalculateLeaderboard();
+                var existingLeaderboard = latestLeaderboardViews.Any(x => x.SeasonName == season.Name);
+
+                if (existingLeaderboard == false)
+                {
+                    latestLeaderboardViews.Add(RecalculateLeaderboard(season.Name));
+                }
             }
 
-            result.Entries = result.Entries.OrderByDescending(x => x.EloRating).ToList();
+            foreach (var season in latestLeaderboardViews)
+            {
+                season.Entries = season.Entries.OrderByDescending(x => x.EloRating).ToList();
+            }
 
-            return result;
+            return latestLeaderboardViews;
         }
 
         public void AddMatchToLeaderboard(LeaderboardView leaderboardView, Match match)

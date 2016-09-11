@@ -45,7 +45,7 @@ namespace Foosball9000Api.Controllers
         {
             try
             {
-                return _matchRepository.GetMatches();
+                return _matchRepository.GetMatches(null);
             }
             catch (Exception ex)
             {
@@ -90,7 +90,7 @@ namespace Foosball9000Api.Controllers
                 return BadRequest("No active seaons");
             }
 
-            var currentSeason = seasons.Single(x => x.EndDate != null);
+            var currentSeason = seasons.Single(x => x.EndDate == null);
 
             var matches = saveMatchesRequest.Matches.OrderBy(x => x.TimeStampUtc).ToList();
 
@@ -104,13 +104,15 @@ namespace Foosball9000Api.Controllers
                 
                 match.SeasonName = currentSeason.Name;
 
-                LeaderboardView currentLeaderboard = _leaderboardService.GetLatestLeaderboardView();
+                var leaderboards = _leaderboardService.GetLatestLeaderboardViews();
 
-                _leaderboardService.AddMatchToLeaderboard(currentLeaderboard, match);
+                var activeLeaderboard = leaderboards.SingleOrDefault(x => x.SeasonName == currentSeason.Name);
+
+                _leaderboardService.AddMatchToLeaderboard(activeLeaderboard, match);
 
                 _matchRepository.SaveMatch(match);
 
-                _leaderboardViewRepository.SaveLeaderboardView(currentLeaderboard);
+                _leaderboardViewRepository.SaveLeaderboardView(activeLeaderboard);
             }
             
             return Ok();

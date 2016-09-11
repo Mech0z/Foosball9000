@@ -16,11 +16,11 @@ var toLocalFormat = function (date) {
 
 var setupUsers = function (leaderboard, users) {
 
-    for (var i = 0; i < leaderboard.length; i++) {
+    for (var i = 0; i < leaderboard.Entries.length; i++) {
         for (var j = 0; j < users.length; j++) {
-            if (leaderboard[i].UserName === users[j].Email) {
-                leaderboard[i].displayName = users[j].Username;
-                leaderboard[i].gravatar = get_gravatar(users[j].Email, 50);
+            if (leaderboard.Entries[i].UserName === users[j].Email) {
+                leaderboard.Entries[i].displayName = users[j].Username;
+                leaderboard.Entries[i].gravatar = get_gravatar(users[j].Email, 50);
             }
         }
     }

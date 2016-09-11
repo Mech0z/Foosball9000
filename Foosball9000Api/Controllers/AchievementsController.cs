@@ -1,9 +1,7 @@
 using System.Web.Http;
 using Logic;
 using Models;
-using System.Collections.Generic;
 using System.Web.Http.Cors;
-using Common.Logging;
 
 namespace Foosball9000Api.Controllers
 {
@@ -11,16 +9,20 @@ namespace Foosball9000Api.Controllers
     public class AchievementsController : ApiController
     {
         private readonly IAchievementsService _achievementsService;
+        private readonly ISeasonLogic _seasonLogic;
 
-        public AchievementsController(IAchievementsService achievementsService)
+        public AchievementsController(IAchievementsService achievementsService, ISeasonLogic seasonLogic)
         {
             _achievementsService = achievementsService;
+            _seasonLogic = seasonLogic;
         }
 
         [HttpGet]
         public AchievementsView Index()
         {
-            var ach = _achievementsService.GetAchievementsView();
+            var activeSeason = _seasonLogic.GetActiveSeason();
+
+            var ach = _achievementsService.GetAchievementsView(activeSeason.Name);
 
             return ach;
         }

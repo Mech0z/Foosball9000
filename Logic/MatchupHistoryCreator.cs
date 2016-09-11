@@ -23,10 +23,10 @@ namespace Logic
         }
 
 
-        public List<PartnerPercentResult> GetPartnerWinPercent(string email)
+        public List<PartnerPercentResult> GetPartnerWinPercent(string email, string season)
         {
 
-            var leaderboard = _leaderboardViewRepository.GetLeaderboardView();
+            var leaderboard = _leaderboardViewRepository.GetLeaderboardView(season);
             double? normalWinRate = null;
             if (leaderboard != null)
             {
@@ -49,7 +49,7 @@ namespace Logic
             }
 
 
-            var matches = _matchRepository.GetMatches();
+            var matches = _matchRepository.GetMatches(season);
 
             foreach (Match match in matches)
             {

@@ -15,21 +15,21 @@ app.controller("startmatchController",
           .then(function (payload) {
 
               var users = payload[1];
-              var leaderboard = payload[0];
+              var leaderboard = payload[0][0];
 
               setupUsers(leaderboard, users);
 
-              for (var i = 0; i < leaderboard.length; i++) {
+              for (var i = 0; i < leaderboard.Entries.length; i++) {
                   leaderboard.Selected = false;
               }
 
-              $scope.userList = leaderboard;
+              $scope.userList = leaderboard.Entries;
               $scope.loading = false;
 
           }, function (error) {
               $scope.loading = false;
               $scope.errorMessage = error;
-              $scope.loadingFailed = true;
+              $scope.loadingFailed = true; 
               console.log(error);
           });
 
