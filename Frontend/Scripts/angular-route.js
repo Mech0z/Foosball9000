@@ -1,16 +1,10 @@
 /**
-<<<<<<< HEAD
- * @license AngularJS v1.5.6
-=======
  * @license AngularJS v1.5.8
->>>>>>> seasons
  * (c) 2010-2016 Google, Inc. http://angularjs.org
  * License: MIT
  */
 (function(window, angular) {'use strict';
 
-<<<<<<< HEAD
-=======
 /* global shallowCopy: true */
 
 /**
@@ -45,7 +39,6 @@ function shallowCopy(src, dst) {
 var isArray;
 var isObject;
 
->>>>>>> seasons
 /**
  * @ngdoc module
  * @name ngRoute
@@ -203,7 +196,7 @@ function $RouteProvider() {
    */
   this.when = function(path, route) {
     //copy original route object to preserve params inherited from proto chain
-    var routeCopy = angular.copy(route);
+    var routeCopy = shallowCopy(route);
     if (angular.isUndefined(routeCopy.reloadOnSearch)) {
       routeCopy.reloadOnSearch = true;
     }

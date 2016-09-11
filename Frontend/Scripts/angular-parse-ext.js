@@ -1,9 +1,5 @@
 /**
-<<<<<<< HEAD
- * @license AngularJS v1.5.6
-=======
  * @license AngularJS v1.5.8
->>>>>>> seasons
  * (c) 2010-2016 Google, Inc. http://angularjs.org
  * License: MIT
  */
