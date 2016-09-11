@@ -21,16 +21,12 @@ namespace MongoDBRepository
 
         public List<Match> GetMatches(string season)
         {
-<<<<<<< HEAD
-            return Collection.Find(Query<Match>.Where(x => x.SeasonName == "Season 2")).ToList();
-=======
             if (season == null)
             {
                 return Collection.FindAll().ToList();
             }
 
             return Collection.Find(Query<Match>.Where(x => x.SeasonName == season)).ToList();
->>>>>>> seasons
         }
 
         public Match GetByTimeStamp(DateTime time)
