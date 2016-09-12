@@ -3,6 +3,10 @@
         <img src="images/ajax-loader.gif" class="ajax-loader"/>
     </div>
 
+    <select ng-model="selectedSeason" ng-change="changedSeason()">
+        <option ng-repeat="x in seasons">{{x}}</option>
+    </select>
+
     <table class="table table-hover" ng-show="!loading && !loadingFailed">
                 <thead>
                     <tr>
@@ -15,7 +19,7 @@
                         <th>HISTORY</th>
                     </tr>
                 </thead>
-                <tr ng-repeat="item in leaderboard">
+                <tr ng-repeat="item in leaderboard.Entries">
                     <td >{{$index + 1}}</td>
                     <td>
                         <p>

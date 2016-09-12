@@ -45,7 +45,19 @@ namespace Foosball9000Api.Controllers
         {
             try
             {
-                return _matchRepository.GetMatches();
+                var season = _seasonLogic.GetActiveSeason();
+                var matches = _matchRepository.GetMatches(null);
+
+                foreach (Match match in matches)
+                {
+                    if (match.TimeStampUtc > season.StartDate && match.SeasonName != season.Name)
+                    {
+                        match.SeasonName = season.Name;
+                        _matchRepository.SaveMatch(match);
+                    }
+                }
+
+                return matches;
             }
             catch (Exception ex)
             {
@@ -59,6 +71,18 @@ namespace Foosball9000Api.Controllers
         public IEnumerable<Match> LastGames([FromUri] int numberOfMatches)
         {
             var seasons = _seasonLogic.GetSeasons();
+
+            var season = _seasonLogic.GetActiveSeason();
+            var matches = _matchRepository.GetMatches(null);
+
+            foreach (Match match in matches)
+            {
+                if (match.TimeStampUtc > season.StartDate && match.SeasonName != season.Name)
+                {
+                    match.SeasonName = season.Name;
+                    _matchRepository.SaveMatch(match);
+                }
+            }
 
             //TODO remove!
             if (seasons.Count == 0)
@@ -90,7 +114,7 @@ namespace Foosball9000Api.Controllers
                 return BadRequest("No active seaons");
             }
 
-            var currentSeason = seasons.Single(x => x.EndDate != null);
+            var currentSeason = seasons.Single(x => x.EndDate == null);
 
             var matches = saveMatchesRequest.Matches.OrderBy(x => x.TimeStampUtc).ToList();
 
@@ -104,7 +128,11 @@ namespace Foosball9000Api.Controllers
                 
                 match.SeasonName = currentSeason.Name;
 
-                LeaderboardView currentLeaderboard = _leaderboardService.GetLatestLeaderboardView();
+                var leaderboards = _leaderboardService.GetLatestLeaderboardViews();
+
+                var activeLeaderboard = leaderboards.SingleOrDefault(x => x.SeasonName == currentSeason.Name);
+
+                _leaderboardService.AddMatchToLeaderboard(activeLeaderboard, match);
 
                 if (match.Id != null)
                 {
@@ -114,8 +142,7 @@ namespace Foosball9000Api.Controllers
                 
                 _matchRepository.SaveMatch(match);
 
-                _leaderboardService.RecalculateLeaderboard();
-
+                _leaderboardViewRepository.SaveLeaderboardView(activeLeaderboard);
             }
             
             return Ok();

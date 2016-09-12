@@ -53,6 +53,13 @@ namespace Logic
             return _seasonRepository.GetSeasons();
         }
 
+        public Season GetActiveSeason()
+        {
+            var existingSeasons = _seasonRepository.GetSeasons();
+
+            return existingSeasons.SingleOrDefault(x => x.EndDate == null);
+        }
+
         public void ConvertOldMatches()
         {
             List<Match> season1Matches = _matchSeason1LegacyRepository.GetMatches();
@@ -81,6 +88,7 @@ namespace Logic
     {
         void ConvertOldMatches();
         void CreateSeasons();
-        List<Season> GetSeasons();  
+        List<Season> GetSeasons();
+        Season GetActiveSeason();
     }
 }

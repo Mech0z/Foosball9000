@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Models;
+using MongoDB.Driver.Builders;
 
 namespace MongoDBRepository
 {
@@ -10,9 +12,14 @@ namespace MongoDBRepository
 
         }
 
-        public LeaderboardView GetLeaderboardView()
+        public LeaderboardView GetLeaderboardView(string seasonName)
         {
-            return Collection.FindAll().ToList().OrderByDescending(x => x.Timestamp).FirstOrDefault();
+            return Collection.Find(Query<LeaderboardView>.Where(x => x.SeasonName == seasonName)).ToList().OrderByDescending(x => x.Timestamp).FirstOrDefault();
+        }
+
+        public List<LeaderboardView> GetLeaderboardViews()
+        {
+            return Collection.FindAll().OrderByDescending(x => x.Timestamp).ToList();
         }
 
         public void SaveLeaderboardView(LeaderboardView view)

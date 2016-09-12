@@ -19,9 +19,14 @@ namespace MongoDBRepository
             Collection.Save(match, WriteConcern.Unacknowledged);
         }
 
-        public List<Match> GetMatches()
+        public List<Match> GetMatches(string season)
         {
-            return Collection.Find(Query<Match>.Where(x => x.SeasonName == "Season 2")).ToList();
+            if (season == null)
+            {
+                return Collection.FindAll().ToList();
+            }
+
+            return Collection.Find(Query<Match>.Where(x => x.SeasonName == season)).ToList();
         }
 
         public Match GetByTimeStamp(DateTime time)
