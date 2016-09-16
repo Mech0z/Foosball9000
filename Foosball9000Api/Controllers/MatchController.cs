@@ -60,27 +60,6 @@ namespace Foosball9000Api.Controllers
         [HttpGet]
         public IEnumerable<Match> LastGames([FromUri] int numberOfMatches)
         {
-            //var seasons = _seasonLogic.GetSeasons();
-
-            //var season = _seasonLogic.GetActiveSeason();
-            //var matches = _matchRepository.GetMatches(null);
-
-            //foreach (Match match in matches)
-            //{
-            //    if (match.TimeStampUtc > season.StartDate && match.SeasonName != season.Name)
-            //    {
-            //        match.SeasonName = season.Name;
-            //        _matchRepository.SaveMatch(match);
-            //    }
-            //}
-
-            ////TODO remove!
-            //if (seasons.Count == 0)
-            //{
-            //    _seasonLogic.CreateSeasons();
-            //    _seasonLogic.ConvertOldMatches();
-            //}
-
             return _matchRepository.GetRecentMatches(numberOfMatches);
         }
 

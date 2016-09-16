@@ -1,5 +1,6 @@
 ﻿using Models;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using MongoDB.Driver.Builders;
 
@@ -43,7 +44,7 @@ namespace MongoDBRepository
                 if(BCrypt.Net.BCrypt.CheckPassword(inputUser.Password, user.Password))
                 {
                     return user.Password;
-                }
+                }   
             }
 
             return string.Empty;
@@ -72,6 +73,22 @@ namespace MongoDBRepository
             if (user != null)
             {
                 if (user.Password == inputUser.Password)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool ValidateAndHasRole(User inputUser, string role)
+        {
+            var user = Collection.Find(Query<User>.Where(x => x.Email == inputUser.Email)).SingleOrDefault();
+
+            if (user != null)
+            {
+                var hasRole = user.Roles.Contains(role);
+                if (user.Password == inputUser.Password && hasRole)
                 {
                     return true;
                 }

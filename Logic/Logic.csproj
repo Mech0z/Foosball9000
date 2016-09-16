@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AchievementsService.cs" />
+    <Compile Include="ISeasonLogic.cs" />
     <Compile Include="LeaderboardService.cs" />
     <Compile Include="EloRating.cs" />
     <Compile Include="ILeaderboardService.cs" />

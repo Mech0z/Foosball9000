@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Models
@@ -15,5 +16,7 @@ namespace Models
         public string GravatarEmail { get; set; }
 
         public string Password { get; set; }
+
+        public List<string> Roles { get; set; }
     }
 }

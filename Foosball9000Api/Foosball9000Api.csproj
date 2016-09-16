@@ -180,6 +180,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MatchController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\SeasonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -187,6 +188,7 @@
     <Compile Include="RequestResponse\ChangePasswordRequest.cs" />
     <Compile Include="RequestResponse\PartnerPercentRequest.cs" />
     <Compile Include="RequestResponse\SaveMatchRequest.cs" />
+    <Compile Include="RequestResponse\VoidRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
