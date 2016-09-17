@@ -36,6 +36,10 @@
                     templateUrl: "views/achievements.html",
                     controller: "achievementsController"
                 })
+                .when("/seasonsAdministration", {
+                    templateUrl: "views/seasonsAdministration.html",
+                    controller: "seasonsAdministrationController"
+                })
                 .when("/player/:email", {
                     templateUrl: "views/player.html",
                     controller: "playerController"

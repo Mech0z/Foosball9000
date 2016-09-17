@@ -40,8 +40,14 @@ namespace Foosball9000Api.Controllers
         }
 
         [HttpGet]
-        public List<Season> GetSeasons()
+        public List<Season> GetSeasons(VoidRequest request)
         {
+            var validated = _userRepository.ValidateAndHasRole(new User
+            {
+                Email = request.Email,
+                Password = request.Password
+            }, "Admin");
+
             var seasons = _seasonLogic.GetSeasons();
             return seasons;
         }
