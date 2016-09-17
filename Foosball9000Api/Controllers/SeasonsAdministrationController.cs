@@ -53,7 +53,7 @@ namespace Foosball9000Api.Controllers
                 return Unauthorized();
             }
 
-            var seasons = _seasonLogic.GetSeasons();
+            List<Season> seasons = _seasonLogic.GetSeasons();
             return Ok(seasons);
         }
     }

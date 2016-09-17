@@ -6,7 +6,7 @@
     seasonsAdministration.factory('seasonsAdministration', ['$http', '$q', "$cookieStore", function ($http, $q, $cookieStore) {
 
         return {
-            startNewSeason: function (email) {
+            startNewSeason: function () {
                 var deferred = $q.defer();
 
                 var voidRequest = {

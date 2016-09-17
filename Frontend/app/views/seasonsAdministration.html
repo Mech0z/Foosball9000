@@ -2,4 +2,35 @@
     <div id="mydiv" ng-show="loading" align="center">
         <img src="images/ajax-loader.gif" class="ajax-loader" />
     </div>
+    
+    <table class="table table-hover" ng-show="!loading">
+        <thead>
+        <tr>
+            <th>NAME</th>
+            <th>START</th>
+            <th>END</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="season in seasons">
+            <td>
+                <p>
+                    {{season.Name}}
+                </p>
+            </td>
+            <td>
+                <p>
+                    {{season.StartDate}}
+                </p>
+            </td>
+            <td>
+                <p>
+                    {{season.EndDate}}
+                </p>
+            </td>
+        </tr>
+    </table>
+    
+    <button ng-click="startNewSeason()" ng-show="!loading" class="btn" style="margin: 10px;">Start new season</button>
+
+    <pre ng-show="validationFailed">{{errorMessage}}</pre>
 </div>

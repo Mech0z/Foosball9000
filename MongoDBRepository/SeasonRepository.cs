@@ -21,15 +21,15 @@ namespace MongoDBRepository
 
         public void CreateNewSeason(Season season)
         {
-            Collection.Save(season, WriteConcern.Unacknowledged);
+            Collection.Save(season, WriteConcern.Acknowledged);
         }
 
         public void EndSeason(Season season)
         {
             var currentSeason = Collection.Find(Query<Season>.Where(x => x.Name == season.Name)).SingleOrDefault();
 
-            currentSeason.EndDate = DateTime.Today;
-            Collection.Save(currentSeason, WriteConcern.Unacknowledged);
+            currentSeason.EndDate = DateTime.UtcNow.Date.AddHours(23);
+            Collection.Save(currentSeason, WriteConcern.Acknowledged);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Logic
             
             if (activeSeason != null)
             {
-                if (activeSeason.StartDate.AddDays(-1).Date >= DateTime.Now.Date)
+                if (activeSeason.StartDate.Date.AddDays(-1).Date == DateTime.UtcNow.Date)
                 {
                     throw new Exception("Cant start new season yet");
                 }
@@ -34,7 +34,7 @@ namespace Logic
 
             var newSeason = new Season
             {
-                StartDate = activeSeason != null ? DateTime.Today.AddDays(1) : DateTime.Today,
+                StartDate = activeSeason != null ? DateTime.UtcNow.Date.AddDays(1) : DateTime.UtcNow.Date,
                 Name = $"Season {newSeasonNumber}"
             };
 
