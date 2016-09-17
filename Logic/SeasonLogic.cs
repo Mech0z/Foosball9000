@@ -21,15 +21,20 @@ namespace Logic
             var newSeasonNumber = seasons.Count + 1;
 
             var activeSeason = seasons.SingleOrDefault(x => x.EndDate == null);
-
+            
             if (activeSeason != null)
             {
+                if (activeSeason.StartDate.AddDays(-1).Date >= DateTime.Now.Date)
+                {
+                    throw new Exception("Cant start new season yet");
+                }
+
                 _seasonRepository.EndSeason(activeSeason);
             }
 
             var newSeason = new Season
             {
-                StartDate = DateTime.Today,
+                StartDate = activeSeason != null ? DateTime.Today.AddDays(1) : DateTime.Today,
                 Name = $"Season {newSeasonNumber}"
             };
 

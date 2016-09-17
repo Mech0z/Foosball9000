@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
 
-    var playerServices = angular.module('playerService', []);
+    var seasonsAdministration = angular.module('seasonsAdministrationService', []);
 
-    playerServices.factory('player', ['$http', '$q', "$cookieStore", function ($http, $q, $cookieStore) {
+    seasonsAdministration.factory('seasonsAdministration', ['$http', '$q', "$cookieStore", function ($http, $q, $cookieStore) {
 
         return {
             startNewSeason: function (email) {
@@ -14,7 +14,7 @@
                     Password: $cookieStore.get("password")
                 };
 
-                $http.get("http://localhost:44716/api/Season/StartNewSeason", voidRequest)
+                $http.post("http://localhost:44716/api/SeasonsAdministration/StartNewSeason", voidRequest)
                 .success(function (data, status, headers, config) {
                     deferred.resolve(data);
                 }).error(function (data, status, headers, config) {
@@ -30,7 +30,7 @@
                     Password: $cookieStore.get("password")
                 };
 
-                $http.get("http://localhost:44716/api/Season/GetSeasons", voidRequest)
+                $http.post("http://localhost:44716/api/SeasonsAdministration/GetSeasons", voidRequest)
                 .success(function (data, status, headers, config) {
                     deferred.resolve(data);
                 }).error(function (data, status, headers, config) {

@@ -1,5 +1,5 @@
 ﻿var app = angular.module("Foosball", [
-        "leaderboardService", "matchService", "userService", "playerService", "ngRoute", "ngCookies", "achievementsService"
+        "leaderboardService", "matchService", "userService", "playerService", "ngRoute", "ngCookies", "achievementsService", "seasonsAdministrationService"
     ])
     .config([
         "$routeProvider", function($routeProvider) {

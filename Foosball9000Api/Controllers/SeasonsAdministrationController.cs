@@ -9,12 +9,12 @@ using MongoDBRepository;
 namespace Foosball9000Api.Controllers
 {
     [EnableCors("*", "*", "*")]
-    public class SeasonController : ApiController
+    public class SeasonsAdministrationController : ApiController
     {
         private readonly IUserRepository _userRepository;
         private readonly ISeasonLogic _seasonLogic;
 
-        public SeasonController(IUserRepository userRepository, ISeasonLogic seasonLogic)
+        public SeasonsAdministrationController(IUserRepository userRepository, ISeasonLogic seasonLogic)
         {
             _userRepository = userRepository;
             _seasonLogic = seasonLogic;
@@ -39,8 +39,8 @@ namespace Foosball9000Api.Controllers
             return Ok(seasonName);
         }
 
-        [HttpGet]
-        public List<Season> GetSeasons(VoidRequest request)
+        [HttpPost]
+        public IHttpActionResult GetSeasons(VoidRequest request)
         {
             var validated = _userRepository.ValidateAndHasRole(new User
             {
@@ -48,8 +48,13 @@ namespace Foosball9000Api.Controllers
                 Password = request.Password
             }, "Admin");
 
+            if (!validated)
+            {
+                return Unauthorized();
+            }
+
             var seasons = _seasonLogic.GetSeasons();
-            return seasons;
+            return Ok(seasons);
         }
     }
 }

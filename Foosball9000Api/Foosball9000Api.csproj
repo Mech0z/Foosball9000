@@ -180,7 +180,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MatchController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
-    <Compile Include="Controllers\SeasonController.cs" />
+    <Compile Include="Controllers\SeasonsAdministrationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
