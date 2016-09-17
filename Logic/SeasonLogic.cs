@@ -35,7 +35,7 @@ namespace Logic
             var newSeason = new Season
             {
                 StartDate = activeSeason != null ? DateTime.UtcNow.Date.AddDays(1) : DateTime.UtcNow.Date,
-                Name = $"Season {newSeasonNumber}"
+                Name = string.Format("Season {0}", newSeasonNumber)
             };
 
             _seasonRepository.CreateNewSeason(newSeason);
