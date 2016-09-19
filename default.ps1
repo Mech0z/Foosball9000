@@ -2,7 +2,7 @@ $here = Split-Path $MyInvocation.MyCommand.Definition
 
 properties {
     $NuGet = "$here\Tools\NuGet.exe"
-    $MsBuild = "msbuild.exe"
+    $MsBuild = "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe"
     $FrontendhNuspec = "$here\frontend\FoosballFrontend.nuspec"
 }
 
