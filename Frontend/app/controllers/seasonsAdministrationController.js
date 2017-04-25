@@ -1,8 +1,14 @@
 ﻿
 app.controller("seasonsAdministrationController",
-    function ($scope, $q, seasonsAdministration) {
+    function ($scope, $q, seasonsAdministration, $cookieStore) {
         $scope.loading = true;
 
+        if ($cookieStore.get("email") == null) {
+            $scope.loggedIn = false;
+            $scope.noAccessMessage = "Login first";
+        } else {
+            $scope.loggedIn = true;
+        }
 
         $q.all([seasonsAdministration.getSeasons()])
           .then(function (payload) {

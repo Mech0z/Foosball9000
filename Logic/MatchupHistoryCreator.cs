@@ -53,51 +53,36 @@ namespace Logic
 
             foreach (Match match in matches)
             {
-                if (match.PlayerList[0] == email)
-                {
-                    PartnerPercentResult resultToManipulate = result.Single(x => x.Email == match.PlayerList[1]);
-                    resultToManipulate.Matches++;
-                    if (match.MatchResult.Team1Won)
-                    {
-                        resultToManipulate.Wins++;
-                    }
-                }
-
-                if (match.PlayerList[1] == email)
-                {
-                    PartnerPercentResult resultToManipulate = result.Single(x => x.Email == match.PlayerList[0]);
-                    resultToManipulate.Matches++;
-                    if (match.MatchResult.Team1Won)
-                    {
-                        resultToManipulate.Wins++;
-                    }
-                }
-
-                if (match.PlayerList[2] == email)
-                {
-                    PartnerPercentResult resultToManipulate = result.Single(x => x.Email == match.PlayerList[3]);
-                    resultToManipulate.Matches++;
-                    if (!match.MatchResult.Team1Won)
-                    {
-                        resultToManipulate.Wins++;
-                    }
-                }
-
-                if (match.PlayerList[3] == email)
-                {
-                    PartnerPercentResult resultToManipulate = result.Single(x => x.Email == match.PlayerList[2]);
-                    resultToManipulate.Matches++;
-                    if (!match.MatchResult.Team1Won)
-                    {
-                        resultToManipulate.Wins++;
-                    }
-                }
+                ManipulatePartnerResults(email, match, result, 0, 1, 2, 3);
+                ManipulatePartnerResults(email, match, result, 1, 0, 2, 3);
+                ManipulatePartnerResults(email, match, result, 2, 3, 0, 1);
+                ManipulatePartnerResults(email, match, result, 3, 2, 0, 1);
             }
 
             return result
-                .Where(x => x.Matches > 0)
-                .OrderByDescending(x => (double)x.Wins / (double)x.Matches)
+                .Where(x => x.MatchesTogether > 0)
+                .OrderByDescending(x => (double)x.WinsTogether / (double)x.MatchesTogether)
                 .ToList();
+        }
+
+        private static void ManipulatePartnerResults(string email, Match match, List<PartnerPercentResult> result, int playerIndex, int partnerIndex, int enemy1Index, int enemy2Index)
+        {
+            if (match.PlayerList[playerIndex] == email)
+            {
+                PartnerPercentResult resultToManipulate = result.Single(x => x.Email == match.PlayerList[partnerIndex]);
+                resultToManipulate.MatchesTogether++;
+
+                PartnerPercentResult enemy1 = result.Single(x => x.Email == match.PlayerList[enemy1Index]);
+                enemy1.MatchesAgainst++;
+                PartnerPercentResult enemy2 = result.Single(x => x.Email == match.PlayerList[enemy2Index]);
+                enemy2.MatchesAgainst++;
+                if (match.MatchResult.Team1Won)
+                {
+                    resultToManipulate.WinsTogether++;
+                    enemy1.WinsAgainst++;
+                    enemy2.WinsAgainst++;
+                }
+            }
         }
 
         public void AddMatch(Match match)
