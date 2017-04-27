@@ -7,9 +7,9 @@
         <thead>
             <tr>
                 <th>Player</th>
-                <th>Win/Matches together</th>
+                <th>Wins together</th>
                 <th>Win% together(average%)</th>
-                <th>Looses/Matches against</th>
+                <th>Wins against</th>
                 <th>Win% (average%) against</th>
             </tr>
         </thead>
@@ -27,7 +27,7 @@
 
             <td>
                 <p>
-                    {{(result.WinsTogether / result.MatchesTogether * 100) | number : 2}}%  ({{result.UsersNormalWinrate}}%)
+                    {{(result.WinsTogether / result.MatchesTogether * 100) | number : 2}}%  ({{result.UsersNormalWinrate}}%
                 </p>
             </td>
             <td>
@@ -38,7 +38,7 @@
 
             <td>
                 <p>
-                    {{(result.WinsAgainst / result.MatchesAgainst * 100) | number : 2}}%)
+                    {{(result.WinsAgainst / result.MatchesAgainst * 100) | number : 2}}%
                 </p>
             </td>
         </tr>
