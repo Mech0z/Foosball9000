@@ -60,7 +60,7 @@ namespace Logic
             }
 
             return result
-                .Where(x => x.MatchesTogether > 0)
+                .Where(x => x.MatchesTogether > 0 || x.MatchesAgainst > 0)
                 .OrderByDescending(x => (double)x.WinsTogether / (double)x.MatchesTogether)
                 .ToList();
         }
@@ -69,16 +69,23 @@ namespace Logic
         {
             if (match.PlayerList[playerIndex] == email)
             {
-                PartnerPercentResult resultToManipulate = result.Single(x => x.Email == match.PlayerList[partnerIndex]);
-                resultToManipulate.MatchesTogether++;
-
+                PartnerPercentResult partner = result.Single(x => x.Email == match.PlayerList[partnerIndex]);
+                partner.MatchesTogether++;
                 PartnerPercentResult enemy1 = result.Single(x => x.Email == match.PlayerList[enemy1Index]);
                 enemy1.MatchesAgainst++;
                 PartnerPercentResult enemy2 = result.Single(x => x.Email == match.PlayerList[enemy2Index]);
                 enemy2.MatchesAgainst++;
-                if (match.MatchResult.Team1Won)
+                
+                if ((playerIndex == 0 || playerIndex == 1) && match.MatchResult.Team1Won)
                 {
-                    resultToManipulate.WinsTogether++;
+                    partner.WinsTogether++;
+                    enemy1.WinsAgainst++;
+                    enemy2.WinsAgainst++;
+                }
+
+                if ((playerIndex == 2 || playerIndex == 3) && match.MatchResult.Team1Won == false)
+                {
+                    partner.WinsTogether++;
                     enemy1.WinsAgainst++;
                     enemy2.WinsAgainst++;
                 }

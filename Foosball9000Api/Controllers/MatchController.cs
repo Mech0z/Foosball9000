@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using Common.Logging;
 using Foosball9000Api.RequestResponse;
 using Logic;
 using Models;
@@ -16,8 +16,6 @@ namespace Foosball9000Api.Controllers
     {
         private readonly ILeaderboardService _leaderboardService;
         private readonly ILeaderboardViewRepository _leaderboardViewRepository;
-        private readonly ILogger _logger;
-        private readonly IUserRepository _userRepository;
         private readonly ISeasonLogic _seasonLogic;
         private readonly IMatchRepository _matchRepository;
         private readonly IMatchupResultRepository _matchupResultRepository;
@@ -26,16 +24,12 @@ namespace Foosball9000Api.Controllers
             IMatchupResultRepository matchupResultRepository,
             ILeaderboardService leaderboardService,
             ILeaderboardViewRepository leaderboardViewRepository,
-            ILogger logger,
-            IUserRepository userRepository,
             ISeasonLogic seasonLogic)
         {
             _matchRepository = matchRepository;
             _matchupResultRepository = matchupResultRepository;
             _leaderboardService = leaderboardService;
             _leaderboardViewRepository = leaderboardViewRepository;
-            _logger = logger;
-            _userRepository = userRepository;
             _seasonLogic = seasonLogic;
         }
 
@@ -51,7 +45,7 @@ namespace Foosball9000Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "{ExceptionSource} had an error", ex.Source);
+                Debug.WriteLine(ex.ToString(), "{ExceptionSource} had an error", ex.Source);
                 throw;
             }
         }
@@ -144,7 +138,7 @@ namespace Foosball9000Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "{ExceptionSource} had an error", ex.Source);
+                Debug.WriteLine(ex.ToString(), "{ExceptionSource} had an error", ex.Source);
                 throw;
             }
         }

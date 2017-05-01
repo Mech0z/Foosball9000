@@ -6,10 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Common.Exceptions;
-using Common.Logging;
 using Foosball9000Api.ContainerInstallers;
-using Foosball9000Api.ActionFilters;
 
 namespace Foosball9000Api
 {
@@ -22,7 +19,6 @@ namespace Foosball9000Api
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            RegisterWebApiFilters(GlobalConfiguration.Configuration.Filters);
             ContainerInstaller();
         }
 
@@ -31,19 +27,11 @@ namespace Foosball9000Api
             Container = new WindsorContainer();
 
             Container.Install(new MongoInstaller(), new LogicInstaller());
-
-            Container.Register(
-                Classes.FromAssemblyNamed("Common")
-                    .BasedOn<ILogger>()
-                    .WithServiceAllInterfaces()
-                    .LifestylePerWebRequest());
+            
             Container.Register(Classes.FromThisAssembly().BasedOn<ApiController>().LifestylePerWebRequest());
 
             GlobalConfiguration.Configuration.Services.Replace(
                 typeof (IHttpControllerActivator), new WindsorCompositionRoot(Container));
-
-            GlobalConfiguration.Configuration.Services.Add(typeof (IExceptionLogger),
-                new TraceExceptionLogger(new Logger()));
         }
 
         // ReSharper disable once RedundantOverridenMember
@@ -53,11 +41,5 @@ namespace Foosball9000Api
             //Container.Dispose();
             base.Dispose();
         }
-
-        public static void RegisterWebApiFilters(System.Web.Http.Filters.HttpFilterCollection filters)
-        {
-            filters.Add(new TraceActionFilter(new Logger()));
-        }
-
     }
 }
