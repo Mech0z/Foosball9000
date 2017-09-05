@@ -21,6 +21,7 @@ TotalScript.sql
 [Rr]elease/
 [Tt]est/
 build/
+.vs/
 
 [Tt]est[Rr]esult
 [Bb]uild[Ll]og.*
