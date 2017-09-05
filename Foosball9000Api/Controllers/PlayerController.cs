@@ -53,7 +53,7 @@ namespace Foosball9000Api.Controllers
         {
             var users = _userRepository.GetUsers();
 
-            if (user.Email == null)
+            if (string.IsNullOrEmpty(user.Email))
             {
                 return BadRequest("Email cant be null");
             }
